@@ -1,4 +1,6 @@
 // This is Karsher wheel lock
+include <MCAD/regular_shapes.scad>
+
 $fn=75;
 
 diameter=17.2;
@@ -9,10 +11,11 @@ disk_diameter=28.5;
 futz=0.01;
 
 All();
+
 module All() {
   CenterCylinder();
   Cap();
-  for (a=[45, -45]) {
+  for (a=[60, -60]) {
     Clip(a);
   }
   little_angle=12;
@@ -57,6 +60,7 @@ module LittleCylinder(rotate) {
 }
 
 module Clip(rotate) {
+  ClipSupport(rotate);
   union() {
     ClipBump(rotate);
     intersection() {
@@ -82,6 +86,25 @@ module ClipBump(rotate) {
     translate([disk_diameter/2, cb_width/2, 14])
       rotate([90, 0, 0])
         cylinder(h=cb_width, r=cb_diameter/2);
+}
+
+// The triangle to support the clip
+module ClipSupport(rotate) {
+  cs_width = 9;
+  cs_thick = 1.5;
+  rotate([0, 0, rotate])
+    translate([disk_diameter/2, 0, 0])
+      rotate([90, 0, 180])
+        right_triangle(base=cs_width, height=cs_width, thick=cs_thick);
+}
+
+module right_triangle(base, height, thick) {
+  linear_extrude(height=thick, center=true)
+    polygon(points=[
+      [0, 0],
+      [base, 0],
+      [0, height]],
+      paths=[[0,1,2]]);
 }
 
 module ClipStraight(rotate) {
