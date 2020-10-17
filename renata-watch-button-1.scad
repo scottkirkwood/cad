@@ -2,10 +2,11 @@
 
 width=6;
 length=10;
-depth=2;
+depth=3;
 border=1;
-brim=1.5;
-brim_thick=0.5;
+brim_w=2.5;
+brim_h=1;
+brim_thick=1;
 futz=0.01;
 
 All();
@@ -23,45 +24,35 @@ module All() {
 
 module Box() {
   difference() {
-      translate([0, 0, brim_thick])
-        RoundedBox([width, length, depth], 0.25);
-      translate([border/2, border/2, depth+brim_thick-border-futz])
-          RoundedBox([width - border, length - border, depth], 0.1);
+      RoundedBox([width, length, depth], r=0.25);
+      translate([border/2, border/2, border/2])
+          RoundedBox([width - border, length - border, depth + border], r=0.1);
   }
 }
 
 module Brim() {
-  cs_r = 20;
-  brim_up = 0.2;
   difference() {
     intersection() {
-      translate([-brim/2, -brim/2, brim_up + futz*2]) {
-        RoundedBox([width+brim, length+brim, brim_thick+brim_up+futz], 0.25);
+      translate([-brim_h/2, -brim_w/2, -brim_thick]) {
+        RoundedBox([width+brim_h, length+brim_w, 2*brim_thick+futz], 0.25);
       }
-      BrimClipSphere(cs_r);
+      BrimClipSphere(radius=12, down=-.5);
     }
-    #BrimClipInnerSphere(cs_r, brim_up);
+    BrimClipSphere(radius=15, down=.4);
   }
 }
 
-module BrimClipSphere(radius) {
-  cs_up = -brim_thick/2;
+module BrimClipSphere(radius, down) {
+  cs_up = -brim_thick/2 + down;
   translate([width/2, length/2, radius + cs_up])
-    scale([1, length/width, 1])
+    scale([1, 1.25, 1])
       sphere(r=radius, $fn=75);
 }
 
-module BrimClipInnerSphere(radius, brim_up) {
-  cs_up = brim_up - brim_thick/2;
-  translate([width/2, length/2, radius + cs_up])
-    scale([1, length/width, 1])
-      sphere(r=radius - brim_thick + brim_up, $fn=75);
-}
-
 module CenterPunch() {
-  cp_diameter = 2;
-  cp_height = 2;
-  cp_off_ground = 0.1;
+  cp_diameter = 3;
+  cp_height = depth;
+  cp_off_ground = -.1;
   translate([width/2, length/2, cp_off_ground])
     cylinder(h=cp_height, r=cp_diameter/2, $fn=80);
 }
