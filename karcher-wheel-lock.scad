@@ -1,13 +1,16 @@
 // This is Karsher wheel lock
-include <MCAD/regular_shapes.scad>
 
 $fn=75;
 
 diameter=17.2;
 wall_thick=1.2;
-height=10; // smaler to print faster 62;
+height=5; // smaler to print faster 62;
 disk_thick=1; // smaller to print faster 3.8;
 disk_diameter=28.5;
+s_diameter=3; // small cylinder
+s_thick=0.6; // small cylinder thickness
+r_thick=0.7; // ridge thickness
+
 futz=0.01;
 
 All();
@@ -15,10 +18,14 @@ All();
 module All() {
   CenterCylinder();
   Cap();
-  for (a=[60, -60]) {
+  for (a=[80, -80]) {
     Clip(a);
   }
   little_angle=12;
+  ExtraLine(rotate=little_angle, length=22);
+  for (a=[0:2]) {
+    ExtraLine(rotate=120*a - little_angle, length=12);
+  }
   for (a=[0:2]) {
     LittleCylinder(120*a - little_angle);
     LittleCylinder(120*a + little_angle);
@@ -26,7 +33,17 @@ module All() {
 }
 
 module Cap() {
-  cylinder(h=disk_thick+futz, r=disk_diameter/2);
+  difference() {
+    cylinder(h=disk_thick+futz, r=disk_diameter/2);
+    CapDivot();
+  }
+}
+
+module CapDivot() {
+  divot_size=7;
+  translate([-disk_diameter+divot_size*2-disk_thick, 0, divot_size/2])
+    rotate([0, 45, 0])
+      cube(size=divot_size, center=true);
 }
 
 module CenterCylinder() {
@@ -39,9 +56,6 @@ module CenterCylinder() {
 }
 
 module LittleCylinder(rotate) {
-  s_diameter = 3; // small cylinder
-  s_thick=0.6;
-  r_thick=0.7; // ridge
   r_embed=0.1; // how far to embed in cylinder
 
   rotate([0, 0, rotate]) {
@@ -54,8 +68,18 @@ module LittleCylinder(rotate) {
 
       }
       translate([diameter/2+s_diameter-r_embed, -r_thick/2, disk_thick-futz])
-        #cube([r_thick, r_thick, height]);
+        cube([r_thick, r_thick, height]);
     }
+  }
+}
+
+// There's a few extra thick lines for support
+module ExtraLine(rotate, length) {
+  el_thick=disk_diameter/2 - diameter/2 - s_diameter; // extra line thickness
+
+  rotate([0, 0, rotate]) {
+      translate([diameter/2+s_diameter, -r_thick/2, futz])
+        #cube([el_thick, r_thick, length]);    
   }
 }
 
