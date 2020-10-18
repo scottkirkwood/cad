@@ -4,8 +4,8 @@ $fn=75;
 
 diameter=17.2;
 wall_thick=1.2;
-height=5; // smaler to print faster 62;
-disk_thick=1; // smaller to print faster 3.8;
+height=62;
+disk_thick=3.8;
 disk_diameter=28.5;
 s_diameter=3; // small cylinder
 s_thick=0.6; // small cylinder thickness
@@ -79,7 +79,7 @@ module ExtraLine(rotate, length) {
 
   rotate([0, 0, rotate]) {
       translate([diameter/2+s_diameter, -r_thick/2, futz])
-        #cube([el_thick, r_thick, length]);    
+        cube([el_thick, r_thick, length]);    
   }
 }
 
@@ -105,30 +105,22 @@ module ClipSphere(rotate) {
 // The little lip at the end of the clip
 module ClipBump(rotate) {
   cb_width = 5; // same as c_width
-  cb_diameter = 2;
+  cb_diameter = 2.1;
   rotate([0, 0, rotate])
-    translate([disk_diameter/2, cb_width/2, 14])
+    translate([disk_diameter/2 - 0.5, cb_width/2, 14])
       rotate([90, 0, 0])
         cylinder(h=cb_width, r=cb_diameter/2);
 }
 
 // The triangle to support the clip
 module ClipSupport(rotate) {
-  cs_width = 9;
+  cs_width = 7;
+  cs_height = 10;
   cs_thick = 1.5;
   rotate([0, 0, rotate])
     translate([disk_diameter/2, 0, 0])
       rotate([90, 0, 180])
-        right_triangle(base=cs_width, height=cs_width, thick=cs_thick);
-}
-
-module right_triangle(base, height, thick) {
-  linear_extrude(height=thick, center=true)
-    polygon(points=[
-      [0, 0],
-      [base, 0],
-      [0, height]],
-      paths=[[0,1,2]]);
+        right_triangle(base=cs_width, height=cs_height, thick=cs_thick);
 }
 
 module ClipStraight(rotate) {
@@ -136,7 +128,7 @@ module ClipStraight(rotate) {
   c_radius = 70; // how far we sweep (smaller is more curved)
   c_sweep = atan2(c_length, c_radius);
   c_width = 5;
-  c_thick = 1;
+  c_thick = 1.5;
   c_tilt_back = 5; // degrees
   c_offset_up = sin(c_tilt_back)*disk_diameter/2;
 
@@ -148,3 +140,11 @@ module ClipStraight(rotate) {
             square([c_thick, c_width]);
 }
 
+module right_triangle(base, height, thick) {
+  linear_extrude(height=thick, center=true)
+    polygon(points=[
+      [0, 0],
+      [base, 0],
+      [0, height]],
+      paths=[[0,1,2]]);
+}
