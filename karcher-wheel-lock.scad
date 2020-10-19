@@ -2,14 +2,14 @@
 
 $fn=75;
 
-diameter=17.2;
+diameter=16.5;
 wall_thick=1.2;
-height=62;
+height=20; // 62;
 disk_thick=3.8;
 disk_diameter=28.5;
-s_diameter=3; // small cylinder
-s_thick=0.6; // small cylinder thickness
-r_thick=0.7; // ridge thickness
+s_diameter=2.8; // small cylinder
+s_thick=0.5; // small cylinder thickness
+r_thick=0.9; // ridge thickness
 
 futz=0.01;
 
@@ -36,14 +36,27 @@ module Cap() {
   difference() {
     cylinder(h=disk_thick+futz, r=disk_diameter/2);
     CapDivot();
+    CapIndicator();
   }
 }
 
 module CapDivot() {
-  divot_size=7;
-  translate([-disk_diameter+divot_size*2-disk_thick, 0, divot_size/2])
+  divot_size=disk_thick*2;
+  translate([-disk_diameter+divot_size*1.9, 0, divot_size*sqrt(2)/2-0.6])
     rotate([0, 45, 0])
       cube(size=divot_size, center=true);
+}
+
+module CapIndicator() {
+  base = 6;
+  height = 7;
+  translate([6, 0, 0])
+    linear_extrude(height=r_thick, center=true)
+      polygon(points=[
+        [0, -base/2],
+        [0, base/2],
+        [height, 0]],
+        paths=[[0,1,2]]);
 }
 
 module CenterCylinder() {
@@ -114,12 +127,12 @@ module ClipBump(rotate) {
 
 // The triangle to support the clip
 module ClipSupport(rotate) {
-  cs_width = 7;
+  cs_width = 2;
   cs_height = 10;
   cs_thick = 1.5;
   rotate([0, 0, rotate])
-    translate([disk_diameter/2, 0, 0])
-      rotate([90, 0, 180])
+    translate([disk_diameter/2, 0, disk_thick-futz])
+      rotate([90, 7, 180])
         right_triangle(base=cs_width, height=cs_height, thick=cs_thick);
 }
 
@@ -128,7 +141,7 @@ module ClipStraight(rotate) {
   c_radius = 70; // how far we sweep (smaller is more curved)
   c_sweep = atan2(c_length, c_radius);
   c_width = 5;
-  c_thick = 1.5;
+  c_thick = 1.4;
   c_tilt_back = 5; // degrees
   c_offset_up = sin(c_tilt_back)*disk_diameter/2;
 

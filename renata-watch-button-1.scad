@@ -2,14 +2,15 @@
 
 width=6;
 length=10;
-depth=1.5;
+depth=2;
 border=1;
 brim_w=2.5;
 brim_h=1;
 brim_thick=1;
 futz=0.01;
 
-All();
+rotate([180, 0, 0])
+  All();
 
 module All() {
   difference() {
@@ -50,9 +51,9 @@ module BrimClipSphere(radius, down) {
 }
 
 module CenterPunch() {
-  cp_diameter = 3;
+  cp_diameter = 3.5;
   cp_height = depth;
-  cp_off_ground = -.1;
+  cp_off_ground = -.5;
   translate([width/2, length/2, cp_off_ground])
     cylinder(h=cp_height, r=cp_diameter/2, $fn=80);
 }
