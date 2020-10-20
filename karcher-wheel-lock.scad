@@ -4,7 +4,7 @@ $fn=75;
 
 diameter=16.5;
 wall_thick=1.2;
-height=20; // 62;
+height=62;
 disk_thick=3.8;
 disk_diameter=28.5;
 s_diameter=2.8; // small cylinder

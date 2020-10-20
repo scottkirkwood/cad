@@ -2,7 +2,7 @@
 
 width=6;
 length=10;
-depth=2;
+depth=1.8;
 border=1;
 brim_w=2.5;
 brim_h=1;
