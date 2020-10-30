@@ -1,11 +1,11 @@
 // This is a tray to hold my modem a little higher
 // For better reception
 $fn=50;
-width = 105;
+width = 110;
 height = width;
 thick = 1.5;
 support_height = height/2;
-support_width = 10;
+support_width = 14;
 wall_support_thick = thick*2;
 eps=0.01;
 
@@ -52,7 +52,7 @@ module Arm(dir) {
   }
   difference() {
     WallSupport(dir);
-    for (x = [-1, 1]) { 
+    for (x = [-1, 1]) {
       for (y = [0, 1]) {
         DrillHole(x, y);
       }
@@ -76,7 +76,7 @@ module Triangle(dir) {
 module TriangleCutout(dir) {
   radius = 10;
   eyeball_x = 5;
-  eyeball_height = 10.25;
+  eyeball_height = 11.8;
   eyeball_angle = 25;
   translate([dir*width/2, -width/4+eyeball_x, height/8+eyeball_height])
     rotate([0, -90, 0])
@@ -99,10 +99,10 @@ module WallSupport(dir) {
 module DrillHole(x, y) {
   radius=6/2;
   hole_thick=wall_support_thick+2*eps;
-  translate([
-      x * (width/2 - radius*2), 
-      width/2+hole_thick/2, 
-      height/2 - radius*2 - (y*height/6)])
+  #translate([
+      x * (width/2 - radius*2.8),
+      width/2+hole_thick/2,
+      height/2 - radius*3 - (y*height/6)])
     rotate([90, 0, 0])
       cylinder(h=hole_thick, r1=radius*2/3, r2=radius);
 }
