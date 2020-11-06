@@ -5,10 +5,10 @@ thick = 4;
 eps = 0.01;
 
 
-translate([0, height*1.5, 0])
-  Piece(false, true);
-translate([0, 0, 0])
-  Piece(true, true);
+//translate([0, height*1.5, 0])
+//  Piece(false, true);
+//translate([0, 0, 0])
+//  Piece(true, true);
 translate([0, -height*1.5, 0])
   Piece(true, false);
 
