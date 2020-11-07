@@ -4,8 +4,8 @@ height = 33;
 thick = 5.8;
 eps = 0.01;
 num_cuts = 7;
-rlb = 2; // 0=right, 1=left, 2=both
-flip = 0; // I print flipped so the thicker base at bottom
+rlb = 1; // 0=right, 1=left, 2=both
+flip = 1; // I print flipped so the thicker base at bottom
 
 rotate([0, 180*flip, 0]) {
   if (rlb == 2) {
@@ -49,7 +49,7 @@ module BottomBlock() {
 
 module CutoutBack() {
   edge = 5;
-  depth = 6;
+  depth = 5;
   translate([0, thick/2, height/2])
     cube([length-edge, depth, height-edge], center=true);
 }
