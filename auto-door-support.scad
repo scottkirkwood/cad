@@ -1,3 +1,6 @@
+// This is the backing plate for the automatic door It is just to bring the
+// toothed piece in line with the edges of the door
+
 length = 620;
 length3 = length / 3;
 height = 21;
