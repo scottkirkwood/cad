@@ -38,9 +38,9 @@ module Taper() {
 }
 
 module BottomBlock() {
-  bb_height = 15;
+  bb_height = 13.5;
   bottom_taper = 1.3;
-  lip = 2;
+  lip = 2.2;
   translate([0, -thick+bottom_taper, height/2-bb_height])
     cube([length+eps, thick, height+eps], center=true);
   translate([0, -thick+bottom_taper+1, height/2-bb_height-lip])
@@ -85,9 +85,9 @@ module CutoutForBolts() {
 }
 
 module Bolt(dir, from_edge) {
-  bolt_width = 15; // really 11mm + some extra
+  bolt_width = 25; // really 11mm + some extra
   bolt_height = 10;
 
-  translate([dir*(length/2-bolt_width/2-from_edge), -thick/4, -eps])
-    cube([bolt_width, thick+eps, bolt_height]);
+  translate([dir*(length/2-from_edge), thick/4, bolt_height/2-eps])
+    cube([bolt_width, thick+eps, bolt_height], center=true);
 }
