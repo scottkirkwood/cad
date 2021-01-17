@@ -42,15 +42,17 @@ module Txt(txt) {
 }
 
 rotate([180, 0, 0]) {
-  if (true) {
+  if (false) {
     BaseWithCurve("Left");
     Spine(50, [190, -45, 50]);
     Spine(40, [160, -30, -25]);
     Spine(45, [180, 40, 5]);
+    Spine(38, [195, 45, -45]);
   } else {
     BaseWithCurve("Right");
     Spine(40, [190, -45, 25]);
     Spine(45, [160, -30, -25]);
     Spine(50, [180, 40, 5]);
+    Spine(41, [195, 45, -45]);
   }
 }
