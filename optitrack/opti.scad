@@ -1,3 +1,4 @@
+left = true;
 
 module Spine(len, rot) {
   rotate(rot) {
@@ -45,19 +46,19 @@ module BaseWithCurve(txt) {
 }
 
 module Txt(txt) {
-  translate([12, 6, 1])
+  translate([12, 5, 1.5])
     rotate([180, 0, 90])
-      linear_extrude(height=2)
-        text(txt, size=5);
+      linear_extrude(height=3)
+        text(txt, size=6);
 }
 
 rotate([180, 0, 0]) {
-  if (false) {
+  if (left) {
     Base("Left");
-    Spine(50, [190, -45, 50]);
+    Spine(50, [180, -40, 40]);
     Spine(40, [160, -30, -25]);
     Spine(45, [180, 40, 5]);
-    Spine(38, [195, 45, -45]);
+    Spine(35, [195, 45, -45]);
   } else {
     Base("Right");
     Spine(30, [190, -45, 25]);
