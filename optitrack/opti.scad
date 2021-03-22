@@ -1,4 +1,4 @@
-left = true;
+left = false;
 
 module Spine(len, rot) {
   rotate(rot) {
@@ -6,8 +6,7 @@ module Spine(len, rot) {
   }
   rotate(rot)
     translate([0, 0, len])
-      rotate(rot/20)
-        Sphere(15);
+      Sphere(15);
 }
 
 module Sphere(d) {
@@ -28,6 +27,12 @@ module Base(txt) {
       cube([rect, rect, thick], center=true);
       Txt(txt);
   }
+}
+
+module SphereBase() {
+  diameter=15;
+  rect = 45;
+
   difference() {
     sphere(d=diameter, $fn=60);
     translate([0, 0, diameter/3])
@@ -55,15 +60,31 @@ module Txt(txt) {
 rotate([180, 0, 0]) {
   if (left) {
     Base("Left");
-    Spine(50, [180, -40, 40]);
-    Spine(40, [160, -30, -25]);
-    Spine(45, [180, 40, 5]);
-    Spine(35, [195, 45, -45]);
+    translate([10, 10, 0]) {
+      SphereBase();
+      Spine(50, [180, -40, 40]);
+    }
+    translate([10, -10, 0]) {
+      SphereBase();
+      Spine(30, [160, -30, -25]);
+    }
+    translate([-10, 0, 0]) {
+      SphereBase();
+      Spine(40, [180, 40, 5]);
+    }
   } else {
     Base("Right");
-    Spine(30, [190, -45, 25]);
-    Spine(40, [160, -30, -25]);
-    Spine(50, [180, 40, 5]);
-    Spine(45, [195, 45, -45]);
+    translate([10, 10, 0]) {
+      SphereBase();
+      Spine(25, [190, -45, 25]);
+    }
+    translate([10, -10, 0]) {
+      SphereBase();
+      Spine(35, [160, -30, -25]);
+    }
+    translate([-10, 0, 0]) {
+      SphereBase();
+      Spine(45, [180, 40, 5]);
+    }
   }
 }
