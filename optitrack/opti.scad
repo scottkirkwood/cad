@@ -76,7 +76,7 @@ rotate([180, 0, 0]) {
     Base("Right");
     translate([10, 10, 0]) {
       SphereBase();
-      Spine(25, [190, -45, 25]);
+      Spine(25, [220, 0, 25]);
     }
     translate([10, -10, 0]) {
       SphereBase();
