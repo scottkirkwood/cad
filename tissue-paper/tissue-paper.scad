@@ -1,7 +1,7 @@
 height=70;
 depth=110;
 len=230;
-thick=2;
+thick=4;
 cw=20;
 module smooth_box() {
   cutout_d=65;
