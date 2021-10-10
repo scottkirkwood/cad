@@ -10,7 +10,6 @@ futz=0.01;
 module All() {
   difference() {
     Cylinder();
-    CenterPunch();
   }
 }
 
@@ -18,7 +17,7 @@ module Cylinder() {
     difference() {
       cylinder(h=depth, d=diameter+thick, $fn=80);
       translate([0, 0, -thick])
-        cylinder(h=depth,d=diameter, $fn=80);
+        cylinder(h=depth+thick*2,d=diameter, $fn=80);
     }
 }
 
