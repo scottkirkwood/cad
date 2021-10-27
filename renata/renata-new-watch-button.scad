@@ -2,20 +2,28 @@
 // Use the spiral (vase) print, the top won't be printed.
 // Also used the 0.1 (fine) print setting.
 
-diameter=6.5;
+diameter=6.9;
 thick=1.0;
 depth=4.3;
 futz=0.01;
 
 module All() {
-  difference() {
+  union() {
     Cylinder();
   }
 }
 
+module Plane() {
+  translate([0, 0, 0])
+    cylinder(h=thick/2, d=diameter+5*thick, $fn=80);
+}
+
 module Cylinder() {
     difference() {
-      cylinder(h=depth, d=diameter+thick, $fn=80);
+      union() {
+        cylinder(h=depth, d=diameter+thick, $fn=80);
+        Plane();
+      }
       translate([0, 0, -thick])
         cylinder(h=depth+thick*2,d=diameter, $fn=80);
     }
