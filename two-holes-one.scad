@@ -2,20 +2,24 @@
 $fn = 32;
 length = 95;
 separation = 60;
-height = 50;
-large_hole_radius = 7.5/2;
+height = 20;
+large_hole_radius = 7.6/2;
 small_hole_radius = 4.25/2;
 thick = 4;
 eps = 0.01;
+clearance = 0.1;
 
 module Hole() {
-  translate([0, height/4, -eps]) {
-    cylinder(h=thick+eps*2, r=large_hole_radius);
-    translate([0, large_hole_radius+small_hole_radius, 0])
-      cylinder(h=thick+eps*2, r=small_hole_radius);
+  h = -2;
+  translate([0, h, -eps]) {
+    cylinder(h=thick+eps*2, r=large_hole_radius+clearance);
+    translate([0, large_hole_radius+small_hole_radius, 0]) {
+      cylinder(h=thick+eps*2, r=small_hole_radius+clearance);
+      cylinder(h=thick/3, r=large_hole_radius);
+    }
   }
   r2 = small_hole_radius*2;
-  translate([-small_hole_radius+eps, height/4+1.9, -eps])
+  translate([-small_hole_radius+eps, h+1.9, -eps])
     cube([r2-eps, r2-eps, thick+eps*2]);
 }
 
@@ -25,19 +29,18 @@ module Plate() {
 }
 
 module Pin(pos) {
-  clearance = 0.1;
   translate(pos) {
     cylinder(h=thick*2+eps*2, r=small_hole_radius-clearance);
-    translate([0, 0, thick*2+thick/4])
-      #sphere(r=large_hole_radius);
+    translate([0, 0, thick*2])
+      sphere(r=large_hole_radius);
   }
 }
 
 difference() {
-  %Plate();
+  Plate();
   Hole();
 }
 
-Pin([-separation/2, -height/4, thick]);
-Pin([separation/2, -height/4, thick]);
+Pin([-separation/2, -height/6, thick]);
+Pin([separation/2, -height/6, thick]);
 
