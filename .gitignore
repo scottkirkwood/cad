@@ -1,2 +1,6 @@
 *.gcode
 *.blend1
+__pycache__/
+*.py[cod]
+*.FCBak
+*.FCStd1
