@@ -25,6 +25,9 @@ import Sketcher
 import Spreadsheet
 import TechDraw
 
+FreeCAD.Units.setSchema(3)  # ImperialDecimal (inches)
+FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Units").SetInt("UserSchema", 3)
+
 print("=" * 75)
 print("  BUILDING PARAMETRIC ARCADE CABINET IN FREECAD (V2)")
 print(f"  FreeCAD Version: {FreeCAD.Version()}")
@@ -1018,207 +1021,468 @@ for name, obj in audit_parts:
 # =============================================================================
 # 10. GROUP 07: TECHNICAL SHOP DRAWINGS (TECHDRAW WORKBENCH)
 # =============================================================================
-print("  [*] Building 07 Technical Drawings (Shop Sheets & Cut List)...")
+print("  [*] Building 07 Technical Drawings (Complete 5-Sheet Shop Blueprint Set)...")
 
 grp_drawings = doc.addObject("App::DocumentObjectGroup", "07_Technical_Drawings")
 grp_drawings.Label = "07 Technical Drawings (Shop Sheets)"
 
 tmpl_file = "/home/scott/20p/cad/arcade/drawing_template.svg"
 
-# -----------------------------------------------------------------------------
-# SHEET 1: SIDE PANEL PROFILE & 15-VERTEX COORDINATE MAP
-# -----------------------------------------------------------------------------
-p1 = doc.addObject("TechDraw::DrawPage", "Drawing_Page_01_Side_Panel")
-p1.Label = "Shop Sheet 1 - Side Panel Profile & Angles"
-t1 = doc.addObject("TechDraw::DrawSVGTemplate", "Template_Sheet_1")
-t1.Template = tmpl_file
-p1.Template = t1
-doc.recompute()
+def setup_page(name, label, title1, title2, title3, sheet_str, scale_str):
+    p = doc.addObject("TechDraw::DrawPage", name)
+    p.Label = label
+    t = doc.addObject("TechDraw::DrawSVGTemplate", f"Template_{name}")
+    t.Template = tmpl_file
+    p.Template = t
+    doc.recompute()
+    t.setEditFieldContent("DrawingTitle1", title1)
+    t.setEditFieldContent("DrawingTitle2", title2)
+    t.setEditFieldContent("DrawingTitle3", title3)
+    t.setEditFieldContent("DrawnBy", "Scott Kirkwood")
+    t.setEditFieldContent("Sheet", sheet_str)
+    t.setEditFieldContent("scale", scale_str)
+    t.setEditFieldContent("CompanyName", "ARCADE SHOP BLUEPRINTS")
+    t.setEditFieldContent("CompanyAddress", "ALL UNITS: INCHES / DEGREES")
+    grp_drawings.addObject(p)
+    return p, t
 
-t1.setEditFieldContent("DrawingTitle1", "PARAMETRIC ARCADE CABINET")
-t1.setEditFieldContent("DrawingTitle2", "SIDE PANEL PROFILE & COORDINATE MAP")
-t1.setEditFieldContent("DrawingTitle3", "3/4\" WHITE BIRCH VC PLYWOOD (2 REQUIRED)")
-t1.setEditFieldContent("DrawnBy", "Scott Kirkwood")
-t1.setEditFieldContent("Sheet", "1 OF 2")
-t1.setEditFieldContent("scale", "1 : 10")
-t1.setEditFieldContent("CompanyName", "ARCADE SHOP DRAWINGS")
-t1.setEditFieldContent("CompanyAddress", "UNITS: INCHES / DEGREES")
+def add_dim(page, view, dir_idx, x_pos, y_pos):
+    edges = view.getVisibleEdges()
+    if edges:
+        dim = TechDraw.makeExtentDim(view, [e for e in edges], dir_idx)
+        page.addView(dim)
+        dim.X = x_pos
+        dim.Y = y_pos
+        dim.ShowUnits = True
+        dim.FormatSpec = "%.2w"
+        return dim
+    return None
 
-# Side Panel Orthographic Projection View
-v_side = doc.addObject("TechDraw::DrawViewPart", "View_Side_Panel")
+# =============================================================================
+# SHEET 1: SIDE PANEL MASTER TEMPLATE & 15-VERTEX COORDINATES
+# =============================================================================
+p1, t1 = setup_page(
+    "Drawing_Page_01_Side_Panel",
+    "Sheet 1 - Side Panel Profile & 15-Vertex Coordinates",
+    "PARAMETRIC ARCADE CABINET",
+    "SHEET 1: SIDE PANEL 15-VERTEX PROFILE",
+    "3/4\" WHITE BIRCH VC PLYWOOD (2 REQUIRED)",
+    "1 OF 5", "1 : 10"
+)
+
+v_side = doc.addObject("TechDraw::DrawViewPart", "View_Side_Panel_Profile")
 v_side.Source = doc.getObject("Side_Panel_Left")
 v_side.Direction = FreeCAD.Vector(0, 1, 0)
 v_side.XDirection = FreeCAD.Vector(1, 0, 0)
-v_side.X = 135.0
-v_side.Y = 145.0
 v_side.ScaleType = "Custom"
 v_side.Scale = 0.10
 p1.addView(v_side)
+v_side.X = 110.0
+v_side.Y = 145.0
 doc.recompute()
 
-# Extent dimensions (Overall width & height)
-edges_side = v_side.getVisibleEdges()
-if edges_side:
-    edge_names = [e for e in edges_side]
-    dim_h = TechDraw.makeExtentDim(v_side, edge_names, 0) # Width (Depth of cabinet)
-    dim_h.X = 135.0
-    dim_h.Y = 40.0
-    p1.addView(dim_h)
-    
-    dim_v = TechDraw.makeExtentDim(v_side, edge_names, 1) # Height
-    dim_v.X = 40.0
-    dim_v.Y = 145.0
-    p1.addView(dim_v)
+add_dim(p1, v_side, 0, 110.0, 35.0)  # Width (Depth 25.25 in)
+add_dim(p1, v_side, 1, 40.0, 145.0)   # Height (65.25 in)
 
-# Vertex Coordinate Table Callout
-anno_coords = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Vertex_Coordinates")
-anno_coords.Text = [
-    "SIDE PANEL 15-VERTEX COORDINATE MAP (Inches from Origin)",
-    "==========================================================",
+a1_coords = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet1_Coordinates")
+a1_coords.Text = [
+    "SIDE PANEL 15-VERTEX COORDINATE MAP (Inches from Origin [0, 0])",
+    "==================================================================",
     "P0:  (X=+2.25, Z= 0.00) - Toe-kick riser base at floor",
-    "P1:  (X=+2.25, Z=+4.50) - Top of toe-kick recess (4.5\" rise)",
-    "P2:  (X=-1.00, Z=+4.50) - Front lower lip (1.0\" perimeter reveal)",
-    "P3:  (X=-1.00, Z=+23.50) - Top of coin door lip (vertical front)",
-    "P4:  (X=-6.25, Z=+29.25) - Apron corbel diagonal (47.6° / 42.4° bevel)",
-    "P5:  (X=-6.25, Z=+33.25) - Front vertical cheek of keyboard cavity",
-    "P6:  (X=+5.25, Z=+33.25) - Control panel shelf support ledge",
-    "P7:  (X=+5.25, Z=+40.00) - Vertical rise behind control console",
+    "P1:  (X=+2.25, Z=+4.50) - Top of toe-kick recess (4.50\" rise)",
+    "P2:  (X=-1.00, Z=+4.50) - Front lower lip corner (1.00\" perimeter reveal)",
+    "P3:  (X=-1.00, Z=+23.50) - Top of coin door lip (vertical front edge)",
+    "P4:  (X=-6.25, Z=+29.25) - Apron corbel diagonal (47.60° rake, 42.40° miter)",
+    "P5:  (X=-6.25, Z=+33.25) - Front vertical cheek of keyboard cavity (4.00\" high)",
+    "P6:  (X=+5.25, Z=+33.25) - Control panel shelf support ledge (11.50\" deep)",
+    "P7:  (X=+5.25, Z=+40.00) - Vertical rise behind control console (6.75\" high)",
     "P8:  (X=+6.00, Z=+42.16) - Transition angle to monitor cheek",
-    "P9:  (X=+13.19, Z=+52.84) - Monitor cheek angle (33.93° rake)",
-    "P10: (X=+8.10, Z=+57.47) - Speaker cheek rake (47.73° angle)",
-    "P11: (X=+6.75, Z=+63.50) - Marquee visor top edge",
-    "P12: (X=+6.75, Z=+65.25) - Front top corner of 1.0\" roof lip",
-    "P13: (X=+19.00, Z=+65.25) - Top rear roof corner",
-    "P14: (X=+19.00, Z= 0.00) - Bottom rear floor corner",
+    "P9:  (X=+13.19, Z=+52.84) - Monitor cheek angle (33.93° rake, 16.57\" length)",
+    "P10: (X=+8.10, Z=+57.47) - Speaker cheek angle (47.73° rake, 7.43\" length)",
+    "P11: (X=+6.75, Z=+63.50) - Marquee visor top edge (12.80° visor rake)",
+    "P12: (X=+6.75, Z=+65.25) - Front top corner of 1.00\" roof perimeter lip",
+    "P13: (X=+19.00, Z=+65.25) - Top rear roof corner (65.25\" total height)",
+    "P14: (X=+19.00, Z= 0.00) - Bottom rear floor corner (20.00\" carcass depth)",
 ]
-anno_coords.X = 300.0
-anno_coords.Y = 185.0
-anno_coords.TextSize = 2.8
-p1.addView(anno_coords)
+p1.addView(a1_coords)
+a1_coords.X = 295.0
+a1_coords.Y = 180.0
+a1_coords.TextSize = 2.6
 
-# Fabrication & Tooling Notes
-anno_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Shop_Notes")
-anno_notes.Text = [
+a1_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet1_Notes")
+a1_notes.Text = [
     "FABRICATION & TOOLING NOTES:",
-    "----------------------------------------------------------",
+    "------------------------------------------------------------------",
     "1. CUT TWO (2) MIRRORED PANELS from 3/4\" White Birch VC plywood.",
-    "2. T-MOLDING: Slot outer perimeter edge with 1/16\" 3-wing slotting cutter.",
-    "3. SWITCH HOLE: Drill 20mm (0.787\") through-hole on Right Side Panel at",
+    "2. T-MOLDING: Slot entire outer perimeter with 1/16\" 3-wing slotting cutter.",
+    "3. ROCKER SWITCH: On RIGHT Side Panel only, drill 20mm (0.787\") hole at",
     "   (X=15.00\", Z=34.00\") with 1.75\" dia x 0.50\" deep inside relief pocket.",
-    "4. CORBEL ALIGNMENT: Diagonal corbel is parallel to Console Apron with",
-    "   a strictly continuous 1.0\" perimeter reveal all the way up.",
+    "4. ALL CORBELS PARALLEL: Apron cheek maintains strict 1.00\" perimeter reveal.",
 ]
-anno_notes.X = 300.0
-anno_notes.Y = 65.0
-anno_notes.TextSize = 2.8
-p1.addView(anno_notes)
+p1.addView(a1_notes)
+a1_notes.X = 295.0
+a1_notes.Y = 65.0
+a1_notes.TextSize = 2.6
 
-grp_drawings.addObject(p1)
+# =============================================================================
+# SHEET 2: CARCASS STRUCTURE & BEVELED PANELS
+# =============================================================================
+p2, t2 = setup_page(
+    "Drawing_Page_02_Carcass_Panels",
+    "Sheet 2 - Carcass Structure & Beveled Panels",
+    "PARAMETRIC ARCADE CABINET",
+    "SHEET 2: CARCASS STRUCTURE & BEVELED PANELS",
+    "3/4\" WHITE BIRCH VC PLYWOOD (ALL WIDTH = 23.000\")",
+    "2 OF 5", "1 : 8"
+)
 
-# -----------------------------------------------------------------------------
-# SHEET 2: CABINET ELEVATIONS & FULL CUT LIST SCHEDULE
-# -----------------------------------------------------------------------------
-p2 = doc.addObject("TechDraw::DrawPage", "Drawing_Page_02_Cabinet_Elevations")
-p2.Label = "Shop Sheet 2 - Cabinet Elevations & Cut List"
-t2 = doc.addObject("TechDraw::DrawSVGTemplate", "Template_Sheet_2")
-t2.Template = tmpl_file
-p2.Template = t2
+# Apron
+v_apron = doc.addObject("TechDraw::DrawViewPart", "View_Console_Apron")
+v_apron.Source = doc.getObject("Console_Diagonal_Apron")
+v_apron.Direction = FreeCAD.Vector(-0.7385, 0, -0.6743)
+v_apron.XDirection = FreeCAD.Vector(0, -1, 0)
+v_apron.ScaleType = "Custom"
+v_apron.Scale = 0.09
+p2.addView(v_apron)
+v_apron.X = 85.0
+v_apron.Y = 195.0
 doc.recompute()
+add_dim(p2, v_apron, 0, 85.0, 170.0)
+add_dim(p2, v_apron, 1, 35.0, 195.0)
 
-t2.setEditFieldContent("DrawingTitle1", "PARAMETRIC ARCADE CABINET")
-t2.setEditFieldContent("DrawingTitle2", "CABINET ELEVATIONS & CUT LIST SCHEDULE")
-t2.setEditFieldContent("DrawingTitle3", "ORTHOGRAPHIC VIEWS & FINISHED DIMENSIONS")
-t2.setEditFieldContent("DrawnBy", "Scott Kirkwood")
-t2.setEditFieldContent("Sheet", "2 OF 2")
-t2.setEditFieldContent("scale", "1 : 12")
-t2.setEditFieldContent("CompanyName", "ARCADE SHOP DRAWINGS")
-t2.setEditFieldContent("CompanyAddress", "UNITS: INCHES / DEGREES")
+# Keyboard Bottom Plate
+v_kb = doc.addObject("TechDraw::DrawViewPart", "View_KB_Plate")
+v_kb.Source = doc.getObject("Keyboard_Bottom_Plate")
+v_kb.Direction = FreeCAD.Vector(0, 0, 1)
+v_kb.XDirection = FreeCAD.Vector(0, -1, 0)
+v_kb.ScaleType = "Custom"
+v_kb.Scale = 0.09
+p2.addView(v_kb)
+v_kb.X = 215.0
+v_kb.Y = 195.0
+doc.recompute()
+add_dim(p2, v_kb, 0, 215.0, 170.0)
+add_dim(p2, v_kb, 1, 165.0, 195.0)
 
-major_cabinet_parts = [
-    side_l,
-    side_r,
-    tk_board,
-    door_panel,
+# Top Roof Panel
+v_roof = doc.addObject("TechDraw::DrawViewPart", "View_Roof_Panel")
+v_roof.Source = doc.getObject("Top_Roof_Panel")
+v_roof.Direction = FreeCAD.Vector(0, 0, 1)
+v_roof.XDirection = FreeCAD.Vector(0, -1, 0)
+v_roof.ScaleType = "Custom"
+v_roof.Scale = 0.09
+p2.addView(v_roof)
+v_roof.X = 345.0
+v_roof.Y = 195.0
+doc.recompute()
+add_dim(p2, v_roof, 0, 345.0, 170.0)
+add_dim(p2, v_roof, 1, 295.0, 195.0)
+
+# Equipment Shelf
+v_shelf = doc.addObject("TechDraw::DrawViewPart", "View_Equip_Shelf")
+v_shelf.Source = doc.getObject("Internal_Cabinet_Shelf")
+v_shelf.Direction = FreeCAD.Vector(0, 0, 1)
+v_shelf.XDirection = FreeCAD.Vector(0, -1, 0)
+v_shelf.ScaleType = "Custom"
+v_shelf.Scale = 0.075
+p2.addView(v_shelf)
+v_shelf.X = 85.0
+v_shelf.Y = 100.0
+doc.recompute()
+add_dim(p2, v_shelf, 0, 85.0, 60.0)
+add_dim(p2, v_shelf, 1, 35.0, 100.0)
+
+# Base Plate
+v_base = doc.addObject("TechDraw::DrawViewPart", "View_Base_Plate")
+v_base.Source = doc.getObject("Bottom_Base_Plate")
+v_base.Direction = FreeCAD.Vector(0, 0, 1)
+v_base.XDirection = FreeCAD.Vector(0, -1, 0)
+v_base.ScaleType = "Custom"
+v_base.Scale = 0.075
+p2.addView(v_base)
+v_base.X = 215.0
+v_base.Y = 100.0
+doc.recompute()
+add_dim(p2, v_base, 0, 215.0, 60.0)
+add_dim(p2, v_base, 1, 165.0, 100.0)
+
+a2_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet2_Table")
+a2_notes.Text = [
+    "BEVEL CUTS & BLADE TILT SPECIFICATIONS:",
+    "==================================================================",
+    "1. CONSOLE DIAGONAL APRON (7.786\" x 23.000\" x 0.750\"): ",
+    "   - Table saw blade tilt: 42.40° ON BOTH TOP AND BOTTOM ENDS.",
+    "   - Parallel board with zero taper. Top meets KB plate at Z=29.25\".",
+    "2. KEYBOARD BOTTOM PLATE (5.250\" x 23.000\" x 0.750\"): ",
+    "   - Square 90° edges on all sides (Z=29.25\" to 30.00\").",
+    "3. TOP ROOF PANEL (10.250\" x 23.000\" x 0.750\"): ",
+    "   - Front edge blade tilt: 12.80° BEVEL; Rear edge square 90°.",
+    "4. TOE KICK RISER (4.500\" x 23.000\" x 0.750\"): Square 90° cuts.",
+    "5. TOE KICK CEILING (1.500\" x 23.000\" x 0.750\"): Square 90° cuts.",
+    "6. DOOR HEADER RAIL (1.500\" x 23.000\" x 0.750\"): Anti-racking stretcher.",
+    "7. EQUIPMENT SHELF (14.000\" x 23.000\" x 0.750\"): Leaves 2.25\" rear slot.",
+    "8. BOTTOM BASE PLATE (14.250\" x 23.000\" x 0.750\"): Elevated 0.75\" Z.",
+]
+p2.addView(a2_notes)
+a2_notes.X = 335.0
+a2_notes.Y = 85.0
+a2_notes.TextSize = 2.2
+
+# =============================================================================
+# SHEET 3: DISPLAY & SOUND PANELS (BEZEL, SPEAKERS, MARQUEE)
+# =============================================================================
+p3, t3 = setup_page(
+    "Drawing_Page_03_Display_Sound",
+    "Sheet 3 - Display & Sound Panels (Bezel & Speakers)",
+    "PARAMETRIC ARCADE CABINET",
+    "SHEET 3: DISPLAY & SOUND PANELS",
+    "3/4\" WHITE BIRCH PLYWOOD (ALL WIDTH = 23.000\")",
+    "3 OF 5", "1 : 8"
+)
+
+# Monitor Bezel
+v_bezel = doc.addObject("TechDraw::DrawViewPart", "View_Bezel_Face")
+v_bezel.Source = doc.getObject("Monitor_Bezel_Board")
+v_bezel.Direction = FreeCAD.Vector(-0.8297, 0, 0.5582)
+v_bezel.XDirection = FreeCAD.Vector(0, -1, 0)
+v_bezel.ScaleType = "Custom"
+v_bezel.Scale = 0.09
+p3.addView(v_bezel)
+v_bezel.X = 110.0
+v_bezel.Y = 150.0
+doc.recompute()
+add_dim(p3, v_bezel, 0, 110.0, 75.0)
+add_dim(p3, v_bezel, 1, 45.0, 150.0)
+
+# Speaker Board
+v_spk = doc.addObject("TechDraw::DrawViewPart", "View_Speaker_Face")
+v_spk.Source = doc.getObject("Speaker_Board")
+v_spk.Direction = FreeCAD.Vector(-0.6727, 0, -0.7399)
+v_spk.XDirection = FreeCAD.Vector(0, -1, 0)
+v_spk.ScaleType = "Custom"
+v_spk.Scale = 0.09
+p3.addView(v_spk)
+v_spk.X = 280.0
+v_spk.Y = 195.0
+doc.recompute()
+add_dim(p3, v_spk, 0, 280.0, 160.0)
+add_dim(p3, v_spk, 1, 220.0, 195.0)
+
+a3_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet3_Specs")
+a3_notes.Text = [
+    "DISPLAY & SOUND FABRICATION SPECIFICATIONS:",
+    "==================================================================",
+    "1. MONITOR BEZEL BOARD (16.572\" x 23.000\" x 0.750\"): ",
+    "   - Screen rake angle: 33.93° FROM VERTICAL.",
+    "   - Bottom edge bevel: 33.93° BEVEL (mates with horizontal shelf).",
+    "   - Top edge miter: 40.83° MITER (mates with speaker board).",
+    "   - Active screen cutout: 14.88\" W x 11.95\" H (centered at Y=0,",
+    "     located 2.66\" up from bottom face).",
+    "   - Dell P1913S button notch: 1.06\" W x 2.55\" H at bottom-right corner.",
+    "2. SPEAKER BOARD (7.433\" x 23.000\" x 0.750\"): ",
+    "   - Speaker rake angle: 47.73° FROM VERTICAL.",
+    "   - Bottom edge miter: 40.83° MITER (mates with bezel board).",
+    "   - Top edge miter: 34.93° MITER (mates with marquee sign).",
+    "   - Two speaker holes: Dia 3.750\" centered at Y = ±6.00\" (12.00\" spacing).",
+    "3. MARQUEE SIGN (5.500\" x 23.000\" x 0.125\" Translucent Acrylic): ",
+    "   - Rakes back 12.80° between speaker board and roof panel.",
+]
+p3.addView(a3_notes)
+a3_notes.X = 285.0
+a3_notes.Y = 80.0
+a3_notes.TextSize = 2.3
+
+# =============================================================================
+# SHEET 4: CONTROLS, KEYBOARD DRAWER & ACCESS DOORS
+# =============================================================================
+p4, t4 = setup_page(
+    "Drawing_Page_04_Controls_Doors",
+    "Sheet 4 - Controls, Keyboard Drawer & Access Doors",
+    "PARAMETRIC ARCADE CABINET",
+    "SHEET 4: CONTROLS & ACCESS PANELS",
+    "3/4\" & 1/4\" PLYWOOD (CONSOLE, DOORS, TRAY)",
+    "4 OF 5", "1 : 10"
+)
+
+# Control Panel Shelf
+v_cp = doc.addObject("TechDraw::DrawViewPart", "View_CP_Shelf")
+v_cp.Source = doc.getObject("Control_Panel_Shelf")
+v_cp.Direction = FreeCAD.Vector(0, 0, 1)
+v_cp.XDirection = FreeCAD.Vector(0, -1, 0)
+v_cp.ScaleType = "Custom"
+v_cp.Scale = 0.075
+p4.addView(v_cp)
+v_cp.X = 105.0
+v_cp.Y = 205.0
+doc.recompute()
+add_dim(p4, v_cp, 0, 105.0, 175.0)
+add_dim(p4, v_cp, 1, 40.0, 205.0)
+
+# Keyboard Tray
+v_tray = doc.addObject("TechDraw::DrawViewPart", "View_KB_Tray")
+v_tray.Source = doc.getObject("Keyboard_Tray")
+v_tray.Direction = FreeCAD.Vector(0, 0, 1)
+v_tray.XDirection = FreeCAD.Vector(0, -1, 0)
+v_tray.ScaleType = "Custom"
+v_tray.Scale = 0.075
+p4.addView(v_tray)
+v_tray.X = 330.0
+v_tray.Y = 205.0
+doc.recompute()
+add_dim(p4, v_tray, 0, 330.0, 175.0)
+add_dim(p4, v_tray, 1, 270.0, 205.0)
+
+# Front Door
+v_fdoor = doc.addObject("TechDraw::DrawViewPart", "View_Front_Door")
+v_fdoor.Source = doc.getObject("Lower_Front_Panel")
+v_fdoor.Direction = FreeCAD.Vector(-1, 0, 0)
+v_fdoor.XDirection = FreeCAD.Vector(0, -1, 0)
+v_fdoor.ScaleType = "Custom"
+v_fdoor.Scale = 0.075
+p4.addView(v_fdoor)
+v_fdoor.X = 105.0
+v_fdoor.Y = 95.0
+doc.recompute()
+add_dim(p4, v_fdoor, 0, 105.0, 45.0)
+add_dim(p4, v_fdoor, 1, 40.0, 95.0)
+
+# Back Access Panel
+v_bdoor = doc.addObject("TechDraw::DrawViewPart", "View_Back_Panel")
+v_bdoor.Source = doc.getObject("Back_Access_Panel_1_4in")
+v_bdoor.Direction = FreeCAD.Vector(1, 0, 0)
+v_bdoor.XDirection = FreeCAD.Vector(0, 1, 0)
+v_bdoor.ScaleType = "Custom"
+v_bdoor.Scale = 0.055
+p4.addView(v_bdoor)
+v_bdoor.X = 225.0
+v_bdoor.Y = 110.0
+doc.recompute()
+add_dim(p4, v_bdoor, 0, 225.0, 35.0)
+add_dim(p4, v_bdoor, 1, 185.0, 110.0)
+
+a4_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet4_Specs")
+a4_notes.Text = [
+    "CONTROLS & DOORS SPECIFICATIONS:",
+    "==================================================================",
+    "1. CONTROL PANEL SUPPORT SHELF (10.500\" x 31.500\" x 0.750\"): ",
+    "   - 31.50\" wide wing shelf centered at Y=0; overhangs sides by 4.25\".",
+    "2. KEYBOARD SLIDE-OUT TRAY (9.000\" x 21.000\" x 0.750\"): ",
+    "   - Slides on 12\" full-extension ball-bearing slides (1.00\" clearance/side).",
+    "3. LOWER FRONT ACCESS DOOR (18.875\" x 22.875\" x 0.750\"): ",
+    "   - Opening: 19.000\" x 23.000\" with strict 1/16\" perimeter reveal.",
+    "   - Continuous piano hinge mounted in 1/16\" gap on Right side.",
+    "   - Magnetic catch and strike plate mounted on Left stop cleat.",
+    "4. BACK ACCESS PANEL (62.625\" x 22.875\" x 0.250\" LIGHTWEIGHT PLYWOOD): ",
+    "   - IEC320 C14 Power Module snap-in cutout: 2.00\" x 1.25\" at",
+    "     (Y = +6.00\", Z = 4.00\" off base).",
+    "   - Cam lock cylinder hole: Dia 0.750\" at top center (3.00\" from top).",
+]
+p4.addView(a4_notes)
+a4_notes.X = 335.0
+a4_notes.Y = 85.0
+a4_notes.TextSize = 2.2
+
+# =============================================================================
+# SHEET 5: CABINET ELEVATIONS & MASTER CUT LIST SCHEDULE
+# =============================================================================
+p5, t5 = setup_page(
+    "Drawing_Page_05_Elevations_CutList",
+    "Sheet 5 - Cabinet Elevations & Master Cut List",
+    "PARAMETRIC ARCADE CABINET",
+    "SHEET 5: ELEVATIONS & MASTER CUT LIST",
+    "FULL ASSEMBLY ELEVATIONS & COMPONENT SCHEDULE",
+    "5 OF 5", "1 : 14"
+)
+
+major_assembly = [
+    doc.getObject("Side_Panel_Left"),
+    doc.getObject("Side_Panel_Right"),
+    doc.getObject("Toe_Kick_Board"),
+    doc.getObject("Lower_Front_Panel"),
     doc.getObject("Console_Diagonal_Apron"),
     doc.getObject("Keyboard_Bottom_Plate"),
-    cp_shelf,
-    cbox_ext,
-    bezel_final,
-    spk_final,
+    doc.getObject("Control_Panel_Shelf"),
+    doc.getObject("User_Control_Box"),
+    doc.getObject("Monitor_Bezel_Board"),
+    doc.getObject("Speaker_Board"),
     doc.getObject("Marquee_Sign"),
     doc.getObject("Top_Roof_Panel"),
-    back_panel
+    doc.getObject("Back_Access_Panel_1_4in")
 ]
 
-# Front Elevation
-v_front = doc.addObject("TechDraw::DrawViewPart", "View_Cabinet_Front")
-v_front.Source = major_cabinet_parts
-v_front.Direction = FreeCAD.Vector(-1, 0, 0)
-v_front.XDirection = FreeCAD.Vector(0, -1, 0)
-v_front.X = 75.0
-v_front.Y = 175.0
-v_front.ScaleType = "Custom"
-v_front.Scale = 0.075
-p2.addView(v_front)
+v5_front = doc.addObject("TechDraw::DrawViewPart", "View_Assy_Front")
+v5_front.Source = major_assembly
+v5_front.Direction = FreeCAD.Vector(-1, 0, 0)
+v5_front.XDirection = FreeCAD.Vector(0, -1, 0)
+v5_front.ScaleType = "Custom"
+v5_front.Scale = 0.065
+p5.addView(v5_front)
+v5_front.X = 75.0
+v5_front.Y = 190.0
 
-# Side Elevation
-v_side2 = doc.addObject("TechDraw::DrawViewPart", "View_Cabinet_Side")
-v_side2.Source = major_cabinet_parts
-v_side2.Direction = FreeCAD.Vector(0, 1, 0)
-v_side2.XDirection = FreeCAD.Vector(-1, 0, 0)
-v_side2.X = 180.0
-v_side2.Y = 175.0
-v_side2.ScaleType = "Custom"
-v_side2.Scale = 0.075
-p2.addView(v_side2)
+v5_side = doc.addObject("TechDraw::DrawViewPart", "View_Assy_Side")
+v5_side.Source = major_assembly
+v5_side.Direction = FreeCAD.Vector(0, 1, 0)
+v5_side.XDirection = FreeCAD.Vector(-1, 0, 0)
+v5_side.ScaleType = "Custom"
+v5_side.Scale = 0.065
+p5.addView(v5_side)
+v5_side.X = 175.0
+v5_side.Y = 190.0
 
-# Isometric 3D View
-v_iso = doc.addObject("TechDraw::DrawViewPart", "View_Cabinet_Isometric")
-v_iso.Source = major_cabinet_parts
-v_iso.Direction = FreeCAD.Vector(-1.0, -1.2, 0.9)
-v_iso.XDirection = FreeCAD.Vector(1.2, -1.0, 0.0)
-v_iso.X = 300.0
-v_iso.Y = 185.0
-v_iso.ScaleType = "Custom"
-v_iso.Scale = 0.055
-p2.addView(v_iso)
-
-# Cut List Schedule Table
-anno_cut = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Cut_List")
-anno_cut.Text = [
-    "TRANSVERSE PANELS CUT LIST SCHEDULE (All Width = 23.000\" Inner Width)",
-    "===================================================================================================",
-    "PART NAME                   QTY  THICK  FINISH SIZE    TOP BEVEL      BOT BEVEL      NOTES",
-    "---------------------------------------------------------------------------------------------------",
-    "Console Diagonal Apron       1   3/4\"   7.786\" x 23\"   42.4° Tilt     42.4° Tilt     Parallel faces, zero taper",
-    "Keyboard Bottom Plate        1   3/4\"   5.250\" x 23\"   Square 90°     Square 90°     Drawer floor (Z=29.25\"-30.00\")",
-    "Monitor Bezel Board          1   3/4\"   16.572\" x 23\"  40.8° Miter    33.9° Bevel    Rake 33.93°; Dell P1913S cutout",
-    "Speaker Board                1   3/4\"   7.433\" x 23\"   34.9° Miter    40.8° Miter    Rake 47.73°; 2x 3.75\" holes",
-    "Top Roof Panel               1   3/4\"   10.250\" x 23\"  Square 90°     12.8° Bevel    Rakes back from visor",
-    "Toe Kick Board               1   3/4\"   4.500\" x 23\"   Square 90°     Square 90°     Setback 2.25\" from front lip",
-    "Toe Kick Ceiling             1   3/4\"   1.500\" x 23\"   Square 90°     Square 90°     Covers toe-kick recess",
-    "Internal Equipment Shelf     1   3/4\"   14.000\" x 23\"  Square 90°     Square 90°     Z=16.00\"; 2.25\" rear cable drop",
-    "Bottom Base Plate            1   3/4\"   14.250\" x 23\"  Square 90°     Square 90°     Elevated 0.75\" for leveler pads",
-    "Door Header Rail             1   3/4\"   1.500\" x 23\"   Square 90°     Square 90°     Anti-racking transverse rail",
-    "Lower Front Access Door      1   3/4\"   18.875\"x22.875\"Square 90°     Square 90°     1/16\" perimeter reveal",
-    "Back Access Panel            1   1/4\"   62.625\"x22.875\"Square 90°     Square 90°     1/4\" lightweight; IEC cutout",
-    "Control Panel Support Shelf  1   3/4\"   10.500\"x31.500\"Square 90°     Square 90°     Wing span 31.5\" centered at Y=0",
-]
-anno_cut.X = 215.0
-anno_cut.Y = 60.0
-anno_cut.TextSize = 2.4
-p2.addView(anno_cut)
-
-grp_drawings.addObject(p2)
+v5_iso = doc.addObject("TechDraw::DrawViewPart", "View_Assy_Isometric")
+v5_iso.Source = major_assembly
+v5_iso.Direction = FreeCAD.Vector(-1.0, -1.2, 0.9)
+v5_iso.XDirection = FreeCAD.Vector(1.2, -1.0, 0.0)
+v5_iso.ScaleType = "Custom"
+v5_iso.Scale = 0.050
+p5.addView(v5_iso)
+v5_iso.X = 310.0
+v5_iso.Y = 195.0
 
 doc.recompute()
-print("  [+] TechDraw Shop Sheets (Sheet 1 & Sheet 2) created successfully")
+
+a5_cut = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet5_Master_CutList")
+a5_cut.Text = [
+    "MASTER PLYWOOD CUT LIST SCHEDULE (All Transverse Carcass Panels Width = 23.000\" Inner Width)",
+    "==================================================================================================",
+    "PART NAME                 QTY THK  FINISH SIZE (IN)  TOP BEVEL/MITER   BOT BEVEL/MITER   NOTES",
+    "--------------------------------------------------------------------------------------------------",
+    "Side Panels (Left/Right)   2  3/4\" 20.00\" x 65.25\"   Per 15-Vertex Map Square 90° Base   1/16\" T-molding",
+    "Console Diagonal Apron     1  3/4\" 7.786\" x 23.000\"  42.40° Blade Tilt 42.40° Blade Tilt Parallel, no taper",
+    "Keyboard Bottom Plate      1  3/4\" 5.250\" x 23.000\"  Square 90°        Square 90°        Z=29.25\"-30.00\"",
+    "Monitor Bezel Board        1  3/4\" 16.572\" x 23.000\" 40.83° Miter      33.93° Bevel      33.93° rake; P1913S",
+    "Speaker Board              1  3/4\" 7.433\" x 23.000\"  34.93° Miter      40.83° Miter      47.73° rake; 2x3.75\"",
+    "Top Roof Panel             1  3/4\" 10.250\" x 23.000\" Square 90°        12.80° Bevel      Rakes from visor",
+    "Toe Kick Board             1  3/4\" 4.500\" x 23.000\"  Square 90°        Square 90°        Setback 2.25\"",
+    "Toe Kick Ceiling           1  3/4\" 1.500\" x 23.000\"  Square 90°        Square 90°        Covers kick recess",
+    "Door Header Stretcher      1  3/4\" 1.500\" x 23.000\"  Square 90°        Square 90°        Anti-racking rail",
+    "Internal Equipment Shelf   1  3/4\" 14.000\" x 23.000\" Square 90°        Square 90°        2.25\" cable slot",
+    "Bottom Base Plate          1  3/4\" 14.250\" x 23.000\" Square 90°        Square 90°        Elevated 0.75\" Z",
+    "Lower Front Access Door    1  3/4\" 18.875\" x 22.875\" Square 90°        Square 90°        1/16\" reveal all sides",
+    "Back Access Panel          1  1/4\" 62.625\" x 22.875\" Square 90°        Square 90°        1/4\" ply; IEC socket",
+    "Control Panel Wing Shelf   1  3/4\" 10.500\" x 31.500\" Square 90°        Square 90°        31.50\" wing span",
+    "Keyboard Slide-Out Tray    1  3/4\" 9.000\" x 21.000\"  Square 90°        Square 90°        For 12\" slides",
+    "Marquee Acrylic Sign       1  1/8\" 5.500\" x 23.000\"  Square 90°        Square 90°        Translucent acrylic",
+]
+p5.addView(a5_cut)
+a5_cut.X = 215.0
+a5_cut.Y = 55.0
+a5_cut.TextSize = 1.8
+
+doc.recompute()
+print("  [+] All 5 TechDraw Shop Sheets created and recomputed successfully!")
 
 # Export Shop DXF files
+for i, page in enumerate([p1, p2, p3, p4, p5], start=1):
+    dxf_path = f"/home/scott/20p/cad/arcade/shop_sheet_{i}.dxf"
+    TechDraw.writeDXFPage(page, dxf_path)
+    print(f"  [+] Exported {dxf_path}")
+
 TechDraw.writeDXFPage(p1, "/home/scott/20p/cad/arcade/shop_sheet_1_side_panel.dxf")
-TechDraw.writeDXFPage(p2, "/home/scott/20p/cad/arcade/shop_sheet_2_cabinet_elevations.dxf")
+TechDraw.writeDXFPage(p5, "/home/scott/20p/cad/arcade/shop_sheet_2_cabinet_elevations.dxf")
 TechDraw.writeDXFView(v_side, "/home/scott/20p/cad/arcade/side_panel_profile.dxf")
-print("  [+] Shop DXF files exported (Sheet 1, Sheet 2, and 1:1 Side Panel profile)")
+print("  [+] Exported 1:1 Side Panel profile DXF")
 
 # =============================================================================
 # 11. SAVE FREECAD PROJECT & EXPORT STEP MODEL
