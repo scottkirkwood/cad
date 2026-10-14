@@ -1042,87 +1042,144 @@ def setup_page(name, label, title1, title2, title3, sheet_str, scale_str):
     t.setEditFieldContent("Sheet", sheet_str)
     t.setEditFieldContent("scale", scale_str)
     t.setEditFieldContent("CompanyName", "ARCADE SHOP BLUEPRINTS")
-    t.setEditFieldContent("CompanyAddress", "ALL UNITS: INCHES / DEGREES")
+    t.setEditFieldContent("CompanyAddress", "ALL UNITS: INCHES (\") / DEGREES (°)")
     grp_drawings.addObject(p)
     return p, t
 
-def add_dim(page, view, dir_idx, x_pos, y_pos):
+def add_extent_dim(page, view, dir_idx, x_offset=0.0, y_offset=0.0):
     edges = view.getVisibleEdges()
     if edges:
         dim = TechDraw.makeExtentDim(view, [e for e in edges], dir_idx)
         page.addView(dim)
-        dim.X = x_pos
-        dim.Y = y_pos
-        dim.ShowUnits = True
-        dim.FormatSpec = "%.2w"
+        dim.X = x_offset
+        dim.Y = y_offset
+        dim.ShowUnits = False
+        dim.FormatSpec = '%.2f"'
         return dim
     return None
 
+def add_dist_dim(page, view, dim_type, pt0, pt1, x_offset=0.0, y_offset=0.0):
+    dim = TechDraw.makeDistanceDim(view, dim_type, pt0, pt1)
+    page.addView(dim)
+    dim.X = x_offset
+    dim.Y = y_offset
+    dim.ShowUnits = False
+    dim.FormatSpec = '%.2f"'
+    return dim
+
+def v_in_pt(view, x, z):
+    return FreeCAD.Vector(x * INCH * view.Scale, z * INCH * view.Scale, 0.0)
+
 # =============================================================================
-# SHEET 1: SIDE PANEL MASTER TEMPLATE & 15-VERTEX COORDINATES
+# SHEET 1: SIDE PANELS (LEFT & RIGHT) 15-VERTEX PROFILE & TOOLING
 # =============================================================================
 p1, t1 = setup_page(
     "Drawing_Page_01_Side_Panel",
-    "Sheet 1 - Side Panel Profile & 15-Vertex Coordinates",
+    "Sheet 1 - Side Panels (Left & Right) Profile & Coordinates",
     "PARAMETRIC ARCADE CABINET",
-    "SHEET 1: SIDE PANEL 15-VERTEX PROFILE",
-    "3/4\" WHITE BIRCH VC PLYWOOD (2 REQUIRED)",
-    "1 OF 5", "1 : 10"
+    "SHEET 1: SIDE PANELS (LEFT & RIGHT) PROFILE",
+    "3/4\" WHITE BIRCH VC PLYWOOD (2 REQUIRED: 1L, 1R)",
+    "1 OF 5", "1 : 12"
 )
 
-v_side = doc.addObject("TechDraw::DrawViewPart", "View_Side_Panel_Profile")
-v_side.Source = doc.getObject("Side_Panel_Left")
-v_side.Direction = FreeCAD.Vector(0, 1, 0)
-v_side.XDirection = FreeCAD.Vector(1, 0, 0)
-v_side.ScaleType = "Custom"
-v_side.Scale = 0.10
-p1.addView(v_side)
-v_side.X = 110.0
-v_side.Y = 145.0
+# 1. Left Side Panel (No switch cutout)
+v_side_l = doc.addObject("TechDraw::DrawViewPart", "View_Side_Panel_Left")
+v_side_l.Source = doc.getObject("Side_Panel_Left")
+v_side_l.Direction = FreeCAD.Vector(0, 1, 0)
+v_side_l.XDirection = FreeCAD.Vector(1, 0, 0)
+v_side_l.ScaleType = "Custom"
+v_side_l.Scale = 0.08
+p1.addView(v_side_l)
+v_side_l.X = 75.0
+v_side_l.Y = 145.0
+doc.recompute()
+v_side = v_side_l
+
+# 2. Right Side Panel (With 20mm round rocker switch hole)
+v_side_r = doc.addObject("TechDraw::DrawViewPart", "View_Side_Panel_Right")
+v_side_r.Source = doc.getObject("Side_Panel_Right")
+v_side_r.Direction = FreeCAD.Vector(0, 1, 0)
+v_side_r.XDirection = FreeCAD.Vector(1, 0, 0)
+v_side_r.ScaleType = "Custom"
+v_side_r.Scale = 0.08
+p1.addView(v_side_r)
+v_side_r.X = 185.0
+v_side_r.Y = 145.0
 doc.recompute()
 
-add_dim(p1, v_side, 0, 110.0, 35.0)  # Width (Depth 25.25 in)
-add_dim(p1, v_side, 1, 40.0, 145.0)   # Height (65.25 in)
+# 9 Key Feature Dimensions directly on Left Panel diagram:
+# 1. Overall Height: 65.25"
+add_dist_dim(p1, v_side_l, "DistanceY", v_in_pt(v_side_l, 19.00, 0.0), v_in_pt(v_side_l, 19.00, 65.25))
+# 2. Overall Depth: 25.25"
+add_dist_dim(p1, v_side_l, "DistanceX", v_in_pt(v_side_l, -6.25, 29.25), v_in_pt(v_side_l, 19.00, 29.25))
+# 3. Toe-kick Riser Height: 4.50"
+add_dist_dim(p1, v_side_l, "DistanceY", v_in_pt(v_side_l, 2.25, 0.0), v_in_pt(v_side_l, 2.25, 4.50))
+# 4. Lower Front Coin Door Vertical Lip: 19.00"
+add_dist_dim(p1, v_side_l, "DistanceY", v_in_pt(v_side_l, -1.00, 4.50), v_in_pt(v_side_l, -1.00, 23.50))
+# 5. Keyboard Cavity Lip: 4.00"
+add_dist_dim(p1, v_side_l, "DistanceY", v_in_pt(v_side_l, -6.25, 29.25), v_in_pt(v_side_l, -6.25, 33.25))
+# 6. Control Shelf Ledge Depth: 11.50"
+add_dist_dim(p1, v_side_l, "DistanceX", v_in_pt(v_side_l, -6.25, 33.25), v_in_pt(v_side_l, 5.25, 33.25))
+# 7. Console Rear Vertical Rise: 6.75"
+add_dist_dim(p1, v_side_l, "DistanceY", v_in_pt(v_side_l, 5.25, 33.25), v_in_pt(v_side_l, 5.25, 40.00))
+# 8. Top Roof Depth: 12.25"
+add_dist_dim(p1, v_side_l, "DistanceX", v_in_pt(v_side_l, 6.75, 65.25), v_in_pt(v_side_l, 19.00, 65.25))
+# 9. Carcass Base Depth: 16.75"
+add_dist_dim(p1, v_side_l, "DistanceX", v_in_pt(v_side_l, 2.25, 0.0), v_in_pt(v_side_l, 19.00, 0.0))
 
+# Dimensions for Switch on Right Panel diagram:
+# Switch Height from Floor: 34.00"
+add_dist_dim(p1, v_side_r, "DistanceY", v_in_pt(v_side_r, 15.00, 0.0), v_in_pt(v_side_r, 15.00, 34.00))
+# Switch Setback from Rear: 4.00"
+add_dist_dim(p1, v_side_r, "DistanceX", v_in_pt(v_side_r, 15.00, 34.00), v_in_pt(v_side_r, 19.00, 34.00))
+
+# Sub-labels underneath panels:
+a_label_l = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Left_Panel")
+a_label_l.Text = ["[ LEFT SIDE PANEL ]", "No switch cutout"]
+p1.addView(a_label_l)
+a_label_l.X = 75.0
+a_label_l.Y = 40.0
+a_label_l.TextSize = 2.4
+
+a_label_r = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Right_Panel")
+a_label_r.Text = ["[ RIGHT SIDE PANEL ]", "20mm (0.787\") switch cutout", "1.75\" dia inside relief"]
+p1.addView(a_label_r)
+a_label_r.X = 185.0
+a_label_r.Y = 40.0
+a_label_r.TextSize = 2.4
+
+# Coordinate Map & Fabrication Notes
 a1_coords = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet1_Coordinates")
 a1_coords.Text = [
-    "SIDE PANEL 15-VERTEX COORDINATE MAP (Inches from Origin [0, 0])",
-    "==================================================================",
-    "P0:  (X=+2.25, Z= 0.00) - Toe-kick riser base at floor",
-    "P1:  (X=+2.25, Z=+4.50) - Top of toe-kick recess (4.50\" rise)",
-    "P2:  (X=-1.00, Z=+4.50) - Front lower lip corner (1.00\" perimeter reveal)",
-    "P3:  (X=-1.00, Z=+23.50) - Top of coin door lip (vertical front edge)",
-    "P4:  (X=-6.25, Z=+29.25) - Apron corbel diagonal (47.60° rake, 42.40° miter)",
-    "P5:  (X=-6.25, Z=+33.25) - Front vertical cheek of keyboard cavity (4.00\" high)",
-    "P6:  (X=+5.25, Z=+33.25) - Control panel shelf support ledge (11.50\" deep)",
-    "P7:  (X=+5.25, Z=+40.00) - Vertical rise behind control console (6.75\" high)",
-    "P8:  (X=+6.00, Z=+42.16) - Transition angle to monitor cheek",
-    "P9:  (X=+13.19, Z=+52.84) - Monitor cheek angle (33.93° rake, 16.57\" length)",
-    "P10: (X=+8.10, Z=+57.47) - Speaker cheek angle (47.73° rake, 7.43\" length)",
-    "P11: (X=+6.75, Z=+63.50) - Marquee visor top edge (12.80° visor rake)",
-    "P12: (X=+6.75, Z=+65.25) - Front top corner of 1.00\" roof perimeter lip",
-    "P13: (X=+19.00, Z=+65.25) - Top rear roof corner (65.25\" total height)",
-    "P14: (X=+19.00, Z= 0.00) - Bottom rear floor corner (20.00\" carcass depth)",
+    "15-VERTEX COORDINATE MAP (Inches from Origin [0, 0])",
+    "===========================================================",
+    "P0:  (X=+2.25\", Z= 0.00\") - Toe-kick riser base at floor",
+    "P1:  (X=+2.25\", Z=+4.50\") - Top of toe-kick recess (4.50\" rise)",
+    "P2:  (X=-1.00\", Z=+4.50\") - Front lower lip (1.00\" reveal)",
+    "P3:  (X=-1.00\", Z=+23.50\") - Top of coin door vertical lip",
+    "P4:  (X=-6.25\", Z=+29.25\") - Apron corbel (42.40° miter)",
+    "P5:  (X=-6.25\", Z=+33.25\") - Keyboard cheek (4.00\" opening)",
+    "P6:  (X=+5.25\", Z=+33.25\") - Control shelf support ledge",
+    "P7:  (X=+5.25\", Z=+40.00\") - Console rear vertical rise",
+    "P8:  (X=+6.00\", Z=+42.16\") - Transition to monitor cheek",
+    "P9:  (X=+13.19\", Z=+52.84\") - Monitor cheek angle (33.93° rake)",
+    "P10: (X=+8.10\", Z=+57.47\") - Speaker cheek angle (47.73° rake)",
+    "P11: (X=+6.75\", Z=+63.50\") - Marquee visor top edge",
+    "P12: (X=+6.75\", Z=+65.25\") - Front top corner of 1.00\" roof lip",
+    "P13: (X=+19.00\", Z=+65.25\") - Top rear corner (65.25\" total)",
+    "P14: (X=+19.00\", Z= 0.00\") - Bottom rear corner (floor level)",
+    "",
+    "FABRICATION & TOOLING NOTES:",
+    "-----------------------------------------------------------",
+    "1. Cut TWO (2) mirrored panels from 3/4\" White Birch ply.",
+    "2. T-MOLDING: Slot entire perimeter with 1/16\" slot cutter.",
+    "3. SWITCH: Drill 20mm hole on Right panel at (15.0\", 34.0\").",
+    "4. RELIEF POCKET: 1.75\" dia x 0.50\" deep inside counterbore.",
 ]
 p1.addView(a1_coords)
-a1_coords.X = 295.0
-a1_coords.Y = 180.0
-a1_coords.TextSize = 2.6
-
-a1_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet1_Notes")
-a1_notes.Text = [
-    "FABRICATION & TOOLING NOTES:",
-    "------------------------------------------------------------------",
-    "1. CUT TWO (2) MIRRORED PANELS from 3/4\" White Birch VC plywood.",
-    "2. T-MOLDING: Slot entire outer perimeter with 1/16\" 3-wing slotting cutter.",
-    "3. ROCKER SWITCH: On RIGHT Side Panel only, drill 20mm (0.787\") hole at",
-    "   (X=15.00\", Z=34.00\") with 1.75\" dia x 0.50\" deep inside relief pocket.",
-    "4. ALL CORBELS PARALLEL: Apron cheek maintains strict 1.00\" perimeter reveal.",
-]
-p1.addView(a1_notes)
-a1_notes.X = 295.0
-a1_notes.Y = 65.0
-a1_notes.TextSize = 2.6
+a1_coords.X = 325.0
+a1_coords.Y = 145.0
+a1_coords.TextSize = 2.2
 
 # =============================================================================
 # SHEET 2: CARCASS STRUCTURE & BEVELED PANELS
@@ -1147,8 +1204,8 @@ p2.addView(v_apron)
 v_apron.X = 85.0
 v_apron.Y = 195.0
 doc.recompute()
-add_dim(p2, v_apron, 0, 85.0, 170.0)
-add_dim(p2, v_apron, 1, 35.0, 195.0)
+add_extent_dim(p2, v_apron, 0)
+add_extent_dim(p2, v_apron, 1)
 
 # Keyboard Bottom Plate
 v_kb = doc.addObject("TechDraw::DrawViewPart", "View_KB_Plate")
@@ -1161,8 +1218,8 @@ p2.addView(v_kb)
 v_kb.X = 215.0
 v_kb.Y = 195.0
 doc.recompute()
-add_dim(p2, v_kb, 0, 215.0, 170.0)
-add_dim(p2, v_kb, 1, 165.0, 195.0)
+add_extent_dim(p2, v_kb, 0)
+add_extent_dim(p2, v_kb, 1)
 
 # Top Roof Panel
 v_roof = doc.addObject("TechDraw::DrawViewPart", "View_Roof_Panel")
@@ -1175,8 +1232,8 @@ p2.addView(v_roof)
 v_roof.X = 345.0
 v_roof.Y = 195.0
 doc.recompute()
-add_dim(p2, v_roof, 0, 345.0, 170.0)
-add_dim(p2, v_roof, 1, 295.0, 195.0)
+add_extent_dim(p2, v_roof, 0)
+add_extent_dim(p2, v_roof, 1)
 
 # Equipment Shelf
 v_shelf = doc.addObject("TechDraw::DrawViewPart", "View_Equip_Shelf")
@@ -1189,8 +1246,8 @@ p2.addView(v_shelf)
 v_shelf.X = 85.0
 v_shelf.Y = 100.0
 doc.recompute()
-add_dim(p2, v_shelf, 0, 85.0, 60.0)
-add_dim(p2, v_shelf, 1, 35.0, 100.0)
+add_extent_dim(p2, v_shelf, 0)
+add_extent_dim(p2, v_shelf, 1)
 
 # Base Plate
 v_base = doc.addObject("TechDraw::DrawViewPart", "View_Base_Plate")
@@ -1203,8 +1260,8 @@ p2.addView(v_base)
 v_base.X = 215.0
 v_base.Y = 100.0
 doc.recompute()
-add_dim(p2, v_base, 0, 215.0, 60.0)
-add_dim(p2, v_base, 1, 165.0, 100.0)
+add_extent_dim(p2, v_base, 0)
+add_extent_dim(p2, v_base, 1)
 
 a2_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet2_Table")
 a2_notes.Text = [
@@ -1251,8 +1308,8 @@ p3.addView(v_bezel)
 v_bezel.X = 110.0
 v_bezel.Y = 150.0
 doc.recompute()
-add_dim(p3, v_bezel, 0, 110.0, 75.0)
-add_dim(p3, v_bezel, 1, 45.0, 150.0)
+add_extent_dim(p3, v_bezel, 0)
+add_extent_dim(p3, v_bezel, 1)
 
 # Speaker Board
 v_spk = doc.addObject("TechDraw::DrawViewPart", "View_Speaker_Face")
@@ -1265,8 +1322,8 @@ p3.addView(v_spk)
 v_spk.X = 280.0
 v_spk.Y = 195.0
 doc.recompute()
-add_dim(p3, v_spk, 0, 280.0, 160.0)
-add_dim(p3, v_spk, 1, 220.0, 195.0)
+add_extent_dim(p3, v_spk, 0)
+add_extent_dim(p3, v_spk, 1)
 
 a3_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet3_Specs")
 a3_notes.Text = [
@@ -1315,8 +1372,8 @@ p4.addView(v_cp)
 v_cp.X = 105.0
 v_cp.Y = 205.0
 doc.recompute()
-add_dim(p4, v_cp, 0, 105.0, 175.0)
-add_dim(p4, v_cp, 1, 40.0, 205.0)
+add_extent_dim(p4, v_cp, 0)
+add_extent_dim(p4, v_cp, 1)
 
 # Keyboard Tray
 v_tray = doc.addObject("TechDraw::DrawViewPart", "View_KB_Tray")
@@ -1329,8 +1386,8 @@ p4.addView(v_tray)
 v_tray.X = 330.0
 v_tray.Y = 205.0
 doc.recompute()
-add_dim(p4, v_tray, 0, 330.0, 175.0)
-add_dim(p4, v_tray, 1, 270.0, 205.0)
+add_extent_dim(p4, v_tray, 0)
+add_extent_dim(p4, v_tray, 1)
 
 # Front Door
 v_fdoor = doc.addObject("TechDraw::DrawViewPart", "View_Front_Door")
@@ -1343,8 +1400,8 @@ p4.addView(v_fdoor)
 v_fdoor.X = 105.0
 v_fdoor.Y = 95.0
 doc.recompute()
-add_dim(p4, v_fdoor, 0, 105.0, 45.0)
-add_dim(p4, v_fdoor, 1, 40.0, 95.0)
+add_extent_dim(p4, v_fdoor, 0)
+add_extent_dim(p4, v_fdoor, 1)
 
 # Back Access Panel
 v_bdoor = doc.addObject("TechDraw::DrawViewPart", "View_Back_Panel")
@@ -1357,8 +1414,8 @@ p4.addView(v_bdoor)
 v_bdoor.X = 225.0
 v_bdoor.Y = 110.0
 doc.recompute()
-add_dim(p4, v_bdoor, 0, 225.0, 35.0)
-add_dim(p4, v_bdoor, 1, 185.0, 110.0)
+add_extent_dim(p4, v_bdoor, 0)
+add_extent_dim(p4, v_bdoor, 1)
 
 a4_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet4_Specs")
 a4_notes.Text = [
@@ -1468,7 +1525,7 @@ a5_cut.Text = [
 p5.addView(a5_cut)
 a5_cut.X = 215.0
 a5_cut.Y = 55.0
-a5_cut.TextSize = 1.8
+a5_cut.TextSize = 1.6
 
 doc.recompute()
 print("  [+] All 5 TechDraw Shop Sheets created and recomputed successfully!")
