@@ -1068,6 +1068,30 @@ def add_dist_dim(page, view, name, dim_type, pt0, pt1, x_offset=0.0, y_offset=0.
     dim.FormatSpec = format_spec
     return dim
 
+def add_edge_dim(page, view, name, dim_type, edge_name, x_offset=0.0, y_offset=0.0, format_spec='%.2f"'):
+    dim = doc.addObject("TechDraw::DrawViewDimension", name)
+    dim.Label = name
+    dim.Type = dim_type
+    dim.References2D = [(view, (edge_name,))]
+    page.addView(dim)
+    dim.X = x_offset
+    dim.Y = y_offset
+    dim.ShowUnits = False
+    dim.FormatSpec = format_spec
+    return dim
+
+def add_angle_dim(page, view, name, edge1, edge2, x_offset=0.0, y_offset=0.0, format_spec='%.1f'):
+    dim = doc.addObject("TechDraw::DrawViewDimension", name)
+    dim.Label = name
+    dim.Type = "Angle"
+    dim.References2D = [(view, (edge1, edge2))]
+    page.addView(dim)
+    dim.X = x_offset
+    dim.Y = y_offset
+    dim.ShowUnits = False
+    dim.FormatSpec = format_spec
+    return dim
+
 # Side panel 2D bounding box center in model inches:
 # X bounds: [-6.25", 19.00"] -> Center = 6.375"
 # Z bounds: [0.00", 65.25"] -> Center = 32.625"
@@ -1083,129 +1107,166 @@ def v_side_pt(view, x, z):
     )
 
 # =============================================================================
-# SHEET 1: SIDE PANELS (LEFT & RIGHT) 15-VERTEX PROFILE & TOOLING
+# SHEET 1: SIDE PANELS (PROFILE DATUMS, SLANTED LENGTHS & CORNER ANGLES)
 # =============================================================================
 p1, t1 = setup_page(
     "Drawing_Page_01_Side_Panel",
-    "Sheet 1 - Side Panels (Left & Right) Profile & Coordinates",
+    "Sheet 1 - Side Panels: Datums, Slanted Lengths & Angles",
     "PARAMETRIC ARCADE CABINET",
-    "SHEET 1: SIDE PANELS (LEFT & RIGHT) PROFILE",
+    "SHEET 1: SIDE PANELS DATUMS, SLANTED CUTS & ANGLES",
     "3/4\" WHITE BIRCH VC PLYWOOD (2 REQUIRED: 1L, 1R)",
-    "1 OF 5", "1 : 12"
+    "1 OF 5", "1 : 14"
 )
 
-# 1. Left Side Panel (No switch cutout)
-v_side_l = doc.addObject("TechDraw::DrawViewPart", "View_Side_Panel_Left")
-v_side_l.Source = doc.getObject("Side_Panel_Left")
-v_side_l.Direction = FreeCAD.Vector(0, 1, 0)
-v_side_l.XDirection = FreeCAD.Vector(1, 0, 0)
-v_side_l.ScaleType = "Custom"
-v_side_l.Scale = 0.08
-p1.addView(v_side_l)
-v_side_l.X = 75.0
-v_side_l.Y = 145.0
+# DIAGRAM 1: Orthogonal Dimensions (Primary Carcass Datums & Overall Extents)
+v_side_ortho = doc.addObject("TechDraw::DrawViewPart", "View_Side_Panel_Orthogonal")
+v_side_ortho.Source = doc.getObject("Side_Panel_Left")
+v_side_ortho.Direction = FreeCAD.Vector(0, 1, 0)
+v_side_ortho.XDirection = FreeCAD.Vector(1, 0, 0)
+v_side_ortho.ScaleType = "Custom"
+v_side_ortho.Scale = 0.072
+p1.addView(v_side_ortho)
+v_side_ortho.X = 55.0
+v_side_ortho.Y = 150.0
+
+# DIAGRAM 2: Slanted Segment Lengths (Non-Axis-Aligned Cut Profiles)
+v_side_slanted = doc.addObject("TechDraw::DrawViewPart", "View_Side_Panel_Slanted")
+v_side_slanted.Source = doc.getObject("Side_Panel_Left")
+v_side_slanted.Direction = FreeCAD.Vector(0, 1, 0)
+v_side_slanted.XDirection = FreeCAD.Vector(1, 0, 0)
+v_side_slanted.ScaleType = "Custom"
+v_side_slanted.Scale = 0.072
+p1.addView(v_side_slanted)
+v_side_slanted.X = 135.0
+v_side_slanted.Y = 150.0
+
+# DIAGRAM 3: Non-90 Degree Corner & Miter Angles
+v_side_angles = doc.addObject("TechDraw::DrawViewPart", "View_Side_Panel_Angles")
+v_side_angles.Source = doc.getObject("Side_Panel_Left")
+v_side_angles.Direction = FreeCAD.Vector(0, 1, 0)
+v_side_angles.XDirection = FreeCAD.Vector(1, 0, 0)
+v_side_angles.ScaleType = "Custom"
+v_side_angles.Scale = 0.072
+p1.addView(v_side_angles)
+v_side_angles.X = 215.0
+v_side_angles.Y = 150.0
+
 doc.recompute()
-v_side = v_side_l
+v_side = v_side_ortho
 
-# 2. Right Side Panel (With 20mm round rocker switch hole)
-v_side_r = doc.addObject("TechDraw::DrawViewPart", "View_Side_Panel_Right")
-v_side_r.Source = doc.getObject("Side_Panel_Right")
-v_side_r.Direction = FreeCAD.Vector(0, 1, 0)
-v_side_r.XDirection = FreeCAD.Vector(1, 0, 0)
-v_side_r.ScaleType = "Custom"
-v_side_r.Scale = 0.08
-p1.addView(v_side_r)
-v_side_r.X = 185.0
-v_side_r.Y = 145.0
-doc.recompute()
+# 1. ORTHOGONAL PROFILE DIMENSIONS (Diagram 1):
+# Overall Height: 65.25"
+add_dist_dim(p1, v_side_ortho, "Dim_Overall_Height", "DistanceY", v_side_pt(v_side_ortho, 19.00, 0.0), v_side_pt(v_side_ortho, 19.00, 65.25), x_offset=10.0)
+# Overall Depth: 25.25"
+add_dist_dim(p1, v_side_ortho, "Dim_Overall_Depth", "DistanceX", v_side_pt(v_side_ortho, -6.25, 0.0), v_side_pt(v_side_ortho, 19.00, 0.0), y_offset=-18.0)
+# Carcass Base Depth: 16.75"
+add_dist_dim(p1, v_side_ortho, "Dim_CarcassBase_Depth", "DistanceX", v_side_pt(v_side_ortho, 2.25, 0.0), v_side_pt(v_side_ortho, 19.00, 0.0), y_offset=-8.0)
+# Toe-kick Riser Height: 4.50"
+add_dist_dim(p1, v_side_ortho, "Dim_ToeKick_Height", "DistanceY", v_side_pt(v_side_ortho, 2.25, 0.0), v_side_pt(v_side_ortho, 2.25, 4.50), x_offset=-6.0)
+# Lower Front Coin Door Vertical Lip: 19.00"
+add_dist_dim(p1, v_side_ortho, "Dim_CoinDoor_Height", "DistanceY", v_side_pt(v_side_ortho, -1.00, 4.50), v_side_pt(v_side_ortho, -1.00, 23.50), x_offset=-8.0)
+# Front Cheek Nose Vertical Lip: 4.00" (Front vertical nose opening)
+add_dist_dim(p1, v_side_ortho, "Dim_FrontNose_Height", "DistanceY", v_side_pt(v_side_ortho, -6.25, 29.25), v_side_pt(v_side_ortho, -6.25, 33.25), x_offset=-8.0)
+# Control Shelf Ledge Depth: 11.50"
+add_dist_dim(p1, v_side_ortho, "Dim_ShelfLedge_Depth", "DistanceX", v_side_pt(v_side_ortho, -6.25, 33.25), v_side_pt(v_side_ortho, 5.25, 33.25), y_offset=6.0)
+# Console Rear Vertical Rise: 6.75"
+add_dist_dim(p1, v_side_ortho, "Dim_ConsoleRear_Rise", "DistanceY", v_side_pt(v_side_ortho, 5.25, 33.25), v_side_pt(v_side_ortho, 5.25, 40.00), x_offset=6.0)
+# Top Roof Depth: 12.25"
+add_dist_dim(p1, v_side_ortho, "Dim_Roof_Depth", "DistanceX", v_side_pt(v_side_ortho, 6.75, 65.25), v_side_pt(v_side_ortho, 19.00, 65.25), y_offset=8.0)
 
-# 9 Key Feature Dimensions directly on Left Panel diagram:
-# 1. Overall Height: 65.25"
-add_dist_dim(p1, v_side_l, "Dim_Overall_Height", "DistanceY", v_side_pt(v_side_l, 19.00, 0.0), v_side_pt(v_side_l, 19.00, 65.25), x_offset=12.0)
-# 2. Overall Depth: 25.25"
-add_dist_dim(p1, v_side_l, "Dim_Overall_Depth", "DistanceX", v_side_pt(v_side_l, -6.25, 0.0), v_side_pt(v_side_l, 19.00, 0.0), y_offset=-20.0)
-# 3. Toe-kick Riser Height: 4.50"
-add_dist_dim(p1, v_side_l, "Dim_ToeKick_Height", "DistanceY", v_side_pt(v_side_l, 2.25, 0.0), v_side_pt(v_side_l, 2.25, 4.50), x_offset=-6.0)
-# 4. Lower Front Coin Door Vertical Lip: 19.00"
-add_dist_dim(p1, v_side_l, "Dim_CoinDoor_Height", "DistanceY", v_side_pt(v_side_l, -1.00, 4.50), v_side_pt(v_side_l, -1.00, 23.50), x_offset=-8.0)
-# 5. Keyboard Cavity Lip: 4.00"
-add_dist_dim(p1, v_side_l, "Dim_KeyboardCavity_Height", "DistanceY", v_side_pt(v_side_l, -6.25, 29.25), v_side_pt(v_side_l, -6.25, 33.25), x_offset=-10.0)
-# 6. Control Shelf Ledge Depth: 11.50"
-add_dist_dim(p1, v_side_l, "Dim_ShelfLedge_Depth", "DistanceX", v_side_pt(v_side_l, -6.25, 33.25), v_side_pt(v_side_l, 5.25, 33.25), y_offset=6.0)
-# 7. Console Rear Vertical Rise: 6.75"
-add_dist_dim(p1, v_side_l, "Dim_ConsoleRear_Rise", "DistanceY", v_side_pt(v_side_l, 5.25, 33.25), v_side_pt(v_side_l, 5.25, 40.00), x_offset=6.0)
-# 8. Top Roof Depth: 12.25"
-add_dist_dim(p1, v_side_l, "Dim_Roof_Depth", "DistanceX", v_side_pt(v_side_l, 6.75, 65.25), v_side_pt(v_side_l, 19.00, 65.25), y_offset=8.0)
-# 9. Carcass Base Depth: 16.75"
-add_dist_dim(p1, v_side_l, "Dim_CarcassBase_Depth", "DistanceX", v_side_pt(v_side_l, 2.25, 0.0), v_side_pt(v_side_l, 19.00, 0.0), y_offset=-10.0)
+# 2. SLANTED SEGMENT CUT LENGTHS (Diagram 2 - True Aligned Edge Lengths):
+# Edge 3 (P3->P4): Apron Corbel Diagonal = 7.79"
+add_edge_dim(p1, v_side_slanted, "Len_Apron_Corbel", "Distance", "Edge3", x_offset=-8.0, y_offset=4.0)
+# Edge 7 (P7->P8): Console to Monitor Transition = 2.29"
+add_edge_dim(p1, v_side_slanted, "Len_Transition_Ledge", "Distance", "Edge7", x_offset=-6.0, y_offset=2.0)
+# Edge 8 (P8->P9): Monitor Cheek Rake = 12.87"
+add_edge_dim(p1, v_side_slanted, "Len_Monitor_Cheek", "Distance", "Edge8", x_offset=8.0, y_offset=-4.0)
+# Edge 9 (P9->P10): Speaker Cheek Rake (Vertex 9 to Vertex 10) = 6.88"
+add_edge_dim(p1, v_side_slanted, "Len_Speaker_Cheek", "Distance", "Edge9", x_offset=8.0, y_offset=4.0)
+# Edge 10 (P10->P11): Marquee Visor Rake = 6.18"
+add_edge_dim(p1, v_side_slanted, "Len_Marquee_Visor", "Distance", "Edge10", x_offset=-8.0, y_offset=4.0)
+# Edge 11 (P11->P12): Visor to Roof Vertical Lip = 1.75"
+add_edge_dim(p1, v_side_slanted, "Len_Roof_Visor_Lip", "Distance", "Edge11", x_offset=-8.0)
 
-# Dimensions for Switch on Right Panel diagram:
-# 10. Switch Height from Floor: 34.00"
-add_dist_dim(p1, v_side_r, "Dim_Switch_Floor_Height", "DistanceY", v_side_pt(v_side_r, 15.00, 0.0), v_side_pt(v_side_r, 15.00, 34.00), x_offset=14.0)
-# 11. Switch Setback from Rear: 4.00"
-add_dist_dim(p1, v_side_r, "Dim_Switch_Rear_Setback", "DistanceX", v_side_pt(v_side_r, 15.00, 34.00), v_side_pt(v_side_r, 19.00, 34.00), y_offset=8.0)
-# 12. Switch Hole Diameter: 0.787" (20mm)
-dim_sw_dia = doc.addObject("TechDraw::DrawViewDimension", "Dim_Switch_Hole_Dia")
-dim_sw_dia.Type = "Diameter"
-dim_sw_dia.References2D = [(v_side_r, ("Edge16",))]
-p1.addView(dim_sw_dia)
-dim_sw_dia.FormatSpec = '%.3f"'
-dim_sw_dia.ShowUnits = False
-# 13. Switch Relief Pocket Diameter: 1.75"
-dim_sw_pocket = doc.addObject("TechDraw::DrawViewDimension", "Dim_Switch_Pocket_Dia")
-dim_sw_pocket.Type = "Diameter"
-dim_sw_pocket.References2D = [(v_side_r, ("Edge15",))]
-p1.addView(dim_sw_pocket)
-dim_sw_pocket.FormatSpec = '%.2f"'
-dim_sw_pocket.ShowUnits = False
+# 3. CORNER & MITER ANGLES (Diagram 3 - All Non-90° Angles):
+# P3: Coin door vertical to Apron corbel diagonal = 137.6°
+add_angle_dim(p1, v_side_angles, "Angle_P3_CoinDoor_Apron", "Edge2", "Edge3")
+# P4: Apron corbel diagonal to Front nose vertical = 137.6°
+add_angle_dim(p1, v_side_angles, "Angle_P4_Apron_Nose", "Edge3", "Edge4")
+# P7: Console rear rise to Transition diagonal = 160.9°
+add_angle_dim(p1, v_side_angles, "Angle_P7_Rise_Trans", "Edge6", "Edge7")
+# P8: Transition diagonal to Monitor cheek rake = 165.2°
+add_angle_dim(p1, v_side_angles, "Angle_P8_Trans_Monitor", "Edge7", "Edge8")
+# P9: Monitor cheek rake to Speaker cheek rake (Vertex 9 Corner) = 98.3°
+add_angle_dim(p1, v_side_angles, "Angle_P9_Monitor_Speaker", "Edge8", "Edge9")
+# P10: Speaker cheek rake to Marquee visor rake = 144.9°
+add_angle_dim(p1, v_side_angles, "Angle_P10_Speaker_Marquee", "Edge9", "Edge10")
+# P11: Marquee visor rake to Roof vertical lip = 167.4°
+add_angle_dim(p1, v_side_angles, "Angle_P11_Marquee_Lip", "Edge10", "Edge11")
 
-# Sub-labels underneath panels:
-a_label_l = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Left_Panel")
-a_label_l.Text = ["[ LEFT SIDE PANEL ]", "No switch cutout"]
-p1.addView(a_label_l)
-a_label_l.X = 75.0
-a_label_l.Y = 40.0
-a_label_l.TextSize = 2.4
+# Sub-labels underneath each panel diagram:
+a_label_1 = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Ortho")
+a_label_1.Text = ["[ 1. ORTHOGONAL DATUMS ]", "Carcass heights & depths"]
+p1.addView(a_label_1)
+a_label_1.X = 55.0
+a_label_1.Y = 40.0
+a_label_1.TextSize = 2.4
 
-a_label_r = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Right_Panel")
-a_label_r.Text = ["[ RIGHT SIDE PANEL ]", "20mm (0.787\") switch cutout", "1.75\" dia inside relief"]
-p1.addView(a_label_r)
-a_label_r.X = 185.0
-a_label_r.Y = 40.0
-a_label_r.TextSize = 2.4
+a_label_2 = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Slanted")
+a_label_2.Text = ["[ 2. SLANTED LENGTHS ]", "True diagonal cut lengths"]
+p1.addView(a_label_2)
+a_label_2.X = 135.0
+a_label_2.Y = 40.0
+a_label_2.TextSize = 2.4
+
+a_label_3 = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Angles")
+a_label_3.Text = ["[ 3. CORNER ANGLES ]", "All non-90° miter angles"]
+p1.addView(a_label_3)
+a_label_3.X = 215.0
+a_label_3.Y = 40.0
+a_label_3.TextSize = 2.4
 
 # Coordinate Map & Fabrication Notes
 a1_coords = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet1_Coordinates")
 a1_coords.Text = [
-    "15-VERTEX COORDINATE MAP (Inches from Origin [0, 0])",
+    "15-VERTEX COORDINATE MAP & CUT SCHEDULE",
     "===========================================================",
     "P0:  (X=+2.25\", Z= 0.00\") - Toe-kick riser base at floor",
     "P1:  (X=+2.25\", Z=+4.50\") - Top of toe-kick recess (4.50\" rise)",
     "P2:  (X=-1.00\", Z=+4.50\") - Front lower lip (1.00\" reveal)",
     "P3:  (X=-1.00\", Z=+23.50\") - Top of coin door vertical lip",
-    "P4:  (X=-6.25\", Z=+29.25\") - Apron corbel (42.40° miter)",
-    "P5:  (X=-6.25\", Z=+33.25\") - Keyboard cheek (4.00\" opening)",
+    "P4:  (X=-6.25\", Z=+29.25\") - Apron corbel (7.79\" cut @ 137.6°)",
+    "P5:  (X=-6.25\", Z=+33.25\") - Front cheek nose (4.00\" rise)",
     "P6:  (X=+5.25\", Z=+33.25\") - Control shelf support ledge",
     "P7:  (X=+5.25\", Z=+40.00\") - Console rear vertical rise",
-    "P8:  (X=+6.00\", Z=+42.16\") - Transition to monitor cheek",
-    "P9:  (X=+13.19\", Z=+52.84\") - Monitor cheek angle (33.93° rake)",
-    "P10: (X=+8.10\", Z=+57.47\") - Speaker cheek angle (47.73° rake)",
-    "P11: (X=+6.75\", Z=+63.50\") - Marquee visor top edge",
-    "P12: (X=+6.75\", Z=+65.25\") - Front top corner of 1.00\" roof lip",
+    "P8:  (X=+6.00\", Z=+42.16\") - Transition diagonal (2.29\" cut)",
+    "P9:  (X=+13.19\", Z=+52.84\") - Monitor cheek (12.87\" cut @ 33.93°)",
+    "P10: (X=+8.10\", Z=+57.47\") - Speaker cheek (6.88\" cut @ 47.73°)",
+    "P11: (X=+6.75\", Z=+63.50\") - Marquee visor (6.18\" cut @ 12.80°)",
+    "P12: (X=+6.75\", Z=+65.25\") - Roof visor vertical lip (1.75\" rise)",
     "P13: (X=+19.00\", Z=+65.25\") - Top rear corner (65.25\" total)",
     "P14: (X=+19.00\", Z= 0.00\") - Bottom rear corner (floor level)",
+    "",
+    "NON-90° CORNER CUT ANGLES:",
+    "-----------------------------------------------------------",
+    "• P3 (Coin to Apron):     137.6° (42.40° rake from vertical)",
+    "• P4 (Apron to Nose):     137.6° (42.40° miter)",
+    "• P7 (Rise to Transition):160.9° (19.14° rake)",
+    "• P8 (Trans to Monitor):  165.2° (33.93° rake)",
+    "• P9 (Monitor to Speaker): 98.3° (V9 vertex angle)",
+    "• P10 (Speaker to Visor): 144.9° (34.93° miter)",
+    "• P11 (Visor to Lip):     167.4° (12.80° bevel)",
     "",
     "FABRICATION & TOOLING NOTES:",
     "-----------------------------------------------------------",
     "1. Cut TWO (2) mirrored panels from 3/4\" White Birch ply.",
     "2. T-MOLDING: Slot entire perimeter with 1/16\" slot cutter.",
-    "3. SWITCH: Drill 20mm hole on Right panel at (15.0\", 34.0\").",
-    "4. RELIEF POCKET: 1.75\" dia x 0.50\" deep inside counterbore.",
+    "3. ON/OFF SWITCH: Drill 20mm hole on Right panel (eyeball).",
 ]
 p1.addView(a1_coords)
-a1_coords.X = 325.0
+a1_coords.X = 330.0
 a1_coords.Y = 145.0
-a1_coords.TextSize = 2.2
+a1_coords.TextSize = 2.0
 
 # =============================================================================
 # SHEET 2: CARCASS STRUCTURE & BEVELED PANELS
