@@ -1058,17 +1058,29 @@ def add_extent_dim(page, view, dir_idx, x_offset=0.0, y_offset=0.0):
         return dim
     return None
 
-def add_dist_dim(page, view, dim_type, pt0, pt1, x_offset=0.0, y_offset=0.0):
+def add_dist_dim(page, view, name, dim_type, pt0, pt1, x_offset=0.0, y_offset=0.0, format_spec='%.2f"'):
     dim = TechDraw.makeDistanceDim(view, dim_type, pt0, pt1)
+    dim.Label = name
     page.addView(dim)
     dim.X = x_offset
     dim.Y = y_offset
     dim.ShowUnits = False
-    dim.FormatSpec = '%.2f"'
+    dim.FormatSpec = format_spec
     return dim
 
-def v_in_pt(view, x, z):
-    return FreeCAD.Vector(x * INCH * view.Scale, z * INCH * view.Scale, 0.0)
+# Side panel 2D bounding box center in model inches:
+# X bounds: [-6.25", 19.00"] -> Center = 6.375"
+# Z bounds: [0.00", 65.25"] -> Center = 32.625"
+SIDE_PANEL_CENTER_X = 6.375
+SIDE_PANEL_CENTER_Z = 32.625
+
+def v_side_pt(view, x, z):
+    """Converts 3D side panel coordinates (inches) to the centered 2D projection space of the view."""
+    return FreeCAD.Vector(
+        (x - SIDE_PANEL_CENTER_X) * INCH * view.Scale,
+        (z - SIDE_PANEL_CENTER_Z) * INCH * view.Scale,
+        0.0
+    )
 
 # =============================================================================
 # SHEET 1: SIDE PANELS (LEFT & RIGHT) 15-VERTEX PROFILE & TOOLING
@@ -1109,29 +1121,43 @@ doc.recompute()
 
 # 9 Key Feature Dimensions directly on Left Panel diagram:
 # 1. Overall Height: 65.25"
-add_dist_dim(p1, v_side_l, "DistanceY", v_in_pt(v_side_l, 19.00, 0.0), v_in_pt(v_side_l, 19.00, 65.25))
+add_dist_dim(p1, v_side_l, "Dim_Overall_Height", "DistanceY", v_side_pt(v_side_l, 19.00, 0.0), v_side_pt(v_side_l, 19.00, 65.25), x_offset=12.0)
 # 2. Overall Depth: 25.25"
-add_dist_dim(p1, v_side_l, "DistanceX", v_in_pt(v_side_l, -6.25, 29.25), v_in_pt(v_side_l, 19.00, 29.25))
+add_dist_dim(p1, v_side_l, "Dim_Overall_Depth", "DistanceX", v_side_pt(v_side_l, -6.25, 0.0), v_side_pt(v_side_l, 19.00, 0.0), y_offset=-20.0)
 # 3. Toe-kick Riser Height: 4.50"
-add_dist_dim(p1, v_side_l, "DistanceY", v_in_pt(v_side_l, 2.25, 0.0), v_in_pt(v_side_l, 2.25, 4.50))
+add_dist_dim(p1, v_side_l, "Dim_ToeKick_Height", "DistanceY", v_side_pt(v_side_l, 2.25, 0.0), v_side_pt(v_side_l, 2.25, 4.50), x_offset=-6.0)
 # 4. Lower Front Coin Door Vertical Lip: 19.00"
-add_dist_dim(p1, v_side_l, "DistanceY", v_in_pt(v_side_l, -1.00, 4.50), v_in_pt(v_side_l, -1.00, 23.50))
+add_dist_dim(p1, v_side_l, "Dim_CoinDoor_Height", "DistanceY", v_side_pt(v_side_l, -1.00, 4.50), v_side_pt(v_side_l, -1.00, 23.50), x_offset=-8.0)
 # 5. Keyboard Cavity Lip: 4.00"
-add_dist_dim(p1, v_side_l, "DistanceY", v_in_pt(v_side_l, -6.25, 29.25), v_in_pt(v_side_l, -6.25, 33.25))
+add_dist_dim(p1, v_side_l, "Dim_KeyboardCavity_Height", "DistanceY", v_side_pt(v_side_l, -6.25, 29.25), v_side_pt(v_side_l, -6.25, 33.25), x_offset=-10.0)
 # 6. Control Shelf Ledge Depth: 11.50"
-add_dist_dim(p1, v_side_l, "DistanceX", v_in_pt(v_side_l, -6.25, 33.25), v_in_pt(v_side_l, 5.25, 33.25))
+add_dist_dim(p1, v_side_l, "Dim_ShelfLedge_Depth", "DistanceX", v_side_pt(v_side_l, -6.25, 33.25), v_side_pt(v_side_l, 5.25, 33.25), y_offset=6.0)
 # 7. Console Rear Vertical Rise: 6.75"
-add_dist_dim(p1, v_side_l, "DistanceY", v_in_pt(v_side_l, 5.25, 33.25), v_in_pt(v_side_l, 5.25, 40.00))
+add_dist_dim(p1, v_side_l, "Dim_ConsoleRear_Rise", "DistanceY", v_side_pt(v_side_l, 5.25, 33.25), v_side_pt(v_side_l, 5.25, 40.00), x_offset=6.0)
 # 8. Top Roof Depth: 12.25"
-add_dist_dim(p1, v_side_l, "DistanceX", v_in_pt(v_side_l, 6.75, 65.25), v_in_pt(v_side_l, 19.00, 65.25))
+add_dist_dim(p1, v_side_l, "Dim_Roof_Depth", "DistanceX", v_side_pt(v_side_l, 6.75, 65.25), v_side_pt(v_side_l, 19.00, 65.25), y_offset=8.0)
 # 9. Carcass Base Depth: 16.75"
-add_dist_dim(p1, v_side_l, "DistanceX", v_in_pt(v_side_l, 2.25, 0.0), v_in_pt(v_side_l, 19.00, 0.0))
+add_dist_dim(p1, v_side_l, "Dim_CarcassBase_Depth", "DistanceX", v_side_pt(v_side_l, 2.25, 0.0), v_side_pt(v_side_l, 19.00, 0.0), y_offset=-10.0)
 
 # Dimensions for Switch on Right Panel diagram:
-# Switch Height from Floor: 34.00"
-add_dist_dim(p1, v_side_r, "DistanceY", v_in_pt(v_side_r, 15.00, 0.0), v_in_pt(v_side_r, 15.00, 34.00))
-# Switch Setback from Rear: 4.00"
-add_dist_dim(p1, v_side_r, "DistanceX", v_in_pt(v_side_r, 15.00, 34.00), v_in_pt(v_side_r, 19.00, 34.00))
+# 10. Switch Height from Floor: 34.00"
+add_dist_dim(p1, v_side_r, "Dim_Switch_Floor_Height", "DistanceY", v_side_pt(v_side_r, 15.00, 0.0), v_side_pt(v_side_r, 15.00, 34.00), x_offset=14.0)
+# 11. Switch Setback from Rear: 4.00"
+add_dist_dim(p1, v_side_r, "Dim_Switch_Rear_Setback", "DistanceX", v_side_pt(v_side_r, 15.00, 34.00), v_side_pt(v_side_r, 19.00, 34.00), y_offset=8.0)
+# 12. Switch Hole Diameter: 0.787" (20mm)
+dim_sw_dia = doc.addObject("TechDraw::DrawViewDimension", "Dim_Switch_Hole_Dia")
+dim_sw_dia.Type = "Diameter"
+dim_sw_dia.References2D = [(v_side_r, ("Edge16",))]
+p1.addView(dim_sw_dia)
+dim_sw_dia.FormatSpec = '%.3f"'
+dim_sw_dia.ShowUnits = False
+# 13. Switch Relief Pocket Diameter: 1.75"
+dim_sw_pocket = doc.addObject("TechDraw::DrawViewDimension", "Dim_Switch_Pocket_Dia")
+dim_sw_pocket.Type = "Diameter"
+dim_sw_pocket.References2D = [(v_side_r, ("Edge15",))]
+p1.addView(dim_sw_pocket)
+dim_sw_pocket.FormatSpec = '%.2f"'
+dim_sw_pocket.ShowUnits = False
 
 # Sub-labels underneath panels:
 a_label_l = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Left_Panel")
@@ -1505,7 +1531,7 @@ a5_cut.Text = [
     "==================================================================================================",
     "PART NAME                 QTY THK  FINISH SIZE (IN)  TOP BEVEL/MITER   BOT BEVEL/MITER   NOTES",
     "--------------------------------------------------------------------------------------------------",
-    "Side Panels (Left/Right)   2  3/4\" 20.00\" x 65.25\"   Per 15-Vertex Map Square 90° Base   1/16\" T-molding",
+    "Side Panels (Left/Right)   2  3/4\" 25.25\" x 65.25\"   Per 15-Vertex Map Square 90° Base   1/16\" T-molding",
     "Console Diagonal Apron     1  3/4\" 7.786\" x 23.000\"  42.40° Blade Tilt 42.40° Blade Tilt Parallel, no taper",
     "Keyboard Bottom Plate      1  3/4\" 5.250\" x 23.000\"  Square 90°        Square 90°        Z=29.25\"-30.00\"",
     "Monitor Bezel Board        1  3/4\" 16.572\" x 23.000\" 40.83° Miter      33.93° Bevel      33.93° rake; P1913S",
