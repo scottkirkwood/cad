@@ -227,19 +227,19 @@ TABLE
   2
 LAYER
   5
-A76
+A78
 330
 0
 100
 AcDbSymbolTable
  70
-12
+14
   0
 LAYER
   5
-A77
+A79
 330
-A76
+A78
 100
 AcDbSymbolTableRecord
 100
@@ -255,9 +255,9 @@ CONTINUOUS
   0
 LAYER
   5
-A78
+A7A
 330
-A76
+A78
 100
 AcDbSymbolTableRecord
 100
@@ -273,51 +273,15 @@ CONTINUOUS
   0
 LAYER
   5
-A79
-330
-A76
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent010
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-A7A
-330
-A76
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent010
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
 A7B
 330
-A76
+A78
 100
 AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-DimExtent011
+DimExtent010
  70
     0
  62
@@ -329,7 +293,25 @@ LAYER
   5
 A7C
 330
-A76
+A78
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent010
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+A7D
+330
+A78
 100
 AcDbSymbolTableRecord
 100
@@ -345,9 +327,27 @@ CONTINUOUS
   0
 LAYER
   5
-A7D
+A7E
 330
-A76
+A78
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent011
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+A7F
+330
+A78
 100
 AcDbSymbolTableRecord
 100
@@ -363,51 +363,15 @@ CONTINUOUS
   0
 LAYER
   5
-A7E
-330
-A76
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent012
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-A7F
-330
-A76
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent012
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
 A80
 330
-A76
+A78
 100
 AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-DimExtent013
+DimExtent012
  70
     0
  62
@@ -419,7 +383,25 @@ LAYER
   5
 A81
 330
-A76
+A78
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent012
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+A82
+330
+A78
 100
 AcDbSymbolTableRecord
 100
@@ -435,9 +417,63 @@ CONTINUOUS
   0
 LAYER
   5
-A82
+A83
 330
-A76
+A78
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent013
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+A84
+330
+A78
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+Annotation_Label_Bezel
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+A85
+330
+A78
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+Annotation_Label_Speaker
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+A86
+330
+A78
 100
 AcDbSymbolTableRecord
 100
@@ -3820,6 +3856,74 @@ AcDbRotatedDimension
 TEXT
   5
 A75
+330
+A02
+100
+AcDbEntity
+  8
+Annotation_Label_Bezel
+100
+AcDbText
+ 10
+110.000000000
+ 20
+65.000000000
+ 30
+0.000000000
+ 40
+2.200000000
+  1
+[ MONITOR BEZEL BOARD ]
+  7
+STANDARD
+ 72
+1
+ 11
+110.000000000
+ 21
+65.000000000
+ 31
+0.000000000
+100
+AcDbText
+  0
+TEXT
+  5
+A76
+330
+A02
+100
+AcDbEntity
+  8
+Annotation_Label_Speaker
+100
+AcDbText
+ 10
+280.000000000
+ 20
+150.000000000
+ 30
+0.000000000
+ 40
+2.200000000
+  1
+[ SPEAKER BOARD ]
+  7
+STANDARD
+ 72
+1
+ 11
+280.000000000
+ 21
+150.000000000
+ 31
+0.000000000
+100
+AcDbText
+  0
+TEXT
+  5
+A77
 330
 A02
 100

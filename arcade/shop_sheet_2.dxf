@@ -227,19 +227,19 @@ TABLE
   2
 LAYER
   5
-AE8
+AED
 330
 0
 100
 AcDbSymbolTable
  70
-27
+32
   0
 LAYER
   5
-AE9
+AEE
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -255,9 +255,9 @@ CONTINUOUS
   0
 LAYER
   5
-AEA
+AEF
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -273,45 +273,45 @@ CONTINUOUS
   0
 LAYER
   5
-AEB
+AF0
 330
-AE8
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-AEC
-330
-AE8
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
 AED
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AF1
 330
-AE8
+AED
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AF2
+330
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -327,9 +327,9 @@ CONTINUOUS
   0
 LAYER
   5
-AEE
+AF3
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -345,9 +345,9 @@ CONTINUOUS
   0
 LAYER
   5
-AEF
+AF4
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -363,9 +363,9 @@ CONTINUOUS
   0
 LAYER
   5
-AF0
+AF5
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -381,9 +381,9 @@ CONTINUOUS
   0
 LAYER
   5
-AF1
+AF6
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -399,9 +399,9 @@ CONTINUOUS
   0
 LAYER
   5
-AF2
+AF7
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -417,9 +417,9 @@ CONTINUOUS
   0
 LAYER
   5
-AF3
+AF8
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -435,9 +435,9 @@ CONTINUOUS
   0
 LAYER
   5
-AF4
+AF9
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -453,9 +453,9 @@ CONTINUOUS
   0
 LAYER
   5
-AF5
+AFA
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -471,9 +471,9 @@ CONTINUOUS
   0
 LAYER
   5
-AF6
+AFB
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -489,9 +489,9 @@ CONTINUOUS
   0
 LAYER
   5
-AF7
+AFC
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -507,9 +507,9 @@ CONTINUOUS
   0
 LAYER
   5
-AF8
+AFD
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -525,9 +525,9 @@ CONTINUOUS
   0
 LAYER
   5
-AF9
+AFE
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -543,9 +543,9 @@ CONTINUOUS
   0
 LAYER
   5
-AFA
+AFF
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -561,9 +561,9 @@ CONTINUOUS
   0
 LAYER
   5
-AFB
+B00
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -579,9 +579,9 @@ CONTINUOUS
   0
 LAYER
   5
-AFC
+B01
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -597,9 +597,9 @@ CONTINUOUS
   0
 LAYER
   5
-AFD
+B02
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -615,9 +615,9 @@ CONTINUOUS
   0
 LAYER
   5
-AFE
+B03
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -633,9 +633,9 @@ CONTINUOUS
   0
 LAYER
   5
-AFF
+B04
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -651,9 +651,9 @@ CONTINUOUS
   0
 LAYER
   5
-B00
+B05
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -669,9 +669,9 @@ CONTINUOUS
   0
 LAYER
   5
-B01
+B06
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -687,9 +687,9 @@ CONTINUOUS
   0
 LAYER
   5
-B02
+B07
 330
-AE8
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -705,9 +705,99 @@ CONTINUOUS
   0
 LAYER
   5
-B03
+B08
 330
-AE8
+AED
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+Annotation_Label_Apron
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+B09
+330
+AED
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+Annotation_Label_KB_Plate
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+B0A
+330
+AED
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+Annotation_Label_Roof
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+B0B
+330
+AED
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+Annotation_Label_Shelf
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+B0C
+330
+AED
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+Annotation_Label_Base
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+B0D
+330
+AED
 100
 AcDbSymbolTableRecord
 100
@@ -7306,6 +7396,176 @@ AcDbRotatedDimension
 TEXT
   5
 AE7
+330
+A02
+100
+AcDbEntity
+  8
+Annotation_Label_Apron
+100
+AcDbText
+ 10
+85.000000000
+ 20
+170.000000000
+ 30
+0.000000000
+ 40
+2.200000000
+  1
+[ CONSOLE DIAGONAL APRON ]
+  7
+STANDARD
+ 72
+1
+ 11
+85.000000000
+ 21
+170.000000000
+ 31
+0.000000000
+100
+AcDbText
+  0
+TEXT
+  5
+AE8
+330
+A02
+100
+AcDbEntity
+  8
+Annotation_Label_KB_Plate
+100
+AcDbText
+ 10
+215.000000000
+ 20
+170.000000000
+ 30
+0.000000000
+ 40
+2.200000000
+  1
+[ KEYBOARD BOTTOM PLATE ]
+  7
+STANDARD
+ 72
+1
+ 11
+215.000000000
+ 21
+170.000000000
+ 31
+0.000000000
+100
+AcDbText
+  0
+TEXT
+  5
+AE9
+330
+A02
+100
+AcDbEntity
+  8
+Annotation_Label_Roof
+100
+AcDbText
+ 10
+345.000000000
+ 20
+170.000000000
+ 30
+0.000000000
+ 40
+2.200000000
+  1
+[ TOP ROOF PANEL ]
+  7
+STANDARD
+ 72
+1
+ 11
+345.000000000
+ 21
+170.000000000
+ 31
+0.000000000
+100
+AcDbText
+  0
+TEXT
+  5
+AEA
+330
+A02
+100
+AcDbEntity
+  8
+Annotation_Label_Shelf
+100
+AcDbText
+ 10
+85.000000000
+ 20
+66.000000000
+ 30
+0.000000000
+ 40
+2.200000000
+  1
+[ INTERNAL EQUIPMENT SHELF ]
+  7
+STANDARD
+ 72
+1
+ 11
+85.000000000
+ 21
+66.000000000
+ 31
+0.000000000
+100
+AcDbText
+  0
+TEXT
+  5
+AEB
+330
+A02
+100
+AcDbEntity
+  8
+Annotation_Label_Base
+100
+AcDbText
+ 10
+215.000000000
+ 20
+66.000000000
+ 30
+0.000000000
+ 40
+2.200000000
+  1
+[ BOTTOM BASE PLATE ]
+  7
+STANDARD
+ 72
+1
+ 11
+215.000000000
+ 21
+66.000000000
+ 31
+0.000000000
+100
+AcDbText
+  0
+TEXT
+  5
+AEC
 330
 A02
 100

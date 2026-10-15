@@ -227,19 +227,19 @@ TABLE
   2
 LAYER
   5
-ABE
+AC2
 330
 0
 100
 AcDbSymbolTable
  70
-22
+26
   0
 LAYER
   5
-ABF
+AC3
 330
-ABE
+AC2
 100
 AcDbSymbolTableRecord
 100
@@ -255,9 +255,9 @@ CONTINUOUS
   0
 LAYER
   5
-AC0
+AC4
 330
-ABE
+AC2
 100
 AcDbSymbolTableRecord
 100
@@ -273,81 +273,81 @@ CONTINUOUS
   0
 LAYER
   5
-AC1
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent014
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-AC2
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent014
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-AC3
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent015
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-AC4
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent015
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
 AC5
 330
-ABE
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent014
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AC6
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent014
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AC7
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent015
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AC8
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent015
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AC9
+330
+AC2
 100
 AcDbSymbolTableRecord
 100
@@ -363,81 +363,81 @@ CONTINUOUS
   0
 LAYER
   5
-AC6
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent016
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-AC7
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent016
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-AC8
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent017
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-AC9
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent017
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
 ACA
 330
-ABE
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent016
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+ACB
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent016
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+ACC
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent017
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+ACD
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent017
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+ACE
+330
+AC2
 100
 AcDbSymbolTableRecord
 100
@@ -453,81 +453,81 @@ CONTINUOUS
   0
 LAYER
   5
-ACB
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent018
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-ACC
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent018
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-ACD
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent019
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-ACE
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent019
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
 ACF
 330
-ABE
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent018
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AD0
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent018
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AD1
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent019
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AD2
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent019
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AD3
+330
+AC2
 100
 AcDbSymbolTableRecord
 100
@@ -543,81 +543,153 @@ CONTINUOUS
   0
 LAYER
   5
-AD0
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent020
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-AD1
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent020
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-AD2
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent021
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
-AD3
-330
-ABE
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-DimExtent021
- 70
-    0
- 62
-    7
-  6
-CONTINUOUS
-  0
-LAYER
-  5
 AD4
 330
-ABE
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent020
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AD5
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent020
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AD6
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent021
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AD7
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DimExtent021
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AD8
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+Annotation_Label_CP_Shelf
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+AD9
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+Annotation_Label_KB_Tray
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+ADA
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+Annotation_Label_Front_Door
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+ADB
+330
+AC2
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+Annotation_Label_Back_Door
+ 70
+    0
+ 62
+    7
+  6
+CONTINUOUS
+  0
+LAYER
+  5
+ADC
+330
+AC2
 100
 AcDbSymbolTableRecord
 100
@@ -6040,6 +6112,142 @@ AcDbRotatedDimension
 TEXT
   5
 ABD
+330
+A02
+100
+AcDbEntity
+  8
+Annotation_Label_CP_Shelf
+100
+AcDbText
+ 10
+105.000000000
+ 20
+158.000000000
+ 30
+0.000000000
+ 40
+2.200000000
+  1
+[ CONTROL PANEL WING SHELF ]
+  7
+STANDARD
+ 72
+1
+ 11
+105.000000000
+ 21
+158.000000000
+ 31
+0.000000000
+100
+AcDbText
+  0
+TEXT
+  5
+ABE
+330
+A02
+100
+AcDbEntity
+  8
+Annotation_Label_KB_Tray
+100
+AcDbText
+ 10
+330.000000000
+ 20
+158.000000000
+ 30
+0.000000000
+ 40
+2.200000000
+  1
+[ KEYBOARD SLIDE-OUT TRAY ]
+  7
+STANDARD
+ 72
+1
+ 11
+330.000000000
+ 21
+158.000000000
+ 31
+0.000000000
+100
+AcDbText
+  0
+TEXT
+  5
+ABF
+330
+A02
+100
+AcDbEntity
+  8
+Annotation_Label_Front_Door
+100
+AcDbText
+ 10
+105.000000000
+ 20
+42.000000000
+ 30
+0.000000000
+ 40
+2.200000000
+  1
+[ LOWER FRONT ACCESS DOOR ]
+  7
+STANDARD
+ 72
+1
+ 11
+105.000000000
+ 21
+42.000000000
+ 31
+0.000000000
+100
+AcDbText
+  0
+TEXT
+  5
+AC0
+330
+A02
+100
+AcDbEntity
+  8
+Annotation_Label_Back_Door
+100
+AcDbText
+ 10
+225.000000000
+ 20
+42.000000000
+ 30
+0.000000000
+ 40
+2.200000000
+  1
+[ REAR ACCESS PANEL (1/4" PLY) ]
+  7
+STANDARD
+ 72
+1
+ 11
+225.000000000
+ 21
+42.000000000
+ 31
+0.000000000
+100
+AcDbText
+  0
+TEXT
+  5
+AC1
 330
 A02
 100

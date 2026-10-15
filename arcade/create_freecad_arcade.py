@@ -1154,25 +1154,28 @@ v_side_angles.Y = 150.0
 doc.recompute()
 v_side = v_side_ortho
 
-# 1. ORTHOGONAL PROFILE DIMENSIONS (Diagram 1):
-# Overall Height: 65.25"
-add_dist_dim(p1, v_side_ortho, "Dim_Overall_Height", "DistanceY", v_side_pt(v_side_ortho, 19.00, 0.0), v_side_pt(v_side_ortho, 19.00, 65.25), x_offset=10.0)
-# Overall Depth: 25.25"
-add_dist_dim(p1, v_side_ortho, "Dim_Overall_Depth", "DistanceX", v_side_pt(v_side_ortho, -6.25, 0.0), v_side_pt(v_side_ortho, 19.00, 0.0), y_offset=-18.0)
-# Carcass Base Depth: 16.75"
-add_dist_dim(p1, v_side_ortho, "Dim_CarcassBase_Depth", "DistanceX", v_side_pt(v_side_ortho, 2.25, 0.0), v_side_pt(v_side_ortho, 19.00, 0.0), y_offset=-8.0)
-# Toe-kick Riser Height: 4.50"
-add_dist_dim(p1, v_side_ortho, "Dim_ToeKick_Height", "DistanceY", v_side_pt(v_side_ortho, 2.25, 0.0), v_side_pt(v_side_ortho, 2.25, 4.50), x_offset=-6.0)
-# Lower Front Coin Door Vertical Lip: 19.00"
-add_dist_dim(p1, v_side_ortho, "Dim_CoinDoor_Height", "DistanceY", v_side_pt(v_side_ortho, -1.00, 4.50), v_side_pt(v_side_ortho, -1.00, 23.50), x_offset=-8.0)
-# Front Cheek Nose Vertical Lip: 4.00" (Front vertical nose opening)
-add_dist_dim(p1, v_side_ortho, "Dim_FrontNose_Height", "DistanceY", v_side_pt(v_side_ortho, -6.25, 29.25), v_side_pt(v_side_ortho, -6.25, 33.25), x_offset=-8.0)
-# Control Shelf Ledge Depth: 11.50"
-add_dist_dim(p1, v_side_ortho, "Dim_ShelfLedge_Depth", "DistanceX", v_side_pt(v_side_ortho, -6.25, 33.25), v_side_pt(v_side_ortho, 5.25, 33.25), y_offset=6.0)
-# Console Rear Vertical Rise: 6.75"
-add_dist_dim(p1, v_side_ortho, "Dim_ConsoleRear_Rise", "DistanceY", v_side_pt(v_side_ortho, 5.25, 33.25), v_side_pt(v_side_ortho, 5.25, 40.00), x_offset=6.0)
-# Top Roof Depth: 12.25"
-add_dist_dim(p1, v_side_ortho, "Dim_Roof_Depth", "DistanceX", v_side_pt(v_side_ortho, 6.75, 65.25), v_side_pt(v_side_ortho, 19.00, 65.25), y_offset=8.0)
+# 1. ORTHOGONAL 90° CUTS DIMENSIONS (Diagram 1):
+# The 9 orthogonal (90-degree) cuts of the side panel perimeter + rear back height:
+# 1. Base baseline: 16.75" (Edge 14)
+add_edge_dim(p1, v_side_ortho, "Dim_01_Base", "DistanceX", "Edge14", y_offset=-8.0)
+# 2. Toe-kick riser: 4.50" (Edge 0)
+add_edge_dim(p1, v_side_ortho, "Dim_02_ToeRiser", "DistanceY", "Edge0", x_offset=-5.0)
+# 3. Toe-kick ceiling recess: 3.25" (Edge 1)
+add_edge_dim(p1, v_side_ortho, "Dim_03_ToeCeiling", "DistanceX", "Edge1", y_offset=4.0)
+# 4. Lower coin door lip: 19.00" (Edge 2)
+add_edge_dim(p1, v_side_ortho, "Dim_04_CoinDoor", "DistanceY", "Edge2", x_offset=-6.0)
+# 5. Front cheek nose vertical lip: 4.00" (Edge 4)
+add_edge_dim(p1, v_side_ortho, "Dim_05_FrontNose", "DistanceY", "Edge4", x_offset=-6.0)
+# 6. Control shelf ledge: 11.50" (Edge 5)
+add_edge_dim(p1, v_side_ortho, "Dim_06_ShelfLedge", "DistanceX", "Edge5", y_offset=5.0)
+# 7. Console rear vertical rise: 6.75" (Edge 6)
+add_edge_dim(p1, v_side_ortho, "Dim_07_ConsoleRise", "DistanceY", "Edge6", x_offset=5.0)
+# 8. Visor roof vertical lip: 1.75" (Edge 11)
+add_edge_dim(p1, v_side_ortho, "Dim_08_VisorLip", "DistanceY", "Edge11", x_offset=-5.0)
+# 9. Top roof horizontal depth: 12.25" (Edge 12)
+add_edge_dim(p1, v_side_ortho, "Dim_09_TopRoof", "DistanceX", "Edge12", y_offset=6.0)
+# 10. Rear back height: 65.25" (Edge 13)
+add_edge_dim(p1, v_side_ortho, "Dim_10_RearHeight", "DistanceY", "Edge13", x_offset=8.0)
 
 # 2. SLANTED SEGMENT CUT LENGTHS (Diagram 2 - True Aligned Edge Lengths):
 # Edge 3 (P3->P4): Apron Corbel Diagonal = 7.79"
@@ -1206,7 +1209,7 @@ add_angle_dim(p1, v_side_angles, "Angle_P11_Marquee_Lip", "Edge10", "Edge11")
 
 # Sub-labels underneath each panel diagram:
 a_label_1 = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Ortho")
-a_label_1.Text = ["[ 1. ORTHOGONAL DATUMS ]", "Carcass heights & depths"]
+a_label_1.Text = ["[ 1. NINE 90° CUTS ]", "All 9 orthogonal cuts & rear height"]
 p1.addView(a_label_1)
 a_label_1.X = 55.0
 a_label_1.Y = 40.0
@@ -1350,6 +1353,42 @@ doc.recompute()
 add_extent_dim(p2, v_base, 0)
 add_extent_dim(p2, v_base, 1)
 
+# Individual Part Labels & Cut Callouts on Sheet 2:
+a2_apron = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Apron")
+a2_apron.Text = ["[ CONSOLE DIAGONAL APRON ]", "7.786\" x 23.000\" (Dual 42.40° Bevels)"]
+p2.addView(a2_apron)
+a2_apron.X = 85.0
+a2_apron.Y = 170.0
+a2_apron.TextSize = 2.2
+
+a2_kb = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_KB_Plate")
+a2_kb.Text = ["[ KEYBOARD BOTTOM PLATE ]", "5.250\" x 23.000\" (Square 90° Cuts)"]
+p2.addView(a2_kb)
+a2_kb.X = 215.0
+a2_kb.Y = 170.0
+a2_kb.TextSize = 2.2
+
+a2_roof = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Roof")
+a2_roof.Text = ["[ TOP ROOF PANEL ]", "10.250\" x 23.000\" (12.80° Front Bevel)"]
+p2.addView(a2_roof)
+a2_roof.X = 345.0
+a2_roof.Y = 170.0
+a2_roof.TextSize = 2.2
+
+a2_shelf = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Shelf")
+a2_shelf.Text = ["[ INTERNAL EQUIPMENT SHELF ]", "14.000\" x 23.000\" (2.25\" Rear Slot)"]
+p2.addView(a2_shelf)
+a2_shelf.X = 85.0
+a2_shelf.Y = 66.0
+a2_shelf.TextSize = 2.2
+
+a2_base = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Base")
+a2_base.Text = ["[ BOTTOM BASE PLATE ]", "14.250\" x 23.000\" (Elevated 0.75\" Z)"]
+p2.addView(a2_base)
+a2_base.X = 215.0
+a2_base.Y = 66.0
+a2_base.TextSize = 2.2
+
 a2_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet2_Table")
 a2_notes.Text = [
     "BEVEL CUTS & BLADE TILT SPECIFICATIONS:",
@@ -1411,6 +1450,21 @@ v_spk.Y = 195.0
 doc.recompute()
 add_extent_dim(p3, v_spk, 0)
 add_extent_dim(p3, v_spk, 1)
+
+# Part Labels on Sheet 3:
+a3_bezel = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Bezel")
+a3_bezel.Text = ["[ MONITOR BEZEL BOARD ]", "16.572\" x 23.000\" (33.93° Rake / 40.83° Miter)", "Screen Cutout: 14.88\" W x 11.95\" H (Centered)"]
+p3.addView(a3_bezel)
+a3_bezel.X = 110.0
+a3_bezel.Y = 65.0
+a3_bezel.TextSize = 2.2
+
+a3_spk = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Speaker")
+a3_spk.Text = ["[ SPEAKER BOARD ]", "7.433\" x 23.000\" (47.73° Rake / Dual Miters)", "Two 3.750\" Speaker Holes (12.0\" Spacing)"]
+p3.addView(a3_spk)
+a3_spk.X = 280.0
+a3_spk.Y = 150.0
+a3_spk.TextSize = 2.2
 
 a3_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet3_Specs")
 a3_notes.Text = [
@@ -1503,6 +1557,35 @@ v_bdoor.Y = 110.0
 doc.recompute()
 add_extent_dim(p4, v_bdoor, 0)
 add_extent_dim(p4, v_bdoor, 1)
+
+# Part Labels on Sheet 4:
+a4_cp = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_CP_Shelf")
+a4_cp.Text = ["[ CONTROL PANEL WING SHELF ]", "10.500\" x 31.500\" (Overhangs by 4.25\")"]
+p4.addView(a4_cp)
+a4_cp.X = 105.0
+a4_cp.Y = 158.0
+a4_cp.TextSize = 2.2
+
+a4_tray = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_KB_Tray")
+a4_tray.Text = ["[ KEYBOARD SLIDE-OUT TRAY ]", "9.000\" x 21.000\" (For 12\" Slides)"]
+p4.addView(a4_tray)
+a4_tray.X = 330.0
+a4_tray.Y = 158.0
+a4_tray.TextSize = 2.2
+
+a4_fdoor = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Front_Door")
+a4_fdoor.Text = ["[ LOWER FRONT ACCESS DOOR ]", "18.875\" x 22.875\" (1/16\" Reveals)"]
+p4.addView(a4_fdoor)
+a4_fdoor.X = 105.0
+a4_fdoor.Y = 42.0
+a4_fdoor.TextSize = 2.2
+
+a4_bdoor = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Back_Door")
+a4_bdoor.Text = ["[ REAR ACCESS PANEL (1/4\" PLY) ]", "62.625\" x 22.875\" (IEC Cutout & Lock)"]
+p4.addView(a4_bdoor)
+a4_bdoor.X = 225.0
+a4_bdoor.Y = 42.0
+a4_bdoor.TextSize = 2.2
 
 a4_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet4_Specs")
 a4_notes.Text = [
