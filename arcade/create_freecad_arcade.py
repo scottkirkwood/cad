@@ -475,13 +475,13 @@ door_panel.Solid = True
 grp_doors_shelves.addObject(door_panel)
 set_style(door_panel, COL_DOOR)
 
-# 2. Rear Access Panel (1/4" LIGHTWEIGHT PLYWOOD - IEC320 C14 Cutout & Cam Lock)
-# Outer opening: 23.0" x 62.75" -> Panel: 22.875" W x 62.625" H x 0.25" T
+# 2. Rear Access Panel (1/4" LIGHTWEIGHT PLYWOOD - IEC320 C14 Cutout, Cam Lock & Dowel Alignment)
+# Outer opening: 23.0" x 62.00" -> Panel: 22.875" W x 61.875" H x 0.25" T (Rests directly on Base Plate at Z=1.50"!)
 sk_back = doc.addObject("Sketcher::SketchObject", "Sketch_BackAccessPanel")
 sk_back.MapMode = "Deactivated"
 back_w_init = (CABINET_INNER_WIDTH - 2.0 * DOOR_CLEARANCE) * INCH
-back_h_raw = z_roof - WOOD_THICKNESS - BASE_OFFSET_Z
-back_h_init = (back_h_raw - 2.0 * DOOR_CLEARANCE) * INCH
+back_h_raw = (z_roof - WOOD_THICKNESS) - (BASE_OFFSET_Z + WOOD_THICKNESS) # 63.50" - 1.50" = 62.00"
+back_h_init = (back_h_raw - 2.0 * DOOR_CLEARANCE) * INCH                  # 61.875"
 
 # Outer panel border
 sk_back.addGeometry(Part.LineSegment(FreeCAD.Vector(0,0,0), FreeCAD.Vector(back_w_init, 0, 0)))
@@ -516,18 +516,18 @@ cam_x = (back_w_init / 2.0)
 cam_y = (back_h_init - 3.0 * INCH)
 sk_back.addGeometry(Part.Circle(FreeCAD.Vector(cam_x, cam_y, 0), FreeCAD.Vector(0,0,1), 0.375 * INCH))
 
-# Place rear sketch directly at rear panel opening!
+# Place rear sketch directly resting on Base Plate (Z = 1.50" + DoorClearance)
 sk_back.Placement = FreeCAD.Placement(
     FreeCAD.Vector(
         in_to_mm(CABINET_DEPTH - BACK_WOOD_THICKNESS),
         in_to_mm(-CABINET_INNER_WIDTH / 2.0 + DOOR_CLEARANCE),
-        in_to_mm(BASE_OFFSET_Z + DOOR_CLEARANCE)
+        in_to_mm(BASE_OFFSET_Z + WOOD_THICKNESS + DOOR_CLEARANCE)
     ),
     rot_face
 )
 sk_back.setExpression("Placement.Base.x", "CabinetParameters.CabinetDepth - CabinetParameters.BackWoodThickness")
 sk_back.setExpression("Placement.Base.y", "-CabinetParameters.InnerWidth / 2 + CabinetParameters.DoorClearance")
-sk_back.setExpression("Placement.Base.z", "CabinetParameters.BaseOffsetZ + CabinetParameters.DoorClearance")
+sk_back.setExpression("Placement.Base.z", "CabinetParameters.BaseOffsetZ + CabinetParameters.WoodThickness + CabinetParameters.DoorClearance")
 grp_doors_shelves.addObject(sk_back)
 
 back_panel = doc.addObject("Part::Extrusion", "Back_Access_Panel_1_4in")
@@ -538,6 +538,49 @@ back_panel.setExpression("LengthFwd", "CabinetParameters.BackWoodThickness")
 back_panel.Solid = True
 grp_doors_shelves.addObject(back_panel)
 set_style(back_panel, COL_BACK_14)
+
+# 2b. Rear Access Panel Retainer & Dowel Reinforcement Cleats:
+# Bottom Stiffener & Dowel Block (3/4" D x 21.0" W x 3/4" H - glued to inner bottom of 1/4" door)
+door_bot_cleat = doc.addObject("Part::Box", "Rear_Door_Bottom_Cleat")
+door_bot_cleat.setExpression("Length", "CabinetParameters.WoodThickness")
+door_bot_cleat.setExpression("Width", "CabinetParameters.InnerWidth - 2.0 in")
+door_bot_cleat.setExpression("Height", "CabinetParameters.WoodThickness")
+door_bot_cleat.setExpression("Placement.Base.x", "CabinetParameters.CabinetDepth - CabinetParameters.BackWoodThickness - CabinetParameters.WoodThickness")
+door_bot_cleat.setExpression("Placement.Base.y", "-CabinetParameters.InnerWidth / 2 + 1.0 in")
+door_bot_cleat.setExpression("Placement.Base.z", "CabinetParameters.BaseOffsetZ + CabinetParameters.WoodThickness + CabinetParameters.DoorClearance")
+grp_doors_shelves.addObject(door_bot_cleat)
+set_style(door_bot_cleat, COL_WOOD_EDGE)
+
+# Top Stop Cleat / Cam Lock Strike (3/4" D x 23.0" W x 3/4" H - mounted directly under roof)
+top_stop_cleat = doc.addObject("Part::Box", "Rear_Top_Stop_Cleat")
+top_stop_cleat.setExpression("Length", "CabinetParameters.WoodThickness")
+top_stop_cleat.setExpression("Width", "CabinetParameters.InnerWidth")
+top_stop_cleat.setExpression("Height", "CabinetParameters.WoodThickness")
+top_stop_cleat.setExpression("Placement.Base.x", "CabinetParameters.CabinetDepth - CabinetParameters.BackWoodThickness - CabinetParameters.WoodThickness")
+top_stop_cleat.setExpression("Placement.Base.y", "-CabinetParameters.InnerWidth / 2")
+top_stop_cleat.Placement.Base.z = in_to_mm(z_roof - 2 * WOOD_THICKNESS) # Z = 62.75" to 63.50"
+grp_doors_shelves.addObject(top_stop_cleat)
+set_style(top_stop_cleat, COL_WOOD_EDGE)
+
+# Two 1/4" Diameter Wood Dowel Pins at Y = +/- 6.0" (engaging base plate and door bottom cleat)
+dowel_rad = in_to_mm(0.125) # 1/4" dia
+dowel_len = in_to_mm(1.25)  # 1-1/4" length (0.5" into base plate, 0.75" into door bottom cleat)
+dowel_z   = in_to_mm(BASE_OFFSET_Z + WOOD_THICKNESS - 0.50) # Z = 1.00"
+dowel_x   = in_to_mm(CABINET_DEPTH - BACK_WOOD_THICKNESS - WOOD_THICKNESS / 2.0) # Centered in 3/4" cleat (X = 17.375")
+
+dowel_l = doc.addObject("Part::Cylinder", "Rear_Dowel_Pin_Left")
+dowel_l.Radius = dowel_rad
+dowel_l.Height = dowel_len
+dowel_l.Placement.Base = FreeCAD.Vector(dowel_x, in_to_mm(6.0), dowel_z)
+grp_doors_shelves.addObject(dowel_l)
+set_style(dowel_l, COL_WOOD_EDGE)
+
+dowel_r = doc.addObject("Part::Cylinder", "Rear_Dowel_Pin_Right")
+dowel_r.Radius = dowel_rad
+dowel_r.Height = dowel_len
+dowel_r.Placement.Base = FreeCAD.Vector(dowel_x, in_to_mm(-6.0), dowel_z)
+grp_doors_shelves.addObject(dowel_r)
+set_style(dowel_r, COL_WOOD_EDGE)
 
 # 3. Internal Equipment Shelf (With 2.25" Rear Cable Drop Slot!)
 # Sits at Z = 16.00", X = 1.50" to 15.50" (flush with back of door jamb stop cleats, zero overlap!)
@@ -577,9 +620,9 @@ set_style(sc_r, COL_WOOD_EDGE)
 # =============================================================================
 print("  [*] Building 03 Base & Feet...")
 
-# 1. Bottom Base Plate (Elevated 3/4" off floor, Z = 0.75" to 1.50")
+# 1. Bottom Base Plate (Elevated 3/4" off floor, Z = 0.75" to 1.50", extends to full X=18.00" carcass depth)
 base_plate = doc.addObject("Part::Box", "Bottom_Base_Plate")
-base_plate.setExpression("Length", "(CabinetParameters.CabinetDepth - CabinetParameters.WoodThickness) - (CabinetParameters.ToeKickDepth + CabinetParameters.WoodThickness)")
+base_plate.setExpression("Length", "CabinetParameters.CabinetDepth - (CabinetParameters.ToeKickDepth + CabinetParameters.WoodThickness)")
 base_plate.setExpression("Width", "CabinetParameters.InnerWidth")
 base_plate.setExpression("Height", "CabinetParameters.WoodThickness")
 base_plate.setExpression("Placement.Base.x", "CabinetParameters.ToeKickDepth + CabinetParameters.WoodThickness")
@@ -591,7 +634,7 @@ set_style(base_plate, COL_BLACK_PAINT)
 # 2. Four 3/4" Plywood Corner Blocks (Flush with Side Panels & Toe Kick at Z = 0.00"!)
 block_size = 3.50
 front_blk_x = TOE_KICK_DEPTH + WOOD_THICKNESS + 0.125
-rear_blk_x  = (CABINET_DEPTH - WOOD_THICKNESS) - block_size - 0.125
+rear_blk_x  = CABINET_DEPTH - block_size - 0.125
 
 corner_defs = [
     ("FL", front_blk_x, "CabinetParameters.InnerWidth / 2 - 3.625 in"),
@@ -1028,6 +1071,53 @@ grp_drawings.Label = "07 Technical Drawings (Shop Sheets)"
 
 tmpl_file = "/home/scott/20p/cad/arcade/drawing_template.svg"
 
+# Automatically extract and preserve user's manual TechDraw positions from existing FCStd file
+def load_saved_techdraw_positions(fcstd_path):
+    import os, zipfile, xml.etree.ElementTree as ET
+    pos_map = {}
+    if os.path.exists(fcstd_path):
+        try:
+            with zipfile.ZipFile(fcstd_path) as z:
+                if 'Document.xml' in z.namelist():
+                    doc_xml = z.read('Document.xml')
+                    root = ET.fromstring(doc_xml)
+                    obj_data = root.find('ObjectData')
+                    if obj_data is not None:
+                        for item in obj_data:
+                            name = item.get('name')
+                            props_tag = item.find('Properties')
+                            if props_tag is None: continue
+                            entry = {}
+                            for p in props_tag:
+                                pname = p.get('name')
+                                if pname in ['X', 'Y']:
+                                    sub = p.find('*')
+                                    if sub is not None:
+                                        try:
+                                            entry[pname] = float(sub.get('value'))
+                                        except:
+                                            pass
+                            if 'X' in entry and 'Y' in entry:
+                                pos_map[name] = entry
+        except Exception as e:
+            print(f"  [!] Note: could not read existing TechDraw layout: {e}")
+    return pos_map
+
+FCSTD_OUTPUT_PATH = "/home/scott/20p/cad/arcade/arcade_cabinet.FCStd"
+SAVED_TECHDRAW_POSITIONS = load_saved_techdraw_positions(FCSTD_OUTPUT_PATH)
+if SAVED_TECHDRAW_POSITIONS:
+    print(f"  [*] Successfully loaded {len(SAVED_TECHDRAW_POSITIONS)} user-adjusted TechDraw positions to preserve layout!")
+
+def apply_td_pos(obj, default_x, default_y):
+    name = obj.Name
+    if name in SAVED_TECHDRAW_POSITIONS:
+        entry = SAVED_TECHDRAW_POSITIONS[name]
+        if 'X' in entry: obj.X = entry['X']
+        if 'Y' in entry: obj.Y = entry['Y']
+    else:
+        obj.X = default_x
+        obj.Y = default_y
+
 def setup_page(name, label, title1, title2, title3, sheet_str, scale_str):
     p = doc.addObject("TechDraw::DrawPage", name)
     p.Label = label
@@ -1051,8 +1141,7 @@ def add_extent_dim(page, view, dir_idx, x_offset=0.0, y_offset=0.0):
     if edges:
         dim = TechDraw.makeExtentDim(view, [e for e in edges], dir_idx)
         page.addView(dim)
-        dim.X = x_offset
-        dim.Y = y_offset
+        apply_td_pos(dim, x_offset, y_offset)
         dim.ShowUnits = False
         dim.FormatSpec = '%.2f"'
         return dim
@@ -1062,8 +1151,7 @@ def add_dist_dim(page, view, name, dim_type, pt0, pt1, x_offset=0.0, y_offset=0.
     dim = TechDraw.makeDistanceDim(view, dim_type, pt0, pt1)
     dim.Label = name
     page.addView(dim)
-    dim.X = x_offset
-    dim.Y = y_offset
+    apply_td_pos(dim, x_offset, y_offset)
     dim.ShowUnits = False
     dim.FormatSpec = format_spec
     return dim
@@ -1074,8 +1162,7 @@ def add_edge_dim(page, view, name, dim_type, edge_name, x_offset=0.0, y_offset=0
     dim.Type = dim_type
     dim.References2D = [(view, (edge_name,))]
     page.addView(dim)
-    dim.X = x_offset
-    dim.Y = y_offset
+    apply_td_pos(dim, x_offset, y_offset)
     dim.ShowUnits = False
     dim.FormatSpec = format_spec
     return dim
@@ -1086,8 +1173,7 @@ def add_angle_dim(page, view, name, edge1, edge2, x_offset=0.0, y_offset=0.0, fo
     dim.Type = "Angle"
     dim.References2D = [(view, (edge1, edge2))]
     page.addView(dim)
-    dim.X = x_offset
-    dim.Y = y_offset
+    apply_td_pos(dim, x_offset, y_offset)
     dim.ShowUnits = False
     dim.FormatSpec = format_spec
     return dim
@@ -1126,8 +1212,7 @@ v_side_ortho.XDirection = FreeCAD.Vector(1, 0, 0)
 v_side_ortho.ScaleType = "Custom"
 v_side_ortho.Scale = 0.072
 p1.addView(v_side_ortho)
-v_side_ortho.X = 55.0
-v_side_ortho.Y = 150.0
+apply_td_pos(v_side_ortho, 55.0, 150.0)
 
 # DIAGRAM 2: Slanted Segment Lengths (Non-Axis-Aligned Cut Profiles)
 v_side_slanted = doc.addObject("TechDraw::DrawViewPart", "View_Side_Panel_Slanted")
@@ -1137,8 +1222,7 @@ v_side_slanted.XDirection = FreeCAD.Vector(1, 0, 0)
 v_side_slanted.ScaleType = "Custom"
 v_side_slanted.Scale = 0.072
 p1.addView(v_side_slanted)
-v_side_slanted.X = 135.0
-v_side_slanted.Y = 150.0
+apply_td_pos(v_side_slanted, 135.0, 150.0)
 
 # DIAGRAM 3: Non-90 Degree Corner & Miter Angles
 v_side_angles = doc.addObject("TechDraw::DrawViewPart", "View_Side_Panel_Angles")
@@ -1148,8 +1232,7 @@ v_side_angles.XDirection = FreeCAD.Vector(1, 0, 0)
 v_side_angles.ScaleType = "Custom"
 v_side_angles.Scale = 0.072
 p1.addView(v_side_angles)
-v_side_angles.X = 215.0
-v_side_angles.Y = 150.0
+apply_td_pos(v_side_angles, 215.0, 150.0)
 
 doc.recompute()
 v_side = v_side_ortho
@@ -1211,22 +1294,19 @@ add_angle_dim(p1, v_side_angles, "Angle_P11_Marquee_Lip", "Edge10", "Edge11")
 a_label_1 = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Ortho")
 a_label_1.Text = ["[ 1. NINE 90° CUTS ]", "All 9 orthogonal cuts & rear height"]
 p1.addView(a_label_1)
-a_label_1.X = 55.0
-a_label_1.Y = 40.0
+apply_td_pos(a_label_1, 55.0, 40.0)
 a_label_1.TextSize = 2.4
 
 a_label_2 = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Slanted")
 a_label_2.Text = ["[ 2. SLANTED LENGTHS ]", "True diagonal cut lengths"]
 p1.addView(a_label_2)
-a_label_2.X = 135.0
-a_label_2.Y = 40.0
+apply_td_pos(a_label_2, 135.0, 40.0)
 a_label_2.TextSize = 2.4
 
 a_label_3 = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Angles")
 a_label_3.Text = ["[ 3. CORNER ANGLES ]", "All non-90° miter angles"]
 p1.addView(a_label_3)
-a_label_3.X = 215.0
-a_label_3.Y = 40.0
+apply_td_pos(a_label_3, 215.0, 40.0)
 a_label_3.TextSize = 2.4
 
 # Coordinate Map & Fabrication Notes
@@ -1267,8 +1347,7 @@ a1_coords.Text = [
     "3. ON/OFF SWITCH: Drill 20mm hole on Right panel (eyeball).",
 ]
 p1.addView(a1_coords)
-a1_coords.X = 330.0
-a1_coords.Y = 145.0
+apply_td_pos(a1_coords, 330.0, 145.0)
 a1_coords.TextSize = 2.0
 
 # =============================================================================
@@ -1291,8 +1370,7 @@ v_apron.XDirection = FreeCAD.Vector(0, -1, 0)
 v_apron.ScaleType = "Custom"
 v_apron.Scale = 0.09
 p2.addView(v_apron)
-v_apron.X = 85.0
-v_apron.Y = 195.0
+apply_td_pos(v_apron, 85.0, 195.0)
 doc.recompute()
 add_extent_dim(p2, v_apron, 0)
 add_extent_dim(p2, v_apron, 1)
@@ -1305,8 +1383,7 @@ v_kb.XDirection = FreeCAD.Vector(0, -1, 0)
 v_kb.ScaleType = "Custom"
 v_kb.Scale = 0.09
 p2.addView(v_kb)
-v_kb.X = 215.0
-v_kb.Y = 195.0
+apply_td_pos(v_kb, 215.0, 195.0)
 doc.recompute()
 add_extent_dim(p2, v_kb, 0)
 add_extent_dim(p2, v_kb, 1)
@@ -1319,8 +1396,7 @@ v_roof.XDirection = FreeCAD.Vector(0, -1, 0)
 v_roof.ScaleType = "Custom"
 v_roof.Scale = 0.09
 p2.addView(v_roof)
-v_roof.X = 345.0
-v_roof.Y = 195.0
+apply_td_pos(v_roof, 345.0, 195.0)
 doc.recompute()
 add_extent_dim(p2, v_roof, 0)
 add_extent_dim(p2, v_roof, 1)
@@ -1333,8 +1409,7 @@ v_shelf.XDirection = FreeCAD.Vector(0, -1, 0)
 v_shelf.ScaleType = "Custom"
 v_shelf.Scale = 0.075
 p2.addView(v_shelf)
-v_shelf.X = 85.0
-v_shelf.Y = 100.0
+apply_td_pos(v_shelf, 85.0, 100.0)
 doc.recompute()
 add_extent_dim(p2, v_shelf, 0)
 add_extent_dim(p2, v_shelf, 1)
@@ -1347,8 +1422,7 @@ v_base.XDirection = FreeCAD.Vector(0, -1, 0)
 v_base.ScaleType = "Custom"
 v_base.Scale = 0.075
 p2.addView(v_base)
-v_base.X = 215.0
-v_base.Y = 100.0
+apply_td_pos(v_base, 215.0, 100.0)
 doc.recompute()
 add_extent_dim(p2, v_base, 0)
 add_extent_dim(p2, v_base, 1)
@@ -1357,36 +1431,31 @@ add_extent_dim(p2, v_base, 1)
 a2_apron = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Apron")
 a2_apron.Text = ["[ CONSOLE DIAGONAL APRON ]", "7.786\" x 23.000\" (Dual 42.40° Bevels)"]
 p2.addView(a2_apron)
-a2_apron.X = 85.0
-a2_apron.Y = 170.0
+apply_td_pos(a2_apron, 85.0, 170.0)
 a2_apron.TextSize = 2.2
 
 a2_kb = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_KB_Plate")
 a2_kb.Text = ["[ KEYBOARD BOTTOM PLATE ]", "5.250\" x 23.000\" (Square 90° Cuts)"]
 p2.addView(a2_kb)
-a2_kb.X = 215.0
-a2_kb.Y = 170.0
+apply_td_pos(a2_kb, 215.0, 170.0)
 a2_kb.TextSize = 2.2
 
 a2_roof = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Roof")
 a2_roof.Text = ["[ TOP ROOF PANEL ]", "10.250\" x 23.000\" (12.80° Front Bevel)"]
 p2.addView(a2_roof)
-a2_roof.X = 345.0
-a2_roof.Y = 170.0
+apply_td_pos(a2_roof, 345.0, 170.0)
 a2_roof.TextSize = 2.2
 
 a2_shelf = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Shelf")
 a2_shelf.Text = ["[ INTERNAL EQUIPMENT SHELF ]", "14.000\" x 23.000\" (2.25\" Rear Slot)"]
 p2.addView(a2_shelf)
-a2_shelf.X = 85.0
-a2_shelf.Y = 66.0
+apply_td_pos(a2_shelf, 85.0, 66.0)
 a2_shelf.TextSize = 2.2
 
 a2_base = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Base")
 a2_base.Text = ["[ BOTTOM BASE PLATE ]", "14.250\" x 23.000\" (Elevated 0.75\" Z)"]
 p2.addView(a2_base)
-a2_base.X = 215.0
-a2_base.Y = 66.0
+apply_td_pos(a2_base, 215.0, 66.0)
 a2_base.TextSize = 2.2
 
 a2_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet2_Table")
@@ -1407,8 +1476,7 @@ a2_notes.Text = [
     "8. BOTTOM BASE PLATE (14.250\" x 23.000\" x 0.750\"): Elevated 0.75\" Z.",
 ]
 p2.addView(a2_notes)
-a2_notes.X = 335.0
-a2_notes.Y = 85.0
+apply_td_pos(a2_notes, 335.0, 85.0)
 a2_notes.TextSize = 2.2
 
 # =============================================================================
@@ -1431,8 +1499,7 @@ v_bezel.XDirection = FreeCAD.Vector(0, -1, 0)
 v_bezel.ScaleType = "Custom"
 v_bezel.Scale = 0.09
 p3.addView(v_bezel)
-v_bezel.X = 110.0
-v_bezel.Y = 150.0
+apply_td_pos(v_bezel, 110.0, 150.0)
 doc.recompute()
 add_extent_dim(p3, v_bezel, 0)
 add_extent_dim(p3, v_bezel, 1)
@@ -1445,8 +1512,7 @@ v_spk.XDirection = FreeCAD.Vector(0, -1, 0)
 v_spk.ScaleType = "Custom"
 v_spk.Scale = 0.09
 p3.addView(v_spk)
-v_spk.X = 280.0
-v_spk.Y = 195.0
+apply_td_pos(v_spk, 280.0, 195.0)
 doc.recompute()
 add_extent_dim(p3, v_spk, 0)
 add_extent_dim(p3, v_spk, 1)
@@ -1455,15 +1521,13 @@ add_extent_dim(p3, v_spk, 1)
 a3_bezel = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Bezel")
 a3_bezel.Text = ["[ MONITOR BEZEL BOARD ]", "16.572\" x 23.000\" (33.93° Rake / 40.83° Miter)", "Screen Cutout: 14.88\" W x 11.95\" H (Centered)"]
 p3.addView(a3_bezel)
-a3_bezel.X = 110.0
-a3_bezel.Y = 65.0
+apply_td_pos(a3_bezel, 110.0, 65.0)
 a3_bezel.TextSize = 2.2
 
 a3_spk = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Speaker")
 a3_spk.Text = ["[ SPEAKER BOARD ]", "7.433\" x 23.000\" (47.73° Rake / Dual Miters)", "Two 3.750\" Speaker Holes (12.0\" Spacing)"]
 p3.addView(a3_spk)
-a3_spk.X = 280.0
-a3_spk.Y = 150.0
+apply_td_pos(a3_spk, 280.0, 150.0)
 a3_spk.TextSize = 2.2
 
 a3_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet3_Specs")
@@ -1486,8 +1550,7 @@ a3_notes.Text = [
     "   - Rakes back 12.80° between speaker board and roof panel.",
 ]
 p3.addView(a3_notes)
-a3_notes.X = 285.0
-a3_notes.Y = 80.0
+apply_td_pos(a3_notes, 285.0, 80.0)
 a3_notes.TextSize = 2.3
 
 # =============================================================================
@@ -1510,8 +1573,7 @@ v_cp.XDirection = FreeCAD.Vector(0, -1, 0)
 v_cp.ScaleType = "Custom"
 v_cp.Scale = 0.075
 p4.addView(v_cp)
-v_cp.X = 105.0
-v_cp.Y = 205.0
+apply_td_pos(v_cp, 105.0, 205.0)
 doc.recompute()
 add_extent_dim(p4, v_cp, 0)
 add_extent_dim(p4, v_cp, 1)
@@ -1524,8 +1586,7 @@ v_tray.XDirection = FreeCAD.Vector(0, -1, 0)
 v_tray.ScaleType = "Custom"
 v_tray.Scale = 0.075
 p4.addView(v_tray)
-v_tray.X = 330.0
-v_tray.Y = 205.0
+apply_td_pos(v_tray, 330.0, 205.0)
 doc.recompute()
 add_extent_dim(p4, v_tray, 0)
 add_extent_dim(p4, v_tray, 1)
@@ -1538,8 +1599,7 @@ v_fdoor.XDirection = FreeCAD.Vector(0, -1, 0)
 v_fdoor.ScaleType = "Custom"
 v_fdoor.Scale = 0.075
 p4.addView(v_fdoor)
-v_fdoor.X = 105.0
-v_fdoor.Y = 95.0
+apply_td_pos(v_fdoor, 105.0, 95.0)
 doc.recompute()
 add_extent_dim(p4, v_fdoor, 0)
 add_extent_dim(p4, v_fdoor, 1)
@@ -1552,8 +1612,7 @@ v_bdoor.XDirection = FreeCAD.Vector(0, 1, 0)
 v_bdoor.ScaleType = "Custom"
 v_bdoor.Scale = 0.055
 p4.addView(v_bdoor)
-v_bdoor.X = 225.0
-v_bdoor.Y = 110.0
+apply_td_pos(v_bdoor, 225.0, 110.0)
 doc.recompute()
 add_extent_dim(p4, v_bdoor, 0)
 add_extent_dim(p4, v_bdoor, 1)
@@ -1562,29 +1621,25 @@ add_extent_dim(p4, v_bdoor, 1)
 a4_cp = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_CP_Shelf")
 a4_cp.Text = ["[ CONTROL PANEL WING SHELF ]", "10.500\" x 31.500\" (Overhangs by 4.25\")"]
 p4.addView(a4_cp)
-a4_cp.X = 105.0
-a4_cp.Y = 158.0
+apply_td_pos(a4_cp, 105.0, 158.0)
 a4_cp.TextSize = 2.2
 
 a4_tray = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_KB_Tray")
 a4_tray.Text = ["[ KEYBOARD SLIDE-OUT TRAY ]", "9.000\" x 21.000\" (For 12\" Slides)"]
 p4.addView(a4_tray)
-a4_tray.X = 330.0
-a4_tray.Y = 158.0
+apply_td_pos(a4_tray, 330.0, 158.0)
 a4_tray.TextSize = 2.2
 
 a4_fdoor = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Front_Door")
 a4_fdoor.Text = ["[ LOWER FRONT ACCESS DOOR ]", "18.875\" x 22.875\" (1/16\" Reveals)"]
 p4.addView(a4_fdoor)
-a4_fdoor.X = 105.0
-a4_fdoor.Y = 42.0
+apply_td_pos(a4_fdoor, 105.0, 42.0)
 a4_fdoor.TextSize = 2.2
 
 a4_bdoor = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Label_Back_Door")
 a4_bdoor.Text = ["[ REAR ACCESS PANEL (1/4\" PLY) ]", "62.625\" x 22.875\" (IEC Cutout & Lock)"]
 p4.addView(a4_bdoor)
-a4_bdoor.X = 225.0
-a4_bdoor.Y = 42.0
+apply_td_pos(a4_bdoor, 225.0, 42.0)
 a4_bdoor.TextSize = 2.2
 
 a4_notes = doc.addObject("TechDraw::DrawViewAnnotation", "Annotation_Sheet4_Specs")
@@ -1605,8 +1660,7 @@ a4_notes.Text = [
     "   - Cam lock cylinder hole: Dia 0.750\" at top center (3.00\" from top).",
 ]
 p4.addView(a4_notes)
-a4_notes.X = 335.0
-a4_notes.Y = 85.0
+apply_td_pos(a4_notes, 335.0, 85.0)
 a4_notes.TextSize = 2.2
 
 # =============================================================================
@@ -1644,8 +1698,7 @@ v5_front.XDirection = FreeCAD.Vector(0, -1, 0)
 v5_front.ScaleType = "Custom"
 v5_front.Scale = 0.065
 p5.addView(v5_front)
-v5_front.X = 75.0
-v5_front.Y = 190.0
+apply_td_pos(v5_front, 75.0, 190.0)
 
 v5_side = doc.addObject("TechDraw::DrawViewPart", "View_Assy_Side")
 v5_side.Source = major_assembly
@@ -1654,8 +1707,7 @@ v5_side.XDirection = FreeCAD.Vector(-1, 0, 0)
 v5_side.ScaleType = "Custom"
 v5_side.Scale = 0.065
 p5.addView(v5_side)
-v5_side.X = 175.0
-v5_side.Y = 190.0
+apply_td_pos(v5_side, 175.0, 190.0)
 
 v5_iso = doc.addObject("TechDraw::DrawViewPart", "View_Assy_Isometric")
 v5_iso.Source = major_assembly
@@ -1664,8 +1716,7 @@ v5_iso.XDirection = FreeCAD.Vector(1.2, -1.0, 0.0)
 v5_iso.ScaleType = "Custom"
 v5_iso.Scale = 0.050
 p5.addView(v5_iso)
-v5_iso.X = 310.0
-v5_iso.Y = 195.0
+apply_td_pos(v5_iso, 310.0, 195.0)
 
 doc.recompute()
 
@@ -1693,8 +1744,7 @@ a5_cut.Text = [
     "Marquee Acrylic Sign       1  1/8\" 5.500\" x 23.000\"  Square 90°        Square 90°        Translucent acrylic",
 ]
 p5.addView(a5_cut)
-a5_cut.X = 215.0
-a5_cut.Y = 55.0
+apply_td_pos(a5_cut, 215.0, 55.0)
 a5_cut.TextSize = 1.6
 
 doc.recompute()
