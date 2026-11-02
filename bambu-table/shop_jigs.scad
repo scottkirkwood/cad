@@ -1,7 +1,9 @@
 // ==============================================================================
-// ESSENTIAL 3D PRINTABLE WOODWORKING JIGS FOR 3D PRINTER TABLE BUILD
+// ESSENTIAL 3D PRINTABLE WOODWORKING JIGS FOR 3D PRINTER TABLE BUILD (V2 - AMS)
 // ==============================================================================
 // 100% Support-free prints designed for Bambu CoreXY 3D Printer.
+// All labels are embossed 0.6mm proud on the top surface for instant
+// 1-click black coloring using the Bambu Studio "Fill" or "Height Range" tool!
 //
 // 1. FORSTNER_SADDLE_GUIDE: Saddles over the 1.5" 2x4 edge, holding a 3/4" (or 5/8")
 //    Forstner bit dead-perpendicular and centered for Figure-8 desktop clips.
@@ -24,8 +26,18 @@ module forstner_guide() {
     GUIDE_D = 19.5; // Fits standard 3/4" (19.05mm) Forstner bit shank/head
     
     difference() {
-        // Main saddle body
-        cube([BOARD_W + 2 * WALL, 45, 26]);
+        union() {
+            // Main saddle body
+            cube([BOARD_W + 2 * WALL, 45, 26]);
+            
+            // Raised text for AMS Black Filament (0.6mm proud on top face)
+            translate([(BOARD_W + 2 * WALL) / 2, 8, 26])
+                linear_extrude(0.6)
+                    text("3/4\" FORSTNER", size=4.0, font="Liberation Sans:style=Bold", halign="center");
+            translate([(BOARD_W + 2 * WALL) / 2, 37, 26])
+                linear_extrude(0.6)
+                    text("2x4 SADDLE", size=4.0, font="Liberation Sans:style=Bold", halign="center");
+        }
         
         // Saddle channel (slides snugly over 2x4 edge)
         translate([WALL, -1, -1])
@@ -33,7 +45,7 @@ module forstner_guide() {
             
         // Centered Forstner bit drill bore (through the top)
         translate([WALL + BOARD_W / 2, 22.5, -2])
-            cylinder(d=GUIDE_D, h=30);
+            cylinder(d=GUIDE_D, h=32);
             
         // Sight windows on sides to see alignment mark on 2x4
         translate([-1, 22.5, 7.5])
@@ -55,22 +67,22 @@ module drawer_pull_jig() {
             cube([HOLE_SPACING + 40, 50, 6]);
             // Top registration lip (hooks over top edge of drawer front)
             cube([HOLE_SPACING + 40, 10, 6 + FENCE_DEPTH]);
+            
+            // Raised AMS text on the face plate (0.6mm proud)
+            translate([(HOLE_SPACING + 40) / 2, 16, 6])
+                linear_extrude(0.6)
+                    text("5\" / 128mm DRAWER PULL", size=6.0, font="Liberation Sans:style=Bold", halign="center");
         }
         
         // Two drill guide holes spaced at 128mm (5.04")
-        translate([20, 28, -1])
+        translate([20, 32, -1])
             cylinder(d=HOLE_DIA, h=10);
-        translate([20 + HOLE_SPACING, 28, -1])
+        translate([20 + HOLE_SPACING, 32, -1])
             cylinder(d=HOLE_DIA, h=10);
             
         // Center alignment notch (line up with pencil mark on center of drawer)
         translate([20 + HOLE_SPACING / 2, -1, -1])
             cube([2.0, 15, 40]);
-            
-        // 128mm / 5" debossed label
-        translate([HOLE_SPACING / 2 - 12, 18, 5.2])
-            linear_extrude(1)
-                text("128mm / 5\"", size=6, font="Liberation Sans:style=Bold");
     }
 }
 
@@ -83,26 +95,33 @@ module clamping_square() {
     WIDTH = 30.0;  // 30mm arm width
     
     difference() {
-        // L-shaped body
         union() {
+            // L-shaped body
             cube([SIZE, WIDTH, THICK]);
             cube([WIDTH, SIZE, THICK]);
+            
+            // Raised AMS text on the top surface (0.6mm proud)
+            translate([WIDTH + 14, WIDTH + 14, THICK])
+                linear_extrude(0.6)
+                    text("90°", size=14, font="Liberation Sans:style=Bold");
+            translate([62, 12, THICK])
+                linear_extrude(0.6)
+                    text("CLAMP", size=6.0, font="Liberation Sans:style=Bold", halign="center");
+            translate([12, 62, THICK])
+                rotate([0, 0, 90])
+                    linear_extrude(0.6)
+                        text("CLAMP", size=6.0, font="Liberation Sans:style=Bold", halign="center");
         }
         
         // Clamp pass-through slots (for quick-clamps or F-clamps)
-        translate([50, -1, THICK / 2])
+        translate([55, -1, THICK / 2])
             cube([25, WIDTH + 2, 12], center=true);
-        translate([-1, 50, THICK / 2])
+        translate([-1, 55, THICK / 2])
             cube([WIDTH + 2, 25, 12], center=true);
             
         // Inside corner relief notch (ensures wood corner doesn't bind)
         translate([WIDTH - 2, WIDTH - 2, -1])
             cube([6, 6, THICK + 2]);
-            
-        // 90° embossed label
-        translate([WIDTH + 8, WIDTH + 8, THICK - 0.8])
-            linear_extrude(1)
-                text("90°", size=14, font="Liberation Sans:style=Bold");
     }
 }
 
