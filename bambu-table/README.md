@@ -33,8 +33,8 @@ Parametric FreeCAD model and woodworking plans for a rock-solid, vibration-dampe
 - [`CUT_LIST_AND_BOM.md`](file:///home/scott/20p/cad/bambu-table/CUT_LIST_AND_BOM.md): Complete dimensioned lumber cut list, hardware specs, and storage capacity.
 - [`drawer_jigs.scad`](file:///home/scott/20p/cad/bambu-table/drawer_jigs.scad): OpenSCAD parametric model for 3D printable slide installation jigs.
 - [`drawer_installation_jigs.stl`](file:///home/scott/20p/cad/bambu-table/drawer_installation_jigs.stl): Support-free 3D printable STL containing slide setback cradle, drawer box standoffs, and 1/8" reveal shims.
-- [`shop_jigs.scad`](file:///home/scott/20p/cad/bambu-table/shop_jigs.scad): OpenSCAD model for woodworking companion jigs with raised AMS text (90° corner clamp square, Forstner bit saddle guide, and drawer pull template).
-- [`woodworking_companion_jigs.stl`](file:///home/scott/20p/cad/bambu-table/woodworking_companion_jigs.stl): Support-free 3D printable STL containing the 3 companion woodworking jigs with embossed labels for AMS multi-color.
+- [`shop_jigs.scad`](file:///home/scott/20p/cad/bambu-table/shop_jigs.scad): OpenSCAD model for woodworking companion jigs with raised AMS text (Forstner bit saddle guide and drawer pull template).
+- [`woodworking_companion_jigs.stl`](file:///home/scott/20p/cad/bambu-table/woodworking_companion_jigs.stl): Support-free 3D printable STL containing the companion woodworking jigs (Forstner saddle guide + 5" pull template) with embossed labels for AMS multi-color.
 - [`drawer_spacers.scad`](file:///home/scott/20p/cad/bambu-table/drawer_spacers.scad): OpenSCAD model for 1/8" drawer front T-spacers and internal 8-5/8" slide tier story stick with raised AMS labels.
 - [`drawer_spacers_and_story_stick.stl`](file:///home/scott/20p/cad/bambu-table/drawer_spacers_and_story_stick.stl): Support-free 3D printable STL for drawer spacing and slide tier stacking.
 

@@ -1,5 +1,5 @@
 // ==============================================================================
-// ESSENTIAL 3D PRINTABLE WOODWORKING JIGS FOR 3D PRINTER TABLE BUILD (V2 - AMS)
+// ESSENTIAL 3D PRINTABLE WOODWORKING JIGS FOR 3D PRINTER TABLE BUILD (V3 - AMS)
 // ==============================================================================
 // 100% Support-free prints designed for Bambu CoreXY 3D Printer.
 // All labels are embossed 0.6mm proud on the top surface for instant
@@ -9,11 +9,9 @@
 //    Forstner bit dead-perpendicular and centered for Figure-8 desktop clips.
 // 2. DRAWER_PULL_JIG: Hooks over the top of the 3/4" Walnut drawer faces with 
 //    standard 5" (128mm) center-to-center drill guide holes.
-// 3. CORNER_CLAMPING_SQUARE: Heavy-duty 90° square for clamping the two 2x4s of 
-//    each L-leg dead-square while driving 2-1/2" pocket screws.
 // ==============================================================================
 
-part = "all"; // [all, forstner_guide, drawer_pull_jig, clamping_square]
+part = "all"; // [all, forstner_guide, drawer_pull_jig]
 
 $fn = 60;
 
@@ -87,45 +85,6 @@ module drawer_pull_jig() {
 }
 
 // ==============================================================================
-// JIG 3: 90° CORNER CLAMPING SQUARE (FOR L-LEG ASSEMBLY)
-// ==============================================================================
-module clamping_square() {
-    SIZE  = 115.0; // 4.5" leg length
-    THICK = 24.0;  // 24mm thick solid clamping surface
-    WIDTH = 30.0;  // 30mm arm width
-    
-    difference() {
-        union() {
-            // L-shaped body
-            cube([SIZE, WIDTH, THICK]);
-            cube([WIDTH, SIZE, THICK]);
-            
-            // Raised AMS text on the top surface (0.6mm proud)
-            translate([WIDTH + 14, WIDTH + 14, THICK])
-                linear_extrude(0.6)
-                    text("90°", size=14, font="Liberation Sans:style=Bold");
-            translate([62, 12, THICK])
-                linear_extrude(0.6)
-                    text("CLAMP", size=6.0, font="Liberation Sans:style=Bold", halign="center");
-            translate([12, 62, THICK])
-                rotate([0, 0, 90])
-                    linear_extrude(0.6)
-                        text("CLAMP", size=6.0, font="Liberation Sans:style=Bold", halign="center");
-        }
-        
-        // Clamp pass-through slots (for quick-clamps or F-clamps)
-        translate([55, -1, THICK / 2])
-            cube([25, WIDTH + 2, 12], center=true);
-        translate([-1, 55, THICK / 2])
-            cube([WIDTH + 2, 25, 12], center=true);
-            
-        // Inside corner relief notch (ensures wood corner doesn't bind)
-        translate([WIDTH - 2, WIDTH - 2, -1])
-            cube([6, 6, THICK + 2]);
-    }
-}
-
-// ==============================================================================
 // PRINT BED LAYOUT (All Support-Free)
 // ==============================================================================
 if (part == "all") {
@@ -133,17 +92,11 @@ if (part == "all") {
     translate([0, 0, 0])
         forstner_guide();
         
-    // 2. Corner Clamping Square
-    translate([65, 0, 0])
-        clamping_square();
-        
-    // 3. Drawer Pull Jig
-    translate([0, 60, 0])
+    // 2. Drawer Pull Jig (Compact layout beside saddle guide)
+    translate([60, 0, 0])
         drawer_pull_jig();
 } else if (part == "forstner_guide") {
     forstner_guide();
 } else if (part == "drawer_pull_jig") {
     drawer_pull_jig();
-} else if (part == "clamping_square") {
-    clamping_square();
 }
