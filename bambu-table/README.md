@@ -34,7 +34,9 @@ Parametric FreeCAD model and woodworking plans for a rock-solid, vibration-dampe
 - [`drawer_jigs.scad`](file:///home/scott/20p/cad/bambu-table/drawer_jigs.scad): OpenSCAD parametric model for 3D printable slide installation jigs.
 - [`drawer_installation_jigs.stl`](file:///home/scott/20p/cad/bambu-table/drawer_installation_jigs.stl): Support-free 3D printable STL containing slide setback cradle, drawer box standoffs, and 1/8" reveal shims.
 - [`shop_jigs.scad`](file:///home/scott/20p/cad/bambu-table/shop_jigs.scad): OpenSCAD model for woodworking companion jigs with raised AMS text (Forstner bit saddle guide and drawer pull template).
-- [`woodworking_companion_jigs.stl`](file:///home/scott/20p/cad/bambu-table/woodworking_companion_jigs.stl): Support-free 3D printable STL containing the companion woodworking jigs (Forstner saddle guide + 5" pull template) with embossed labels for AMS multi-color.
+- [`woodworking_companion_jigs.stl`](file:///home/scott/20p/cad/bambu-table/woodworking_companion_jigs.stl): Support-free 3D printable STL containing both companion woodworking jigs (Forstner saddle guide + 5" pull template) with embossed labels for AMS multi-color.
+- [`forstner_saddle_guide.stl`](file:///home/scott/20p/cad/bambu-table/forstner_saddle_guide.stl): Individual STL containing just the 2×4 Forstner saddle guide (3/4" bore).
+- [`drawer_pull_jig.stl`](file:///home/scott/20p/cad/bambu-table/drawer_pull_jig.stl): Individual STL containing just the 5" (128mm) drawer pull drilling jig.
 - [`drawer_spacers.scad`](file:///home/scott/20p/cad/bambu-table/drawer_spacers.scad): OpenSCAD model for 1/8" drawer front T-spacers and internal 8-5/8" slide tier story stick with raised AMS labels.
 - [`drawer_spacers_and_story_stick.stl`](file:///home/scott/20p/cad/bambu-table/drawer_spacers_and_story_stick.stl): Complete plate containing all 3 jigs (pair of 1/8" T-spacers + 8-5/8" story stick) with wide separation.
 - [`drawer_front_t_spacers.stl`](file:///home/scott/20p/cad/bambu-table/drawer_front_t_spacers.stl): Individual STL containing just the pair of 1/8" drawer front T-spacers.
