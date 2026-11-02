@@ -1,0 +1,302 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1150" width="1600" height="1150" style="background:#ffffff; font-family:'Liberation Sans', Arial, sans-serif;">
+  <defs>
+    <!-- Arrowhead markers -->
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0284c7"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#16a34a"/>
+    </marker>
+
+    <!-- Gradients -->
+    <linearGradient id="jigTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="jigFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="jigSide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0369a1"/>
+      <stop offset="100%" stop-color="#075985"/>
+    </linearGradient>
+    <linearGradient id="cavityGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="3" dy="5" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Canvas Frame -->
+  <rect x="20" y="20" width="1560" height="1110" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+
+  <!-- Header Bar -->
+  <rect x="20" y="20" width="1560" height="90" rx="16" fill="#0f172a"/>
+  <rect x="20" y="94" width="1560" height="16" fill="#0f172a"/>
+  <text x="60" y="65" font-size="28" font-weight="bold" fill="#ffffff" letter-spacing="0.5">DRAWER INSTALLATION JIGS: PART IDENTIFICATION &amp; FEATURE GUIDE</text>
+  <text x="60" y="92" font-size="15" fill="#94a3b8">Bambu Stand 3D Printer Storage Workbench • Match each printed piece and discover what every cavity &amp; notch does</text>
+  <rect x="1330" y="42" width="210" height="36" rx="6" fill="#0284c7"/>
+  <text x="1435" y="66" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">PAGE 1 OF 2: PARTS GUIDE</text>
+
+  <!-- ========================================================================= -->
+  <!-- ITEM 1: THE "WEIRD SHAPE" JIG (SETBACK CRADLE) -->
+  <!-- ========================================================================= -->
+  <g transform="translate(60, 140)">
+    <rect x="0" y="0" width="700" height="530" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="700" height="50" rx="12" fill="#f1f5f9"/>
+    <rect x="0" y="38" width="700" height="12" fill="#f1f5f9"/>
+    
+    <rect x="20" y="12" width="28" height="28" rx="6" fill="#0284c7"/>
+    <text x="34" y="32" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text>
+    <text x="58" y="33" font-size="17" font-weight="bold" fill="#0f172a">JIG 1: SLIDE SETBACK CRADLE (1 Piece)</text>
+    <rect x="520" y="14" width="160" height="24" rx="4" fill="#fee2e2"/>
+    <text x="600" y="30" font-size="11" font-weight="bold" fill="#dc2626" text-anchor="middle">THE "WEIRD SHAPE" BLOCK</text>
+
+    <!-- 3D ISOMETRIC ILLUSTRATION OF SETBACK CRADLE -->
+    <g transform="translate(60, 90)">
+      <!-- Ground shadow -->
+      <polygon points="120,310 380,310 440,260 180,260" fill="#e2e8f0" opacity="0.6"/>
+
+      <!-- Isometric 3D Solid Model of Setback Cradle -->
+      <!-- Left guide wall (X=0 to 8, Y=0 to 85, Z=0 to 28) -->
+      <!-- Base plate + side wall + front hook -->
+      <!-- Draw isometric faces: X vector is (+0.866, +0.5), Y vector is (-0.866, +0.5), Z is (0, -1) -->
+      <!-- Base block -->
+      <path d="M 140,240 L 280,300 L 400,240 L 260,180 Z" fill="url(#jigTop)" stroke="#0369a1" stroke-width="2"/>
+      
+      <!-- Front Hook / Step -->
+      <path d="M 140,240 L 140,200 L 170,185 L 170,225 Z" fill="url(#jigFront)" stroke="#0369a1" stroke-width="2"/>
+      <path d="M 170,185 L 210,165 L 210,205 L 170,225 Z" fill="url(#jigSide)" stroke="#0369a1" stroke-width="2"/>
+
+      <!-- Slide Support Shelf at Z=10mm -->
+      <path d="M 180,215 L 270,255 L 360,210 L 270,170 Z" fill="#7dd3fc" stroke="#0284c7" stroke-width="1.5"/>
+
+      <!-- 2.5mm Setback Stop Lip (Front vertical wall) -->
+      <path d="M 180,215 L 180,185 L 195,178 L 195,208 Z" fill="#dc2626" stroke="#991b1b" stroke-width="1.5"/>
+
+      <!-- THE BIG RECTANGULAR CAVITY / HOLE THROUGH THE MIDDLE -->
+      <!-- Screw Access Window (38mm x 28mm cut through) -->
+      <polygon points="230,220 290,245 310,230 250,205" fill="#0f172a" stroke="#dc2626" stroke-width="2.5"/>
+      <path d="M 230,220 L 230,260 L 290,285 L 290,245 Z" fill="#1e293b" opacity="0.8"/>
+      <path d="M 290,285 L 310,270 L 310,230 L 290,245 Z" fill="#0f172a"/>
+
+      <!-- Chamfered rear corner -->
+      <path d="M 370,225 L 400,240 L 390,270 L 360,255 Z" fill="url(#jigSide)" stroke="#0369a1" stroke-width="1.5"/>
+
+      <!-- Left 28mm high spine wall -->
+      <path d="M 140,200 L 140,140 L 260,85 L 260,180 L 240,190 L 240,110 L 155,150 L 155,205 Z" 
+            fill="url(#jigFront)" stroke="#0369a1" stroke-width="2"/>
+      <path d="M 140,140 L 155,133 L 275,78 L 260,85 Z" fill="url(#jigTop)" stroke="#0369a1" stroke-width="1.5"/>
+
+      <!-- CALLOUTS TO ALL FEATURES -->
+      <!-- 1. Front Registration Hook -->
+      <path d="M 120,180 L 50,150" stroke="#0284c7" stroke-width="1.8" marker-start="url(#arrow-blue)"/>
+      <text x="45" y="145" font-size="12" font-weight="bold" fill="#0284c7" text-anchor="end">1. FRONT REGISTRATION HOOK</text>
+      <text x="45" y="160" font-size="11" fill="#475569" text-anchor="end">Clutches front edge of 2x4 leg/post</text>
+
+      <!-- 2. Setback Stop (2.5mm lip) -->
+      <path d="M 188,195 L 110,105" stroke="#dc2626" stroke-width="1.8" marker-start="url(#arrow-red)"/>
+      <text x="105" y="100" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="end">2. 2.5mm (3/32") SETBACK STOP</text>
+      <text x="105" y="115" font-size="11" fill="#475569" text-anchor="end">Metal slide bumps here so it is</text>
+      <text x="105" y="128" font-size="11" fill="#475569" text-anchor="end">recessed behind cabinet face</text>
+
+      <!-- 3. Slide Support Shelf -->
+      <path d="M 330,200 L 410,130" stroke="#0284c7" stroke-width="1.8" marker-start="url(#arrow-blue)"/>
+      <text x="415" y="125" font-size="12" font-weight="bold" fill="#0284c7">3. SLIDE SUPPORT SHELF (Z=10mm)</text>
+      <text x="415" y="140" font-size="11" fill="#475569">Metal slide rests flat on this shelf hands-free</text>
+
+      <!-- 4. THE BIG SQUARE CAVITY / HOLE -->
+      <path d="M 270,235 L 360,290" stroke="#dc2626" stroke-width="2.5" marker-start="url(#arrow-red)"/>
+      <rect x="365" y="270" width="210" height="54" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="375" y="290" font-size="12" font-weight="bold" fill="#dc2626">4. THE LARGE SQUARE CAVITY:</text>
+      <text x="375" y="305" font-size="12" font-weight="bold" fill="#0f172a">"SCREW ACCESS WINDOW"</text>
+      <text x="375" y="318" font-size="10.5" fill="#475569">Drill bit &amp; screwdriver reach through this hole!</text>
+
+      <!-- 5. Chamfered rear corner -->
+      <path d="M 385,250 L 460,240" stroke="#64748b" stroke-width="1.5" marker-start="url(#arrow-slate)"/>
+      <text x="465" y="244" font-size="11" fill="#64748b">Chamfered tail (clears carcass)</text>
+    </g>
+
+    <!-- Bottom summary box -->
+    <rect x="20" y="455" width="660" height="55" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <text x="35" y="476" font-size="12" font-weight="bold" fill="#1e40af">PURPOSE:</text>
+    <text x="105" y="476" font-size="12" fill="#1e3a8a">Holds the heavy 18" metal carcass slides dead-level against the inside 2x4 posts,</text>
+    <text x="35" y="494" font-size="12" fill="#1e3a8a">automatically sets the 2.5mm setback, and lets you screw into the wood through the big center window.</text>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- ITEM 2: THE "TWO L-SHAPED JIGS" (BOX MOUNTING BLOCKS) -->
+  <!-- ========================================================================= -->
+  <g transform="translate(840, 140)">
+    <rect x="0" y="0" width="700" height="530" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="700" height="50" rx="12" fill="#f1f5f9"/>
+    <rect x="0" y="38" width="700" height="12" fill="#f1f5f9"/>
+    
+    <rect x="20" y="12" width="28" height="28" rx="6" fill="#0284c7"/>
+    <text x="34" y="32" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">2</text>
+    <text x="58" y="33" font-size="17" font-weight="bold" fill="#0f172a">JIG 2: DRAWER BOX MOUNTING BLOCKS (Pair)</text>
+    <rect x="490" y="14" width="190" height="24" rx="4" fill="#fef3c7"/>
+    <text x="585" y="30" font-size="11" font-weight="bold" fill="#d97706" text-anchor="middle">THE "TWO L-SHAPED JIGS"</text>
+
+    <!-- 3D ISOMETRIC ILLUSTRATION OF BOX MOUNT SPACER -->
+    <g transform="translate(60, 90)">
+      <!-- Ground shadow -->
+      <polygon points="120,310 360,310 400,270 160,270" fill="#e2e8f0" opacity="0.6"/>
+
+      <!-- Isometric 3D Solid Model of Box Mount Spacer -->
+      <!-- Base plate (55mm wide x 35mm deep x 6.35mm thick) -->
+      <!-- Standoff Step (1/4" thick) -->
+      <path d="M 180,275 L 340,275 L 390,230 L 230,230 Z" fill="url(#jigTop)" stroke="#0369a1" stroke-width="2"/>
+      <path d="M 180,275 L 180,290 L 340,290 L 340,275 Z" fill="url(#jigFront)" stroke="#0369a1" stroke-width="2"/>
+      <path d="M 340,290 L 390,245 L 390,230 L 340,275 Z" fill="url(#jigSide)" stroke="#0369a1" stroke-width="2"/>
+
+      <!-- Upright 22mm Fence (10mm thick x 35mm deep) on the left -->
+      <path d="M 180,275 L 180,170 L 210,170 L 210,275 Z" fill="url(#jigFront)" stroke="#0369a1" stroke-width="2"/>
+      <path d="M 210,170 L 260,125 L 260,230 L 210,275 Z" fill="url(#jigSide)" stroke="#0369a1" stroke-width="2"/>
+
+      <!-- THE "WEIRD SQUARE CAVITY": 45° Diamond Finger Pinch Notch on top of fence -->
+      <!-- Cut into the top edge of the fence: from Y=7 to 27 -->
+      <path d="M 180,170 L 230,125 L 260,125 L 210,170 Z" fill="url(#jigTop)" stroke="#0369a1" stroke-width="2"/>
+      <!-- The Notch cavity -->
+      <polygon points="190,160 205,175 220,160 205,145" fill="#0f172a" stroke="#d97706" stroke-width="2"/>
+      <polygon points="205,175 220,160 240,142 225,157" fill="#1e293b"/>
+      <polygon points="190,160 205,175 225,157 210,142" fill="#0f172a"/>
+
+      <!-- CALLOUTS TO ALL FEATURES -->
+      <!-- 1. The 1/4" Standoff Step -->
+      <path d="M 290,250 L 360,200" stroke="#0284c7" stroke-width="1.8" marker-start="url(#arrow-blue)"/>
+      <text x="365" y="195" font-size="12" font-weight="bold" fill="#0284c7">1. 1/4" (6.35mm) STANDOFF STEP</text>
+      <text x="365" y="210" font-size="11" fill="#475569">The metal drawer slide rail rests on this step</text>
+      <text x="365" y="223" font-size="11" fill="#475569">Guarantees slide is 100% parallel to box bottom!</text>
+
+      <!-- 2. Vertical Alignment Fence -->
+      <path d="M 195,220 L 110,200" stroke="#0284c7" stroke-width="1.8" marker-start="url(#arrow-blue)"/>
+      <text x="105" y="195" font-size="12" font-weight="bold" fill="#0284c7" text-anchor="end">2. VERTICAL FENCE (22mm)</text>
+      <text x="105" y="210" font-size="11" fill="#475569" text-anchor="end">Hugs the side of the 1/2" Birch drawer box</text>
+
+      <!-- 3. THE WEIRD SQUARE CAVITY -->
+      <path d="M 210,155 L 140,85" stroke="#d97706" stroke-width="2.5" marker-start="url(#arrow-amber)"/>
+      <rect x="20" y="55" width="240" height="56" rx="6" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+      <text x="30" y="75" font-size="12" font-weight="bold" fill="#d97706">3. THE "WEIRD SQUARE CAVITY":</text>
+      <text x="30" y="90" font-size="12" font-weight="bold" fill="#0f172a">"FINGER PINCH NOTCH"</text>
+      <text x="30" y="103" font-size="10.5" fill="#475569">Pinch thumb &amp; finger here to pull block out!</text>
+
+      <!-- 4. Pair indicator -->
+      <rect x="420" y="270" width="130" height="35" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+      <text x="485" y="292" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">QTY: 2 PIECES</text>
+    </g>
+
+    <!-- Bottom summary box -->
+    <rect x="20" y="455" width="660" height="55" rx="6" fill="#fefce8" stroke="#fef08a" stroke-width="1.5"/>
+    <text x="35" y="476" font-size="12" font-weight="bold" fill="#854d0e">PURPOSE:</text>
+    <text x="105" y="476" font-size="12" fill="#713f12">Used on your workbench under the drawer box (one at the front, one at the rear).</text>
+    <text x="35" y="494" font-size="12" fill="#713f12">Lifts the slide rail 1/4" off the bench so screws never rub, then you pinch the notch to pull them out.</text>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- ITEM 3 & 4: REVEAL SHIMS & PRINT BED MAP (BOTTOM) -->
+  <!-- ========================================================================= -->
+  <g transform="translate(60, 690)">
+    <!-- Container -->
+    <rect x="0" y="0" width="1480" height="420" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="1480" height="46" rx="12" fill="#f1f5f9"/>
+    <rect x="0" y="34" width="1480" height="12" fill="#f1f5f9"/>
+    
+    <text x="24" y="30" font-size="16" font-weight="bold" fill="#1e293b">JIG 3: 1/8" REVEAL SHIMS &amp; BAMBU PRINT BED MATCHING MAP</text>
+
+    <!-- LEFT: REVEAL SHIMS 3D DRAWING -->
+    <g transform="translate(40, 70)">
+      <rect x="0" y="0" width="640" height="280" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+      
+      <rect x="20" y="16" width="28" height="28" rx="6" fill="#0284c7"/>
+      <text x="34" y="36" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text>
+      <text x="58" y="36" font-size="16" font-weight="bold" fill="#0f172a">JIG 3: 1/8" REVEAL SHIMS (Set of 4)</text>
+
+      <!-- 3D Drawing of Reveal Shim -->
+      <g transform="translate(80, 70)">
+        <!-- Flat U-Shim with Pull Tab -->
+        <path d="M 40,80 L 140,80 L 180,40 L 80,40 Z" fill="url(#jigTop)" stroke="#0369a1" stroke-width="2"/>
+        <path d="M 40,80 L 40,90 L 140,90 L 140,80 Z" fill="url(#jigFront)" stroke="#0369a1" stroke-width="2"/>
+        <path d="M 140,90 L 180,50 L 180,40 L 140,80 Z" fill="url(#jigSide)" stroke="#0369a1" stroke-width="2"/>
+
+        <!-- Center U-Slot -->
+        <polygon points="70,75 110,75 125,60 85,60" fill="#f8fafc" stroke="#0369a1" stroke-width="1.5"/>
+
+        <!-- Debossed "1/8"" text on tab -->
+        <text x="120" y="48" font-size="12" font-weight="bold" fill="#0369a1" transform="rotate(-20 120 48)">1/8"</text>
+
+        <!-- Callouts -->
+        <path d="M 50,85 L -20,120" stroke="#dc2626" stroke-width="1.8" marker-start="url(#arrow-red)"/>
+        <text x="-25" y="125" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="end">Exact 1/8" (3.18mm) Thickness</text>
+        <text x="-25" y="140" font-size="11" fill="#475569" text-anchor="end">Sets equal reveal around walnut faces</text>
+
+        <path d="M 160,42 L 230,20" stroke="#0284c7" stroke-width="1.8" marker-start="url(#arrow-blue)"/>
+        <text x="235" y="18" font-size="12" font-weight="bold" fill="#0284c7">Ergonomic Pull Tab</text>
+        <text x="235" y="32" font-size="11" fill="#475569">Grip to pull shims out after clamping</text>
+      </g>
+
+      <text x="20" y="250" font-size="12" fill="#334155"><tspan font-weight="bold">How to use:</tspan> Place one shim on each of the 4 sides of the drawer front while clamping from inside.</text>
+    </g>
+
+    <!-- RIGHT: BAMBU PRINT BED MAP -->
+    <g transform="translate(740, 70)">
+      <rect x="0" y="0" width="700" height="280" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+      <text x="20" y="32" font-size="15" font-weight="bold" fill="#ffffff">PRINT BED MAP (Matching What You Sliced on your Bambu)</text>
+      
+      <!-- Bed representation (256x256 scaled down) -->
+      <g transform="translate(40, 50)">
+        <!-- Bed Plate outline -->
+        <rect x="0" y="0" width="300" height="190" rx="8" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+        <text x="150" y="180" font-size="10" fill="#64748b" text-anchor="middle">BAMBU BUILD PLATE (256 x 256 mm)</text>
+
+        <!-- Jig 1 on plate (Setback cradle) -->
+        <rect x="15" y="20" width="55" height="110" rx="4" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>
+        <rect x="25" y="55" width="35" height="35" fill="#0f172a"/>
+        <text x="42" y="42" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">JIG 1</text>
+        <text x="42" y="115" font-size="8" fill="#0f172a" text-anchor="middle">Cradle</text>
+
+        <!-- Jig 2 on plate (Pair of Box Mount Spacers) -->
+        <rect x="95" y="20" width="70" height="45" rx="3" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>
+        <polygon points="100,20 106,26 100,32" fill="#0f172a"/>
+        <text x="135" y="46" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">JIG 2 (A)</text>
+
+        <rect x="95" y="80" width="70" height="45" rx="3" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>
+        <polygon points="100,80 106,86 100,92" fill="#0f172a"/>
+        <text x="135" y="106" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">JIG 2 (B)</text>
+
+        <!-- Jig 3 on plate (4 Shims) -->
+        <rect x="190" y="15" width="45" height="30" rx="2" fill="#38bdf8" stroke="#0284c7" stroke-width="1"/>
+        <rect x="190" y="52" width="45" height="30" rx="2" fill="#38bdf8" stroke="#0284c7" stroke-width="1"/>
+        <rect x="190" y="89" width="45" height="30" rx="2" fill="#38bdf8" stroke="#0284c7" stroke-width="1"/>
+        <rect x="190" y="126" width="45" height="30" rx="2" fill="#38bdf8" stroke="#0284c7" stroke-width="1"/>
+        <text x="212" y="34" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">SHIM</text>
+        <text x="212" y="71" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">SHIM</text>
+        <text x="212" y="108" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">SHIM</text>
+        <text x="212" y="145" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">SHIM</text>
+      </g>
+
+      <!-- Key Callouts -->
+      <g transform="translate(390, 60)">
+        <text x="0" y="20" font-size="13" font-weight="bold" fill="#38bdf8">• JIG 1: Setback Cradle</text>
+        <text x="15" y="38" font-size="11" fill="#94a3b8">1 pc with big center window</text>
+
+        <text x="0" y="75" font-size="13" font-weight="bold" fill="#fde047">• JIG 2: Box Mount Spacers</text>
+        <text x="15" y="93" font-size="11" fill="#94a3b8">2 identical L-shaped pieces</text>
+        <text x="15" y="108" font-size="11" fill="#94a3b8">with 45° diamond pinch notch</text>
+
+        <text x="0" y="145" font-size="13" font-weight="bold" fill="#4ade80">• JIG 3: Reveal Shims</text>
+        <text x="15" y="163" font-size="11" fill="#94a3b8">4 flat U-shims labeled "1/8""</text>
+      </g>
+    </g>
+  </g>
+</svg>

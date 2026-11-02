@@ -33,8 +33,9 @@ Parametric FreeCAD model and woodworking plans for a rock-solid, vibration-dampe
 - [`CUT_LIST_AND_BOM.md`](file:///home/scott/20p/cad/bambu-table/CUT_LIST_AND_BOM.md): Complete dimensioned lumber cut list, hardware specs, and storage capacity.
 - [`drawer_jigs.scad`](file:///home/scott/20p/cad/bambu-table/drawer_jigs.scad): OpenSCAD parametric model for 3D printable slide installation jigs.
 - [`drawer_installation_jigs.stl`](file:///home/scott/20p/cad/bambu-table/drawer_installation_jigs.stl): Support-free 3D printable STL containing slide setback cradle, drawer box standoffs, and 1/8" reveal shims.
-- [`drawer_installation_jigs_guide.svg`](file:///home/scott/20p/cad/bambu-table/drawer_installation_jigs_guide.svg): High-resolution vector visual guide and dimensioned blueprints for the 3-in-1 drawer slide installation jigs.
-- [`drawer_installation_jigs_guide.pdf`](file:///home/scott/20p/cad/bambu-table/drawer_installation_jigs_guide.pdf): Printable PDF shop guide for the 3-in-1 drawer slide installation jigs.
+- [`drawer_jigs_identification_guide.svg`](file:///home/scott/20p/cad/bambu-table/drawer_jigs_identification_guide.svg): Visual part identification catalog with 3D isometric views explaining every notch, cavity, and surface on the printed pieces.
+- [`drawer_installation_jigs_guide.svg`](file:///home/scott/20p/cad/bambu-table/drawer_installation_jigs_guide.svg): High-resolution vector workshop installation blueprint for the 3-in-1 drawer slide installation jigs.
+- [`drawer_installation_jigs_guide.pdf`](file:///home/scott/20p/cad/bambu-table/drawer_installation_jigs_guide.pdf): Printable 2-page PDF shop guide (Page 1: Parts Identification Catalog, Page 2: Workshop Installation Blueprint).
 - [`shop_jigs.scad`](file:///home/scott/20p/cad/bambu-table/shop_jigs.scad): OpenSCAD model for woodworking companion jigs with raised AMS text (Forstner bit saddle guide and drawer pull template).
 - [`woodworking_companion_jigs.stl`](file:///home/scott/20p/cad/bambu-table/woodworking_companion_jigs.stl): Support-free 3D printable STL containing both companion woodworking jigs (Forstner saddle guide + 5" pull template) with embossed labels for AMS multi-color.
 - [`forstner_saddle_guide.stl`](file:///home/scott/20p/cad/bambu-table/forstner_saddle_guide.stl): Individual STL containing just the 2×4 Forstner saddle guide (3/4" bore).

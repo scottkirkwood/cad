@@ -225,64 +225,63 @@
 
     <!-- Step 1 Card -->
     <g transform="translate(30, 70)">
-      <rect x="0" y="0" width="330" height="235" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+      <rect x="0" y="0" width="335" height="235" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
       <circle cx="36" cy="36" r="18" fill="#0284c7"/>
       <text x="36" y="42" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text>
       <text x="68" y="42" font-size="16" font-weight="bold" fill="#0f172a">Mark Centerline</text>
-      <text x="20" y="80" font-size="13" fill="#334155">
+      <text x="20" y="80" font-size="12.5" fill="#334155">
         <tspan x="20" dy="0">• Drawer width is <tspan font-weight="bold">18-3/8" (466.7mm)</tspan>.</tspan>
-        <tspan x="20" dy="24">• Measure <tspan font-weight="bold">9-3/16" (233.4mm)</tspan> from</tspan>
-        <tspan x="32" dy="20">either side edge.</tspan>
-        <tspan x="20" dy="24">• Make a crisp, sharp pencil tick</tspan>
-        <tspan x="32" dy="20">mark on the <tspan font-weight="bold">top edge</tspan> of the drawer.</tspan>
+        <tspan x="20" dy="22">• Measure <tspan font-weight="bold">9-3/16" (233.4mm)</tspan> from</tspan>
+        <tspan x="32" dy="18">either side edge.</tspan>
+        <tspan x="20" dy="22">• Make a sharp pencil mark on</tspan>
+        <tspan x="32" dy="18">the <tspan font-weight="bold">top edge</tspan> of the drawer.</tspan>
       </text>
     </g>
 
     <!-- Step 2 Card -->
-    <g transform="translate(390, 70)">
-      <rect x="0" y="0" width="330" height="235" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(395, 70)">
+      <rect x="0" y="0" width="335" height="235" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
       <circle cx="36" cy="36" r="18" fill="#0284c7"/>
       <text x="36" y="42" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">2</text>
       <text x="68" y="42" font-size="16" font-weight="bold" fill="#0f172a">Hook Over Top Edge</text>
-      <text x="20" y="80" font-size="13" fill="#334155">
+      <text x="20" y="80" font-size="12.5" fill="#334155">
         <tspan x="20" dy="0">• Take the printed blue jig.</tspan>
-        <tspan x="20" dy="24">• Place the <tspan font-weight="bold">22mm inside step</tspan> over</tspan>
-        <tspan x="32" dy="20">the top edge of the walnut face.</tspan>
-        <tspan x="20" dy="24">• The flat drilling plate hangs down</tspan>
-        <tspan x="32" dy="20">the front face of the drawer.</tspan>
-        <tspan x="20" dy="24">• <tspan fill="#dc2626" font-weight="bold">Note:</tspan> The black text faces the wood.</tspan>
+        <tspan x="20" dy="22">• Place the <tspan font-weight="bold">22mm inside step</tspan></tspan>
+        <tspan x="32" dy="18">over top edge of walnut face.</tspan>
+        <tspan x="20" dy="22">• Flat drilling plate hangs down</tspan>
+        <tspan x="32" dy="18">the front face of the drawer.</tspan>
+        <tspan x="20" dy="22">• <tspan fill="#dc2626" font-weight="bold">Note:</tspan> Black text faces wood.</tspan>
       </text>
     </g>
 
     <!-- Step 3 Card -->
-    <g transform="translate(750, 70)">
-      <rect x="0" y="0" width="330" height="235" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(760, 70)">
+      <rect x="0" y="0" width="335" height="235" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
       <circle cx="36" cy="36" r="18" fill="#0284c7"/>
       <text x="36" y="42" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text>
       <text x="68" y="42" font-size="16" font-weight="bold" fill="#0f172a">Align Center Notch</text>
-      <text x="20" y="80" font-size="13" fill="#334155">
-        <tspan x="20" dy="0">• Slide the jig left or right until the</tspan>
-        <tspan x="32" dy="20"><tspan font-weight="bold">center alignment notch</tspan> splits your</tspan>
-        <tspan x="32" dy="20">pencil mark dead-center.</tspan>
-        <tspan x="20" dy="24">• Firmly secure the jig using a</tspan>
-        <tspan x="32" dy="20"><tspan font-weight="bold">Quick-Grip clamp</tspan> so it cannot</tspan>
-        <tspan x="32" dy="20">shift while drilling.</tspan>
+      <text x="20" y="80" font-size="12.5" fill="#334155">
+        <tspan x="20" dy="0">• Slide jig until <tspan font-weight="bold">center notch</tspan></tspan>
+        <tspan x="32" dy="18">splits your pencil mark dead-center.</tspan>
+        <tspan x="20" dy="22">• Firmly secure the jig using a</tspan>
+        <tspan x="32" dy="18"><tspan font-weight="bold">Quick-Grip clamp</tspan> so it</tspan>
+        <tspan x="32" dy="18">cannot shift while drilling.</tspan>
       </text>
     </g>
 
     <!-- Step 4 Card -->
-    <g transform="translate(1110, 70)">
-      <rect x="0" y="0" width="340" height="235" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <g transform="translate(1125, 70)">
+      <rect x="0" y="0" width="335" height="235" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
       <circle cx="36" cy="36" r="18" fill="#16a34a"/>
       <text x="36" y="42" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">4</text>
       <text x="68" y="42" font-size="16" font-weight="bold" fill="#0f172a">Drill Guide Holes</text>
-      <text x="20" y="80" font-size="13" fill="#334155">
-        <tspan x="20" dy="0">• Chuck a <tspan font-weight="bold">3/16" (4.8mm)</tspan> wood drill bit.</tspan>
-        <tspan x="20" dy="24">• Drill through both guide holes.</tspan>
-        <tspan x="20" dy="24">• <tspan font-weight="bold">Anti-Blowout Tip:</tspan> Clamp a scrap</tspan>
-        <tspan x="32" dy="20">wood block behind the drawer face</tspan>
-        <tspan x="32" dy="20">to prevent veneer blowout on exit.</tspan>
-        <tspan x="20" dy="24">• Fasten your 5" pulls with #8 screws.</tspan>
+      <text x="20" y="80" font-size="12.5" fill="#334155">
+        <tspan x="20" dy="0">• Chuck a <tspan font-weight="bold">3/16" (4.8mm)</tspan> bit.</tspan>
+        <tspan x="20" dy="22">• Drill through both guide holes.</tspan>
+        <tspan x="20" dy="22">• <tspan font-weight="bold">Anti-Blowout Tip:</tspan> Clamp scrap</tspan>
+        <tspan x="32" dy="18">wood behind drawer face to</tspan>
+        <tspan x="32" dy="18">prevent veneer blowout on exit.</tspan>
+        <tspan x="20" dy="22">• Fasten 5" pulls with #8 screws.</tspan>
       </text>
     </g>
   </g>
