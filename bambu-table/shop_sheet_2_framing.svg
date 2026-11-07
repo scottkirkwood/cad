@@ -1,0 +1,289 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1650 1275" width="1650" height="1275" style="background:#ffffff; font-family:'Liberation Sans', Arial, sans-serif;">
+  
+  <defs>
+    <!-- Arrowhead markers -->
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#334155"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0284c7"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#dc2626"/>
+    </marker>
+
+    <!-- Gradients -->
+    <linearGradient id="walnutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8a5a36"/>
+      <stop offset="50%" stop-color="#6e4324"/>
+      <stop offset="100%" stop-color="#543217"/>
+    </linearGradient>
+    <linearGradient id="spfGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="50%" stop-color="#fde68a"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="birchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#fde047"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+    <linearGradient id="steelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#cbd5e1"/>
+      <stop offset="50%" stop-color="#94a3b8"/>
+      <stop offset="100%" stop-color="#64748b"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-3%" y="-3%" width="108%" height="108%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  
+  <!-- Background Canvas Frame -->
+  <rect x="20" y="20" width="1610" height="1235" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+
+  <!-- Architectural Title Block Header -->
+  <rect x="20" y="20" width="1610" height="85" rx="12" fill="#0f172a"/>
+  <rect x="20" y="85" width="1610" height="20" fill="#0f172a"/>
+
+  <text x="50" y="60" font-size="26" font-weight="bold" fill="#ffffff" letter-spacing="0.5">BAMBU STAND: 3D PRINTER WORKBENCH BLUEPRINTS</text>
+  <text x="50" y="85" font-size="14" fill="#94a3b8">Solid Walnut Top (24"x48"x1") • L-Shaped 2x4 SPF Legs • 3-Tier Spool Drawers • CR-6 SE Bay • Anti-Racking Shear Wall</text>
+
+  <!-- Title Block Right Info -->
+  <rect x="1230" y="32" width="375" height="60" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="1250" y="55" font-size="13" font-weight="bold" fill="#38bdf8">SHEET 2 OF 4:</text>
+  <text x="1350" y="55" font-size="13" font-weight="bold" fill="#ffffff">2X4 SOLID TIMBER BASE &amp; JOINERY SCHEDULE</text>
+  <text x="1250" y="76" font-size="11" fill="#94a3b8">SCALE: NTS (DIMENSIONED) • UNITS: INCHES (")</text>
+
+  <!-- Sheet Subtitle Banner -->
+  <rect x="20" y="105" width="1610" height="36" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="50" y="129" font-size="14" font-weight="bold" fill="#0f172a">» 2x4 Solid Timber Base &amp; Joinery Schedule: <tspan font-weight="normal" fill="#475569">Upper aprons, lower stretchers, cross-ties, and L-shaped leg assembly breakdown</tspan></text>
+
+
+  <!-- ========================================================================= -->
+  <!-- TOP FRAME PLAN (VIEW FROM ABOVE AT Z = 27.0") -->
+  <!-- ========================================================================= -->
+  <g transform="translate(50, 160)">
+    <rect x="0" y="0" width="760" height="480" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="760" height="40" rx="10" fill="#e2e8f0"/>
+    <rect x="0" y="28" width="760" height="12" fill="#e2e8f0"/>
+    <text x="20" y="26" font-size="15" font-weight="bold" fill="#0f172a">1. UPPER APRON FRAME PLAN (TOP-DOWN VIEW AT Z = 27.0")</text>
+
+    <!-- Plan Graphics -->
+    <g transform="translate(45, 60)">
+      <!-- Frame outer boundary: 45.0" W x 21.0" D -> Scale: 14px per inch -> 630px x 294px -->
+      <!-- Rear Apron (38.0" L x 1.5" T = 532px x 21px) -->
+      <rect x="49" y="30" width="532" height="21" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+      <text x="315" y="45" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">Upper_Rear_Apron: 1.5" x 3.5" x 38.00" [2x Front &amp; Back]</text>
+
+      <!-- Front Apron (38.0" L x 1.5" T = 532px x 21px) -->
+      <rect x="49" y="273" width="532" height="21" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+      <text x="315" y="288" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">Upper_Front_Apron: 1.5" x 3.5" x 38.00"</text>
+
+      <!-- Left Side Apron (11.0" L x 1.5" T = 154px x 21px) -> Y: 80 to 234 -->
+      <rect x="49" y="80" width="21" height="154" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+      <text x="59" y="160" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle" transform="rotate(-90 59 160)">Left_Apron (11.0") [2x]</text>
+
+      <!-- Right Side Apron (11.0" L x 1.5" T = 154px x 21px) -->
+      <rect x="560" y="80" width="21" height="154" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+      <text x="570" y="160" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle" transform="rotate(-90 570 160)">Right_Apron (11.0") [2x]</text>
+
+      <!-- Center Cross-Tie (18.0" L x 1.5" T = 252px x 21px) -> Y: 51 to 273, at X = 305 -->
+      <rect x="305" y="51" width="21" height="222" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+      <text x="315" y="160" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle" transform="rotate(-90 315 160)">Center_Cross_Tie: 1.5" x 3.5" x 18.00" [2x Upper &amp; Lower]</text>
+
+      <!-- 4 L-Leg Profiles in Corners -->
+      <!-- Top-Left Leg -->
+      <path d="M 0,30 L 49,30 L 49,51 L 21,51 L 21,80 L 0,80 Z" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
+      <!-- Top-Right Leg -->
+      <path d="M 581,30 L 630,30 L 630,80 L 609,80 L 609,51 L 581,51 Z" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
+      <!-- Bottom-Left Leg -->
+      <path d="M 0,244 L 21,244 L 21,273 L 49,273 L 49,294 L 0,294 Z" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
+      <!-- Bottom-Right Leg -->
+      <path d="M 609,244 L 630,244 L 630,294 L 581,294 L 581,273 L 609,273 Z" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
+
+      <!-- Bay Width Dimensions -->
+      <!-- Left Bay: 18.625" -->
+      <line x1="70" y1="20" x2="305" y2="20" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="187" y="15" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">18.625" (Drawer Bay Opening)</text>
+
+      <!-- Right Bay: 18.625" -->
+      <line x1="326" y1="20" x2="560" y2="20" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="443" y="15" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">18.625" (CR-6 Bay Opening)</text>
+
+      <!-- Overall Dimensions -->
+      <line x1="0" y1="330" x2="630" y2="330" stroke="#0284c7" stroke-width="2"/>
+      <text x="315" y="350" font-size="13" font-weight="bold" fill="#0284c7" text-anchor="middle">BASE FRAME OVERALL WIDTH: 45.00"</text>
+
+      <line x1="660" y1="30" x2="660" y2="294" stroke="#0284c7" stroke-width="2"/>
+      <text x="680" y="165" font-size="12" font-weight="bold" fill="#0284c7" text-anchor="middle" transform="rotate(90 680 165)">FRAME DEPTH: 21.00"</text>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- ENLARGED DETAIL A: L-SHAPED 2x4 CORNER LEG CONSTRUCTION (RIGHT) -->
+  <!-- ========================================================================= -->
+  <g transform="translate(840, 160)">
+    <rect x="0" y="0" width="760" height="480" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="760" height="40" rx="10" fill="#e2e8f0"/>
+    <rect x="0" y="28" width="760" height="12" fill="#e2e8f0"/>
+    <text x="20" y="26" font-size="15" font-weight="bold" fill="#0f172a">2. DETAIL A: "L-SHAPED" 2x4 CORNER LEG JOINT (ZERO PLANING NEEDED)</text>
+
+    <!-- Leg Assembly Graphic -->
+    <g transform="translate(50, 60)">
+      <!-- Top-Down Cross Section of L-Joint -->
+      <!-- Piece A (Front Flange: 1.5" x 3.5" = 45px x 105px) -->
+      <rect x="60" y="40" width="105" height="45" fill="url(#spfGrad)" stroke="#b45309" stroke-width="2"/>
+      <text x="112" y="67" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">PIECE A: Front Flange (3.5" x 1.5")</text>
+
+      <!-- Piece B (Side Return Flange: 1.5" x 3.5" = 45px x 105px, joined at 90°) -->
+      <rect x="60" y="85" width="45" height="105" fill="url(#spfGrad)" stroke="#b45309" stroke-width="2"/>
+      <text x="82" y="145" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle" transform="rotate(-90 82 145)">PIECE B: Side Return (3.5" x 1.5")</text>
+
+      <!-- 90° Joint Seam Highlight (Wood Glue + Pocket Screws) -->
+      <line x1="60" y1="85" x2="105" y2="85" stroke="#dc2626" stroke-width="3"/>
+      <circle cx="82" cy="85" r="4" fill="#dc2626"/>
+
+      <!-- Corner Foot Mount Block (2.0" x 2.0" = 60px x 60px) in the inside corner -->
+      <rect x="105" y="85" width="60" height="60" fill="#fde68a" stroke="#ca8a04" stroke-width="2" stroke-dasharray="3,3"/>
+      <circle cx="135" cy="115" r="8" fill="#ffffff" stroke="#0284c7" stroke-width="2"/>
+      <text x="135" y="119" font-size="9" font-weight="bold" fill="#0284c7" text-anchor="middle">3/8"</text>
+
+      <!-- Callouts -->
+      <path d="M 135,145 L 180,180" stroke="#0284c7" stroke-width="1.8" marker-start="url(#arrow-blue)"/>
+      <rect x="185" y="160" width="260" height="50" rx="4" fill="#eff6ff" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="195" y="180" font-size="11" font-weight="bold" fill="#0369a1">Corner_Foot_Block (1.5" x 2.0" x 2.0")</text>
+      <text x="195" y="196" font-size="10" fill="#475569">Glued in corner to mount 3/8"-16 leveling foot insert</text>
+
+      <!-- Kreg Pocket Screw Holes Callout -->
+      <circle cx="95" cy="110" r="4" fill="#dc2626"/>
+      <circle cx="95" cy="140" r="4" fill="#dc2626"/>
+      <circle cx="95" cy="170" r="4" fill="#dc2626"/>
+      <path d="M 95,140 L 20,180" stroke="#dc2626" stroke-width="1.8" marker-start="url(#arrow-red)"/>
+      <rect x="0" y="185" width="220" height="52" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="10" y="204" font-size="11" font-weight="bold" fill="#dc2626">3x Pocket Screws (2-1/2")</text>
+      <text x="10" y="218" font-size="10" fill="#475569">Drilled on inside face of Piece B into</text>
+      <text x="10" y="230" font-size="10" fill="#475569">flat face of Piece A + Titebond II glue</text>
+
+      <!-- Explanatory Box on why this replaces 4x4s -->
+      <rect x="0" y="265" width="660" height="120" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+      <text x="20" y="290" font-size="13" font-weight="bold" fill="#0f172a">WHY THE "L-SHAPED" 2x4 CORNER LEG DESIGN IS SUPERIOR:</text>
+      <text x="20" y="312" font-size="12" fill="#334155">• <tspan font-weight="bold">Zero Planer or Jointer Needed:</tspan> Factory-flat edge of Piece B joins factory-flat face of Piece A.</text>
+      <text x="20" y="332" font-size="12" fill="#334155">• <tspan font-weight="bold">No Green Pressure-Treated 4x4s:</tspan> Home Depot Canada only stocks green wet 4x4s outdoors. 2x4 studs are dry!</text>
+      <text x="20" y="352" font-size="12" fill="#334155">• <tspan font-weight="bold">Huge Torsional Rigidity:</tspan> An L-bracket column has a 3.5" x 3.5" perimeter envelope that resists twist!</text>
+      <text x="20" y="372" font-size="12" fill="#334155">• <tspan font-weight="bold">Internal Corner Foot Pad:</tspan> The glued 2x2 corner block gives a solid 1.5" thick base for threaded leveling glides.</text>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- BOTTOM PANEL: 2x4 LUMBER CUTTING SCHEDULE & OPTIMIZATION (FULL WIDTH) -->
+  <!-- ========================================================================= -->
+  <g transform="translate(50, 665)">
+    <rect x="0" y="0" width="1550" height="560" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="1550" height="38" rx="10" fill="#0f172a"/>
+    <rect x="0" y="26" width="1550" height="12" fill="#0f172a"/>
+    <text x="20" y="26" font-size="15" font-weight="bold" fill="#ffffff">3. COMPLETE 2x4 SPF LUMBER CUTTING SCHEDULE &amp; BOARD BREAKDOWN</text>
+
+    <!-- Cutting Diagram Graphic showing 8-ft Studs -->
+    <g transform="translate(30, 55)">
+      <text x="0" y="15" font-size="13" font-weight="bold" fill="#0f172a">HOW TO CUT 7 STANDARD 8-FOOT (96") 2x4 STUDS WITH ZERO WOOD WASTE:</text>
+
+      <!-- Stud 1 -->
+      <g transform="translate(0, 30)">
+        <text x="0" y="18" font-size="12" font-weight="bold" fill="#475569">STUD #1 (96"):</text>
+        <rect x="130" y="0" width="580" height="26" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+        <text x="420" y="18" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">Long Rail: Upper_Front_Apron (38.00")</text>
+        <rect x="715" y="0" width="580" height="26" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+        <text x="1005" y="18" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">Long Rail: Upper_Rear_Apron (38.00")</text>
+        <rect x="1300" y="0" width="190" height="26" fill="#e2e8f0" stroke="#94a3b8" stroke-dasharray="2,2"/>
+        <text x="1395" y="18" font-size="10" fill="#64748b" text-anchor="middle">20" Offcut (Foot blocks)</text>
+      </g>
+
+      <!-- Stud 2 -->
+      <g transform="translate(0, 68)">
+        <text x="0" y="18" font-size="12" font-weight="bold" fill="#475569">STUD #2 (96"):</text>
+        <rect x="130" y="0" width="580" height="26" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+        <text x="420" y="18" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">Long Rail: Lower_Front_Stretcher (38.00")</text>
+        <rect x="715" y="0" width="580" height="26" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+        <text x="1005" y="18" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">Long Rail: Lower_Rear_Stretcher (38.00")</text>
+        <rect x="1300" y="0" width="190" height="26" fill="#e2e8f0" stroke="#94a3b8" stroke-dasharray="2,2"/>
+        <text x="1395" y="18" font-size="10" fill="#64748b" text-anchor="middle">20" Offcut</text>
+      </g>
+
+      <!-- Stud 3 -->
+      <g transform="translate(0, 106)">
+        <text x="0" y="18" font-size="12" font-weight="bold" fill="#475569">STUD #3 (96"):</text>
+        <rect x="130" y="0" width="275" height="26" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+        <text x="267" y="18" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">Center Cross-Tie (18.0")</text>
+        <rect x="410" y="0" width="275" height="26" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+        <text x="547" y="18" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">Center Cross-Tie (18.0")</text>
+        <rect x="690" y="0" width="170" height="26" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+        <text x="775" y="18" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle">Side Rail (11.0")</text>
+        <rect x="865" y="0" width="170" height="26" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+        <text x="950" y="18" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle">Side Rail (11.0")</text>
+        <rect x="1040" y="0" width="170" height="26" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+        <text x="1125" y="18" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle">Side Rail (11.0")</text>
+        <rect x="1215" y="0" width="170" height="26" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+        <text x="1300" y="18" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle">Side Rail (11.0")</text>
+        <rect x="1390" y="0" width="100" height="26" fill="#e2e8f0" stroke="#94a3b8" stroke-dasharray="2,2"/>
+        <text x="1440" y="18" font-size="9" fill="#64748b" text-anchor="middle">16" Offcut</text>
+      </g>
+
+      <!-- Studs 4, 5, 6, 7 (Corner Legs) -->
+      <g transform="translate(0, 144)">
+        <text x="0" y="18" font-size="12" font-weight="bold" fill="#475569">STUDS #4-7 (4x):</text>
+        <rect x="130" y="0" width="455" height="26" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+        <text x="357" y="18" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">L-Leg Piece A: Front/Rear Flange (30.00")</text>
+        <rect x="590" y="0" width="455" height="26" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+        <text x="817" y="18" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">L-Leg Piece B: Side Return Flange (30.00")</text>
+        <rect x="1050" y="0" width="440" height="26" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+        <text x="1270" y="18" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">3rd Leg Piece / Spare (30.00")</text>
+      </g>
+
+      <!-- Summary Cut Schedule Table -->
+      <g transform="translate(0, 200)" font-size="12">
+        <rect x="0" y="0" width="1490" height="265" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+        <text x="20" y="25" font-weight="bold" fill="#0f172a">PART NAME &amp; LABEL</text>
+        <text x="320" y="25" font-weight="bold" fill="#0f172a">REPEAT QTY</text>
+        <text x="460" y="25" font-weight="bold" fill="#0f172a">CUT SIZE (T x W x L)</text>
+        <text x="750" y="25" font-weight="bold" fill="#0f172a">FUNCTION &amp; PLACEMENT IN FRAME</text>
+        <line x1="20" y1="35" x2="1470" y2="35" stroke="#cbd5e1" stroke-width="1"/>
+
+        <!-- Items -->
+        <text x="20" y="60" font-weight="bold" fill="#0284c7">Front_Rear_Long_Rails</text>
+        <text x="320" y="60" font-weight="bold" fill="#dc2626">4x</text>
+        <text x="460" y="60" font-weight="bold" fill="#0f172a">1.50" x 3.50" x 38.00"</text>
+        <text x="750" y="60" fill="#334155">Upper long rails (2x) &amp; lower long stretchers (2x) spanning front and rear</text>
+
+        <text x="20" y="88" font-weight="bold" fill="#0284c7">Side_Short_Rails</text>
+        <text x="320" y="88" font-weight="bold" fill="#dc2626">4x</text>
+        <text x="460" y="88" font-weight="bold" fill="#0f172a">1.50" x 3.50" x 11.00"</text>
+        <text x="750" y="88" fill="#334155">Upper side rails (2x) &amp; lower side stretchers (2x) connecting front and rear legs</text>
+
+        <text x="20" y="116" font-weight="bold" fill="#0284c7">Center_Bay_Cross_Ties</text>
+        <text x="320" y="116" font-weight="bold" fill="#dc2626">2x</text>
+        <text x="460" y="116" font-weight="bold" fill="#0f172a">1.50" x 3.50" x 18.00"</text>
+        <text x="750" y="116" fill="#334155">Upper &amp; lower cross-ties between front and rear 38" rails; anchors center partition</text>
+
+        <text x="20" y="144" font-weight="bold" fill="#0284c7">Leg_Front_Rear_Flanges</text>
+        <text x="320" y="144" font-weight="bold" fill="#dc2626">4x</text>
+        <text x="460" y="144" font-weight="bold" fill="#0f172a">1.50" x 3.50" x 30.00"</text>
+        <text x="750" y="144" fill="#334155">Front face of the 4 L-shaped corner columns; 30.0" tall for 31.5" finished bench height</text>
+
+        <text x="20" y="172" font-weight="bold" fill="#0284c7">Leg_Side_Return_Flanges</text>
+        <text x="320" y="172" font-weight="bold" fill="#dc2626">4x</text>
+        <text x="460" y="172" font-weight="bold" fill="#0f172a">1.50" x 3.50" x 30.00"</text>
+        <text x="750" y="172" fill="#334155">Side returns of the 4 L-shaped corner columns; pocket screwed to Front Flanges at 90°</text>
+
+        <text x="20" y="200" font-weight="bold" fill="#0284c7">Corner_Foot_Mount_Blocks</text>
+        <text x="320" y="200" font-weight="bold" fill="#dc2626">4x</text>
+        <text x="460" y="200" font-weight="bold" fill="#0f172a">1.50" x 2.00" x 2.00"</text>
+        <text x="750" y="200" fill="#334155">Scrap 2x4 blocks glued inside bottom corner of each L-leg; bored for 3/8" leveling foot insert</text>
+
+        <line x1="20" y1="215" x2="1470" y2="215" stroke="#cbd5e1" stroke-width="1"/>
+        <text x="20" y="238" font-weight="bold" fill="#16a34a">TOTAL 2x4 SPF LUMBER NEEDED: Exactly 7 Standard 8-foot (96") Studs (~$45.50 CAD at Home Depot Canada SKU 1000112108)</text>
+      </g>
+    </g>
+  </g>
+</svg>

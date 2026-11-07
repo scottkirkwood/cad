@@ -29,6 +29,11 @@ Parametric FreeCAD model and woodworking plans for a rock-solid, vibration-dampe
 - [`create_freecad_table.py`](file:///home/scott/20p/cad/bambu-table/create_freecad_table.py): FreeCAD Python generator script that parametrically builds the entire solid model and shop sheet.
 - [`bambu_printer_table.FCStd`](file:///home/scott/20p/cad/bambu-table/bambu_printer_table.FCStd): FreeCAD native document with parameters spreadsheet, labeled groups, and TechDraw blueprints.
 - [`bambu_printer_table.step`](file:///home/scott/20p/cad/bambu-table/bambu_printer_table.step): Universal 3D STEP assembly (84 solid parts).
+- [`bambu_table_shop_drawings_complete.pdf`](file:///home/scott/20p/cad/bambu-table/bambu_table_shop_drawings_complete.pdf): Master 4-page printable shop blueprint set (Letter 8.5" × 11" Landscape) with individual board dimensions, repeat counts (e.g. 4x, 8x), component labels (`Center_Divider_Gable`), and plywood thicknesses.
+- [`shop_sheet_1_elevations.svg`](file:///home/scott/20p/cad/bambu-table/shop_sheet_1_elevations.svg): Sheet 1: Bench Elevations, Main Clearances, and Component Labels.
+- [`shop_sheet_2_framing.svg`](file:///home/scott/20p/cad/bambu-table/shop_sheet_2_framing.svg): Sheet 2: 2×4 Solid Timber Base & L-Shaped Leg Joinery Breakdown.
+- [`shop_sheet_3_plywood.svg`](file:///home/scott/20p/cad/bambu-table/shop_sheet_3_plywood.svg): Sheet 3: Plywood Panels & Thickness Specifications Guide (3/4", 1/2", 1/4").
+- [`shop_sheet_4_drawers.svg`](file:///home/scott/20p/cad/bambu-table/shop_sheet_4_drawers.svg): Sheet 4: 3-Tier Drawer Bank, Slide Elevations, and 12-Spool Storage Layout.
 - [`shop_sheet_printer_table.dxf`](file:///home/scott/20p/cad/bambu-table/shop_sheet_printer_table.dxf): 2D shop elevation and cut list blueprint.
 - [`CUT_LIST_AND_BOM.md`](file:///home/scott/20p/cad/bambu-table/CUT_LIST_AND_BOM.md): Complete dimensioned lumber cut list, hardware specs, and storage capacity.
 - [`drawer_jigs.scad`](file:///home/scott/20p/cad/bambu-table/drawer_jigs.scad): OpenSCAD parametric model for 3D printable slide installation jigs.
