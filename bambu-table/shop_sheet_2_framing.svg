@@ -74,34 +74,48 @@
     <g transform="translate(45, 60)">
       <!-- Frame outer boundary: 45.0" W x 21.0" D -> Scale: 14px per inch -> 630px x 294px -->
       <!-- Rear Apron (38.0" L x 1.5" T = 532px x 21px) -->
-      <rect x="49" y="30" width="532" height="21" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
-      <text x="315" y="45" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">Upper_Rear_Apron: 1.5" x 3.5" x 38.00" [2x Front &amp; Back]</text>
+      <rect x="49" y="0" width="532" height="21" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+      <text x="315" y="15" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">Upper_Rear_Apron: 1.5" x 3.5" x 38.00" [2x Front &amp; Back]</text>
 
       <!-- Front Apron (38.0" L x 1.5" T = 532px x 21px) -->
       <rect x="49" y="273" width="532" height="21" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
       <text x="315" y="288" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">Upper_Front_Apron: 1.5" x 3.5" x 38.00"</text>
 
-      <!-- Left Side Apron (11.0" L x 1.5" T = 154px x 21px) -> Y: 80 to 234 -->
-      <rect x="49" y="80" width="21" height="154" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
-      <text x="59" y="160" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle" transform="rotate(-90 59 160)">Left_Apron (11.0") [2x]</text>
+      <!-- Left Side Apron (11.0" L x 1.5" T = 154px x 21px) -> Y: 70 to 224 -->
+      <rect x="0" y="70" width="21" height="154" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+      <text x="11" y="147" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle" transform="rotate(-90 11 147)">Left_Apron (11.00") [2x]</text>
 
       <!-- Right Side Apron (11.0" L x 1.5" T = 154px x 21px) -->
-      <rect x="560" y="80" width="21" height="154" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
-      <text x="570" y="160" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle" transform="rotate(-90 570 160)">Right_Apron (11.0") [2x]</text>
+      <rect x="609" y="70" width="21" height="154" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+      <text x="620" y="147" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle" transform="rotate(-90 620 147)">Right_Apron (11.00") [2x]</text>
 
-      <!-- Center Cross-Tie (18.0" L x 1.5" T = 252px x 21px) -> Y: 51 to 273, at X = 305 -->
-      <rect x="305" y="51" width="21" height="222" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
-      <text x="315" y="160" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle" transform="rotate(-90 315 160)">Center_Cross_Tie: 1.5" x 3.5" x 18.00" [2x Upper &amp; Lower]</text>
+      <!-- Center Cross-Tie (18.0" L x 1.5" T = 252px x 21px) -> Y: 21 to 273, at X = 305 -->
+      <rect x="305" y="21" width="21" height="252" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
+      <text x="315" y="147" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle" transform="rotate(-90 315 147)">Center_Cross_Tie: 1.5" x 3.5" x 18.00" [2x Upper &amp; Lower]</text>
 
-      <!-- 4 L-Leg Profiles in Corners -->
-      <!-- Top-Left Leg -->
-      <path d="M 0,30 L 49,30 L 49,51 L 21,51 L 21,80 L 0,80 Z" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
-      <!-- Top-Right Leg -->
-      <path d="M 581,30 L 630,30 L 630,80 L 609,80 L 609,51 L 581,51 Z" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
-      <!-- Bottom-Left Leg -->
-      <path d="M 0,244 L 21,244 L 21,273 L 49,273 L 49,294 L 0,294 Z" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
-      <!-- Bottom-Right Leg -->
-      <path d="M 609,244 L 630,244 L 630,294 L 581,294 L 581,273 L 609,273 Z" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
+      <!-- 4 L-Leg Profiles in Corners (Each leg is 3.5" Wide x 5.0" Deep) -->
+      <!-- Top-Left Leg: 3.5" W (49px), 5.0" D (70px) -->
+      <path d="M 0,0 L 49,0 L 49,21 L 21,21 L 21,70 L 0,70 Z" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
+      <!-- Top-Right Leg: 3.5" W (49px), 5.0" D (70px) -->
+      <path d="M 581,0 L 630,0 L 630,70 L 609,70 L 609,21 L 581,21 Z" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
+      <!-- Bottom-Left Leg: 3.5" W (49px), 5.0" D (70px) -->
+      <path d="M 0,224 L 21,224 L 21,273 L 49,273 L 49,294 L 0,294 Z" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
+      <!-- Bottom-Right Leg: 3.5" W (49px), 5.0" D (70px) -->
+      <path d="M 609,224 L 630,224 L 630,294 L 581,294 L 581,273 L 609,273 Z" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
+
+      <!-- Leg Dimension Callouts on Top-Left Leg -->
+      <line x1="0" y1="-12" x2="49" y2="-12" stroke="#78350f" stroke-width="1.2"/>
+      <text x="25" y="-16" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle">3.50"</text>
+      <line x1="-12" y1="0" x2="-12" y2="70" stroke="#78350f" stroke-width="1.2"/>
+      <text x="-16" y="38" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle" transform="rotate(-90 -16 38)">5.00"</text>
+
+      <!-- Side Stretcher 11.00" Callout -->
+      <line x1="-12" y1="70" x2="-12" y2="224" stroke="#0284c7" stroke-width="1.2"/>
+      <text x="-16" y="147" font-size="10" font-weight="bold" fill="#0284c7" text-anchor="middle" transform="rotate(-90 -16 147)">11.00"</text>
+
+      <!-- Front Leg 5.00" Callout -->
+      <line x1="-12" y1="224" x2="-12" y2="294" stroke="#78350f" stroke-width="1.2"/>
+      <text x="-16" y="262" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle" transform="rotate(-90 -16 262)">5.00"</text>
 
       <!-- Bay Width Dimensions -->
       <!-- Left Bay: 18.625" -->
@@ -166,12 +180,21 @@
       <text x="10" y="218" font-size="10" fill="#475569">Drilled on inside face of Piece B into</text>
       <text x="10" y="230" font-size="10" fill="#475569">flat face of Piece A + Titebond II glue</text>
 
+      <!-- Detail A Dimension Lines -->
+      <!-- Width: 3.50" across front flange -->
+      <line x1="60" y1="25" x2="165" y2="25" stroke="#78350f" stroke-width="1.5"/>
+      <text x="112" y="18" font-size="12" font-weight="bold" fill="#78350f" text-anchor="middle">LEG FRONT WIDTH = 3.50"</text>
+
+      <!-- Depth: 5.00" along side (1.5" Piece A + 3.5" Piece B) -->
+      <line x1="45" y1="40" x2="45" y2="190" stroke="#0284c7" stroke-width="1.5"/>
+      <text x="35" y="115" font-size="12" font-weight="bold" fill="#0284c7" text-anchor="middle" transform="rotate(-90 35 115)">LEG SIDE DEPTH = 5.00" (1.5" + 3.5")</text>
+
       <!-- Explanatory Box on why this replaces 4x4s -->
       <rect x="0" y="265" width="660" height="120" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
       <text x="20" y="290" font-size="13" font-weight="bold" fill="#0f172a">WHY THE "L-SHAPED" 2x4 CORNER LEG DESIGN IS SUPERIOR:</text>
       <text x="20" y="312" font-size="12" fill="#334155">• <tspan font-weight="bold">Zero Planer or Jointer Needed:</tspan> Factory-flat edge of Piece B joins factory-flat face of Piece A.</text>
       <text x="20" y="332" font-size="12" fill="#334155">• <tspan font-weight="bold">No Green Pressure-Treated 4x4s:</tspan> Home Depot Canada only stocks green wet 4x4s outdoors. 2x4 studs are dry!</text>
-      <text x="20" y="352" font-size="12" fill="#334155">• <tspan font-weight="bold">Huge Torsional Rigidity:</tspan> An L-bracket column has a 3.5" x 3.5" perimeter envelope that resists twist!</text>
+      <text x="20" y="352" font-size="12" fill="#334155">• <tspan font-weight="bold">Huge Torsional Rigidity:</tspan> An L-bracket column has a 3.5" Wide x 5.0" Deep perimeter envelope that resists twist!</text>
       <text x="20" y="372" font-size="12" fill="#334155">• <tspan font-weight="bold">Internal Corner Foot Pad:</tspan> The glued 2x2 corner block gives a solid 1.5" thick base for threaded leveling glides.</text>
     </g>
   </g>
