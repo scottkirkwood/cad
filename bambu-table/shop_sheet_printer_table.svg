@@ -109,24 +109,28 @@
       <rect x="132" y="489" width="666" height="61" fill="url(#spfGrad)" stroke="#b45309" stroke-width="2"/>
       <text x="465" y="526" font-size="12" font-weight="bold" fill="#78350f" text-anchor="middle">Lower_Front_Stretcher: 2x4 SPF Lumber (1.5" T x 3.5" W x 38.0" L) [2x Front &amp; Back]</text>
 
-      <!-- CENTER DIVIDER GABLE (3/4" Birch Plywood, 22.0" Tall = 368px) -->
-      <!-- Center is at X = 465, thickness 3/4" = 13px -> X: 458.5 to 471.5 -->
-      <rect x="458" y="121" width="14" height="368" fill="url(#birchGrad)" stroke="#ca8a04" stroke-width="2"/>
-      
-      <!-- Callout: Center Divider Gable -->
-      <line x1="465" y1="280" x2="520" y2="280" stroke="#0284c7" stroke-width="2" marker-start="url(#arrow-blue)"/>
-      <rect x="525" y="255" width="220" height="52" rx="4" fill="#eff6ff" stroke="#38bdf8" stroke-width="1.5"/>
-      <text x="535" y="275" font-size="12" font-weight="bold" fill="#0369a1">Center_Divider_Gable</text>
-      <text x="535" y="292" font-size="11" font-weight="bold" fill="#dc2626">3/4" Birch Plywood (0.75" Thick)</text>
-      <text x="535" y="304" font-size="10" fill="#475569">Size: 18.0" D x 22.0" H (1x)</text>
+      <!-- GROOVED 2x4 TOP SPACER (1.5" W x 1.5" H with 3/4"x1/2" groove -> 1.0" effective spacer) -->
+      <rect x="451" y="121" width="28" height="24" fill="url(#spfGrad)" stroke="#b45309" stroke-width="1.5"/>
 
-      <!-- LEFT BAY: 3-TIER DRAWER BANK (Clear Opening: 18.625" W x 22.0" H) -->
+      <!-- CENTER DIVIDER GABLE (3/4" Birch Plywood, 22.0" Tall, nests 1/2" into grooved spacer) -->
+      <!-- Center is at X = 465, thickness 3/4" = 13px -> X: 458.5 to 471.5 -->
+      <rect x="458" y="137" width="14" height="352" fill="url(#birchGrad)" stroke="#ca8a04" stroke-width="2"/>
+      
+      <!-- Callout: Center Divider Gable & Grooved Top Spacer -->
+      <line x1="465" y1="280" x2="520" y2="280" stroke="#0284c7" stroke-width="2" marker-start="url(#arrow-blue)"/>
+      <rect x="525" y="250" width="245" height="62" rx="4" fill="#eff6ff" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="535" y="268" font-size="12" font-weight="bold" fill="#0369a1">Center_Divider_Gable + Top Spacer</text>
+      <text x="535" y="284" font-size="11" font-weight="bold" fill="#dc2626">3/4" Birch: 18.0" D x 22.0" H (1x)</text>
+      <text x="535" y="298" font-size="10" fill="#475569">Nests 1/2" into 1.5"x1.5"x18" grooved 2x4</text>
+      <text x="535" y="309" font-size="10" fill="#475569">spacer at top (fills full 23.0" opening)</text>
+
+      <!-- LEFT BAY: 3-TIER DRAWER BANK (Clear Opening: 18.625" W x 23.0" H) -->
       <!-- Width: 18.625" = 326px -> X: 132 to 458 -->
-      <!-- Drawer 1: Top Tool Drawer (4.5" H = 79px) -->
+      <!-- Drawer 1: Top Tool Drawer (5.5" H = 85px) -->
       <rect x="134" y="123" width="322" height="75" rx="2" fill="url(#walnutGrad)" stroke="#3d220e" stroke-width="2"/>
       <rect x="275" y="156" width="40" height="8" rx="2" fill="#0f172a"/>
       <text x="295" y="145" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Drawer_01_Top_Tools_Face</text>
-      <text x="295" y="185" font-size="10" fill="#fed7aa" text-anchor="middle">3/4" Walnut: 4.50" H x 18.375" W (1x)</text>
+      <text x="295" y="185" font-size="10" fill="#fed7aa" text-anchor="middle">3/4" Walnut: 5.50" H x 18.375" W (1x)</text>
 
       <!-- Drawer 2: Middle Spool Drawer (8.5" H = 149px) -->
       <rect x="134" y="201" width="322" height="142" rx="2" fill="url(#walnutGrad)" stroke="#3d220e" stroke-width="2"/>
@@ -233,16 +237,16 @@
       <rect x="83" y="489" width="234" height="61" fill="url(#spfGrad)" stroke="#b45309" stroke-width="2"/>
       <text x="200" y="526" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">Side_Lower_Stretcher (11.0") [2x]</text>
 
-      <!-- REAR SHEAR WALL (1/2" Birch Plywood, 29.0" Tall x 45.0" Wide) -->
-      <!-- Mounted to back of rear legs: thickness 1/2" = 8px at X: 375 to 383 -->
-      <rect x="375" y="60" width="9" height="490" fill="url(#birchGrad)" stroke="#ca8a04" stroke-width="2"/>
+      <!-- REAR SHEAR WALL (1/2" Birch Plywood, 24.0" Tall x 45.0" Wide, mounted flush at top) -->
+      <!-- Mounted to back of rear legs: thickness 1/2" = 8px at X: 375 to 383, Y: 60 to 452 (leaves 6" cable pass-through at bottom) -->
+      <rect x="375" y="60" width="9" height="392" fill="url(#birchGrad)" stroke="#ca8a04" stroke-width="2"/>
       
       <!-- Callout: Rear Shear Wall -->
       <line x1="380" y1="200" x2="330" y2="170" stroke="#dc2626" stroke-width="2" marker-start="url(#arrow-red)"/>
-      <rect x="150" y="145" width="230" height="48" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
-      <text x="160" y="165" font-size="11" font-weight="bold" fill="#dc2626">Rear_Shear_Wall_Panel</text>
-      <text x="160" y="180" font-size="10" font-weight="bold" fill="#0f172a">1/2" Birch Plywood (45.0" W x 29.0" H)</text>
-      <text x="160" y="190" font-size="9" fill="#475569">Stops racking under CoreXY acceleration!</text>
+      <rect x="145" y="145" width="235" height="50" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="155" y="164" font-size="11" font-weight="bold" fill="#dc2626">Rear_Shear_Wall_Panel (Flush at Top)</text>
+      <text x="155" y="179" font-size="10" font-weight="bold" fill="#0f172a">1/2" Birch Plywood (45.0" W x 24.0" H)</text>
+      <text x="155" y="191" font-size="9" fill="#475569">Stops CoreXY racking + 6" cable gap below!</text>
 
       <!-- Depth Dimensions -->
       <line x1="0" y1="15" x2="400" y2="15" stroke="#0f172a" stroke-width="2"/>
@@ -332,11 +336,11 @@
       <text x="1260" y="152" fill="#64748b">From 2x4 offcuts</text>
 
       <!-- Row 7 -->
-      <text x="0" y="176" font-weight="bold" fill="#0f172a">Center_Divider_Gable</text>
-      <text x="280" y="176" font-weight="bold" fill="#0284c7">1x</text>
-      <text x="340" y="176" font-weight="bold" fill="#b45309">3/4" PureBond Birch Plywood</text>
-      <text x="560" y="176" font-weight="bold" fill="#0f172a">0.75" x 18.00" x 22.00"</text>
-      <text x="820" y="176" fill="#475569">Vertical bay partition; anchors right slide rails and CR-6 tech shelf</text>
+      <text x="0" y="176" font-weight="bold" fill="#0f172a">Center_Divider_Gable + Spacer</text>
+      <text x="280" y="176" font-weight="bold" fill="#0284c7">1x+1x</text>
+      <text x="340" y="176" font-weight="bold" fill="#b45309">3/4" Birch + 1.5"x1.5" Grooved 2x4</text>
+      <text x="560" y="176" font-weight="bold" fill="#0f172a">0.75" x 18.00" x 22.00" (+1" Spacer)</text>
+      <text x="820" y="176" fill="#475569">22" gable nests 1/2" into grooved 2x4 top spacer (fills 23.0" opening); +3x 18" Left 2x4 Runners</text>
       <text x="1260" y="176" fill="#64748b">Home Depot SKU 1001513690</text>
 
       <!-- Row 8 -->
@@ -344,23 +348,23 @@
       <text x="280" y="200" font-weight="bold" fill="#0284c7">1x</text>
       <text x="340" y="200" font-weight="bold" fill="#b45309">3/4" PureBond Birch Plywood</text>
       <text x="560" y="200" font-weight="bold" fill="#0f172a">0.75" x 18.625" x 18.00"</text>
-      <text x="820" y="200" fill="#475569">Heavy lower printer shelf; supports Creality CR-6 SE with 5.5" clearance</text>
+      <text x="820" y="200" fill="#475569">Heavy lower printer shelf on 2x4 cleats; supports Creality CR-6 SE with 5.5" clearance</text>
       <text x="1260" y="200" fill="#64748b">Home Depot SKU 1001513690</text>
 
       <!-- Row 9 -->
       <text x="0" y="224" font-weight="bold" fill="#0f172a">Rear_Shear_Wall_Panel</text>
       <text x="280" y="224" font-weight="bold" fill="#0284c7">1x</text>
       <text x="340" y="224" font-weight="bold" fill="#ca8a04">1/2" PureBond Birch Plywood</text>
-      <text x="560" y="224" font-weight="bold" fill="#0f172a">0.50" x 45.00" x 29.00"</text>
-      <text x="820" y="224" fill="#475569"><tspan font-weight="bold" fill="#dc2626">SCREWED TO REAR FRAME:</tspan> Completely stops racking under CoreXY acceleration</text>
+      <text x="560" y="224" font-weight="bold" fill="#0f172a">0.50" x 45.00" x 24.00"</text>
+      <text x="820" y="224" fill="#475569"><tspan font-weight="bold" fill="#dc2626">MOUNTED FLUSH AT TOP:</tspan> Stops CoreXY racking 100%; leaves 6" bottom cable pass-through</text>
       <text x="1260" y="224" fill="#64748b">Home Depot SKU 1001513691</text>
 
       <!-- Row 10 -->
-      <text x="0" y="248" font-weight="bold" fill="#0f172a">Spool_Drawer_Faces</text>
-      <text x="280" y="248" font-weight="bold" fill="#dc2626">2x</text>
+      <text x="0" y="248" font-weight="bold" fill="#0f172a">Walnut_Drawer_Faces</text>
+      <text x="280" y="248" font-weight="bold" fill="#dc2626">2x + 1x</text>
       <text x="340" y="248" font-weight="bold" fill="#78350f">3/4" PureBond Walnut Plywood</text>
-      <text x="560" y="248" font-weight="bold" fill="#0f172a">0.75" x 18.375" x 8.50"</text>
-      <text x="820" y="248" fill="#475569"><tspan font-weight="bold">REPEAT 2x:</tspan> Middle &amp; Bottom Drawer faces; flush mounted against box front</text>
+      <text x="560" y="248" font-weight="bold" fill="#0f172a">18.375" W x 8.50" H (2x) &amp; 5.50" H (1x)</text>
+      <text x="820" y="248" fill="#475569"><tspan font-weight="bold">FILLS 23.0" BAY:</tspan> Two 8.50" Spool Faces + One 5.50" Tool Face + four 1/8" reveals = 23.00"</text>
       <text x="1260" y="248" fill="#64748b">PureBond Walnut 2x4' Panel</text>
     </g>
   </g>

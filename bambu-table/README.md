@@ -75,18 +75,23 @@ From your remaining 2×4 studs, cut:
 * Join the 18" center cross-ties between the front and rear rails.
 
 ### Step 4: Install the 1/2" Birch Shear Back Panel
-* Using your **Milwaukee track saw on foam board**, cut the 1/2" Birch project panel down to 45.0" wide.
-* Screw it across the rear flanges and rear rails. *(This locks the frame completely against racking).*
+* Using your **Milwaukee track saw on foam board**, crosscut the 1/2" Birch project panel (`24" × 48"`) down to **45.0" wide × 24.0" high**.
+* Mount it **flush with the top of the Upper Rear Apron** and screw it across the rear flanges and upper rail (leaving a 6" open cable pass-through at the bottom).
 
-### Step 5: Install Center Partition & Shelves
-* Cut the 3/4" Birch panel: Center Divider (18" × 22") and CR-6 Shelf (18" × 18.625").
-* Mount between the center cross-ties and right-side rails.
+### Step 5: Install Center Partition, Grooved Top Spacer & Left 2×4 Slide Runners
+* Cut the 3/4" Birch panel: Center Divider (`18.0" × 22.0"`) and CR-6 Shelf (`18.0" × 18.625"`).
+* Rout a `3/4" W × 1/2" D` dado groove down the center of a `1.5" × 1.5" × 18.0"` 2×4 offcut (`Center_Gable_Grooved_Spacer`) and screw it under the Upper Center Cross-Tie.
+* Glue the top edge of the `22.0"` Center Divider into the `1/2"` groove and pocket-screw the bottom to the Lower Center Cross-Tie (`22.0" + 1.0" effective spacer = 23.0"` bay height). Add a `1.5" × 1.5" × 6.0"` 2×4 tie block at mid-height behind the gable to tie into the Rear Shear Wall.
+* Cut **three `18.0"` pieces of 2×4** (`Left_Slide_Runners`) from your leg offcuts and pocket-screw them horizontally between the Front-Left and Back-Left legs with their inside faces flush at `X = 5.00"`.
+* Mount the CR-6 Shelf in the right bay on 2×4 cleats screwed inside the lower stretchers.
 
 ### Step 6: Build the Drawers
-* Cut 1/2" Birch drawer box parts with your track saw.
-* Join with Kreg pocket holes on the outside of front & back pieces (hidden).
-* Screw 1/2" (or 1/4") bottoms flush to the box underside.
-* Mount 18" slides and screw 3/4" Walnut drawer faces flush from inside the box with 1/8" reveal shims.
+* Measure your assembled bay opening width $W_{\text{bay}}$ (nominally `18.625"`). Outside box width is $W_{\text{box}} = W_{\text{bay}} - 1.000"$ (`17.625"`).
+* Cut the 1/2" Birch drawer box side walls (`18.00" × 7.75"` [4x] and `18.00" × 3.50"` [2x]) and front/back sub-panels (`16.625" × 7.75"` [4x] and `16.625" × 3.50"` [2x], which sit *between* the 1/2" side walls).
+* Join with Kreg pocket holes on the outside of front & back sub-panels (hidden behind drawer faces).
+* Glue and screw the **1/4" Birch bottoms (`17.50" × 17.875"`) flush to the flat underside** of the box walls (do NOT groove the walls).
+* Mount the 18" slides (aligning the front of the carcass slides flush with the front of the 18" gable and left runners at `Y = 3.00"`, and spacing them `8-5/8"` **bottom-to-bottom**).
+* Cut the 3/4" Walnut drawer faces (`18.375" × 8.50"` [2x] for the spool drawers, and **`18.375" × 5.50"` [1x]** for the top tool drawer so the stack fills the full `23.00"` opening with four `1/8"` reveals) and screw them from inside the box.
 
 ### Step 7: Mount Tabletop & Leveling Feet
 * Bore 1/8" deep recesses on the top edge of the 2×4 aprons using a Forstner bit with a tape flag.

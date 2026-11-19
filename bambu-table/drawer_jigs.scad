@@ -28,16 +28,16 @@ module setback_cradle() {
         cube([40, 85, 28]);
         
         // 1. Slide Support Shelf:
-        // Ledge at Z = 10mm. Metal slide rests on this shelf (10mm to 29mm).
+        // Ledge at Z = 10mm. Metal slide rests on this shelf (10mm to 28mm).
         // Leaves an 8mm guide wall on the left (X=0 to X=8) to reference the wood frame.
-        translate([8, -1, 10])
-            cube([33, 87, 20]);
+        translate([8, 2.5, 10])
+            cube([33, 85, 20]);
             
         // 2. Setback Stop (Front Lip):
-        // The slide butts against a 2.5mm front wall at Y = 2.5mm.
-        // Recesses the metal slide by exactly 2.5mm (3/32") behind the 2x4 front face!
-        translate([6, 2.5, 8])
-            cube([35, 85, 22]);
+        // The slide butts against a 2.5mm front wall at Y = 0 to 2.5mm (rising from Z=10 to Z=28).
+        // Recesses the metal slide by exactly 2.5mm (3/32") behind the front edge!
+        translate([6, 2.5, 10])
+            cube([35, 85, 20]);
             
         // 3. Front Face Frame Registration Hook:
         // Cutout for the front of the 2x4 / divider (from Y = -1 to Y = 16)
